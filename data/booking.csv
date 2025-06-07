@@ -1,0 +1,4 @@
+bookingID,accommodationEmailAddress,guestIdentificationLastName,room,status,guestEmailAddress
+21430490,accoma@gmail.com,booking2ln,a12,unverified,null
+23059312,accoma@gmail.com,booking1ln,a11,verified,usera@gmail.com
+48929122,accomb@gmail.com,booking3ln,a2,closed,usera@gmail.com

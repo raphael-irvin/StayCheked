@@ -1,0 +1,3 @@
+ticketID,accommodationEmail,guestEmail,bookingID,subject,category,status,lastUpdatedAt
+1,accoma@gmail.com,usera@gmail.com,48929122,Broken TV,Maintenance,Closed,31/05/2025 17:20
+2,accomb@gmail.com,usera@gmail.com,23059312,Wifi Not Available,Technical,Open,06/06/2025 11:40

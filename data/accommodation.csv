@@ -1,0 +1,4 @@
+userID,username,emailAddress,contactNo,password,accommodationName,address,status
+a-1,accoma,accoma@gmail.com,02489849932,accomApw,AccommodationA,AccommodationALoc,verified
+a-3,accomc,accomc@gmail.com,03209575932,accomCpw,AccommodationC,AccommodationCLoc,unverified
+a-2,accomb,accomb@gmail.com,08592389102,accomBpw,AccommodationB,AccommodationBLoc,verified
