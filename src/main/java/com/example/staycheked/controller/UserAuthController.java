@@ -19,15 +19,6 @@ public class UserAuthController {
     @FXML
     TextField passwordField;
 
-    @FXML
-    Button loginButton;
-
-    @FXML
-    Button registerGuestButton;
-
-    @FXML
-    Button registerAccommodationButton;
-
     public void setUserAuthService(UserAuthService userAuthService) {
         this.userAuthService = userAuthService;
     }
