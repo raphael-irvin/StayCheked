@@ -20,7 +20,6 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/LoginView.fxml"));
         UserAuthController userAuthController = new UserAuthController();
         fxmlLoader.setController(userAuthController);
-        userAuthController.setStage(stage);
         userAuthController.setUserAuthService(new UserAuthService());
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);

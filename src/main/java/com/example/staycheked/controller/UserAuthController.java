@@ -5,8 +5,10 @@ import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.model.user.User;
 import com.example.staycheked.service.UserAuthService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -47,10 +49,6 @@ public class UserAuthController {
 
     public void setUserAuthService(UserAuthService userAuthService) {
         this.userAuthService = userAuthService;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     public void onLoginButtonClick() {
@@ -136,7 +134,8 @@ public class UserAuthController {
         }
     }
 
-    public void switchToRegisterGuestView() {
+    public void switchToRegisterGuestView(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/RegisterGuestView.fxml"));
         fxmlLoader.setController(this);
         try {
@@ -149,7 +148,8 @@ public class UserAuthController {
         }
     }
 
-    public void switchToRegisterAccommodationView() {
+    public void switchToRegisterAccommodationView(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/RegisterAccommodationView.fxml"));
         fxmlLoader.setController(this);
         try {
@@ -163,7 +163,8 @@ public class UserAuthController {
         }
     }
 
-    public void backToLoginButtonClick() {
+    public void backToLoginButtonClick(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/LoginView.fxml"));
         fxmlLoader.setController(this);
         try {
@@ -177,11 +178,11 @@ public class UserAuthController {
         }
     }
 
-    public void onToggleAccommodationRegistrationButtonClick() {
+    public void onToggleAccommodationRegistrationButtonClick(ActionEvent event) {
         if (toggleAccommodationRegistration.isSelected()) {
-            switchToRegisterAccommodationView();
+            switchToRegisterAccommodationView(event);
         } else if (!toggleAccommodationRegistration.isSelected()) {
-            switchToRegisterGuestView();
+            switchToRegisterGuestView(event);
         }
     }
 
