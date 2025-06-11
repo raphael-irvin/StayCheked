@@ -1,0 +1,17 @@
+.authTextField {
+    -fx-border-radius: 30px;
+    border-radius: 30px;
+
+    -fx-background-radius: 30px;
+}
+
+.button#authButton {
+    -fx-background-color: rgb(31, 132, 255);
+    background-color: rgb(31, 132, 255);
+
+    -fx-text-fill: white;
+    -fx-border-radius: 30px;
+    border-radius: 30px;
+
+    -fx-background-radius: 30px;
+}
