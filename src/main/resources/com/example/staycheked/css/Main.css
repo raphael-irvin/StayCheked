@@ -1,3 +1,8 @@
+.root {
+    -fx-background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+}
+
 .authTextField {
     -fx-border-radius: 30px;
     border-radius: 30px;
