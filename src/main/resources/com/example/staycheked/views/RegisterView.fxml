@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" spacing="5.0" stylesheets="@../css/Main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="14.0" prefWidth="399.0" />
+      <VBox spacing="10.0">
+         <children>
+            <VBox prefWidth="399.0" spacing="5.0">
+               <children>
+                  <Label text="Full Name">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fullNameField" prefHeight="34.0" prefWidth="399.0" promptText="youremailaddress@gmail.com" styleClass="authTextField" stylesheets="@../css/Main.css">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox prefWidth="399.0" spacing="5.0">
+               <children>
+                  <Label text="Username">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameField" prefHeight="34.0" prefWidth="399.0" promptText="youremailaddress@gmail.com" styleClass="authTextField" stylesheets="@../css/Main.css">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox prefWidth="399.0" spacing="5.0">
+               <children>
+                  <Label text="Email Address">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="emailField" prefHeight="34.0" prefWidth="399.0" promptText="youremailaddress@gmail.com" styleClass="authTextField" stylesheets="@../css/Main.css">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox prefWidth="399.0" spacing="5.0">
+               <children>
+                  <Label text="Password">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="passwordField" prefHeight="34.0" prefWidth="399.0" promptText="*******" styleClass="authTextField" stylesheets="@../css/Main.css">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </PasswordField>
+               </children>
+            </VBox>
+            <VBox prefWidth="399.0" spacing="5.0">
+               <children>
+                  <Label text="Contact Number">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="contactNoField" prefHeight="34.0" prefWidth="399.0" promptText="youremailaddress@gmail.com" styleClass="authTextField" stylesheets="@../css/Main.css">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Pane prefHeight="15.0" prefWidth="400.0" />
+      <Button mnemonicParsing="false" onAction="#onRegisterGuestButtonClick" prefHeight="36.0" prefWidth="398.0" styleClass="authButton" stylesheets="@../css/Main.css" text="Register">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Pane prefHeight="0.0" prefWidth="400.0" />
+      <Button id="register" mnemonicParsing="false" onAction="#backToLoginButtonClick" prefHeight="36.0" styleClass="authButton" stylesheets="@../css/Main.css" text="Back">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+   </children>
+   <padding>
+      <Insets left="250.0" right="250.0" />
+   </padding>
+</VBox>

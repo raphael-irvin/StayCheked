@@ -6,12 +6,19 @@ import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.model.user.User;
 import com.example.staycheked.service.UserAuthService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class UserAuthController {
 
     private UserAuthService userAuthService;
+    private Stage stage;
 
     @FXML
     TextField emailField;
@@ -19,8 +26,24 @@ public class UserAuthController {
     @FXML
     TextField passwordField;
 
+    @FXML
+    TextField fullNameField;
+
+    @FXML
+    TextField usernameField;
+
+    @FXML
+    TextField contactNoField;
+
+    @FXML
+    TextField accommodationNameField;
+
     public void setUserAuthService(UserAuthService userAuthService) {
         this.userAuthService = userAuthService;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public void onLoginButtonClick() {
@@ -36,9 +59,15 @@ public class UserAuthController {
         }
     }
 
-    public void onRegisterGuestButtonClick(String username, String emailAddress, String contactNo, String password, String fullName) {
+    public void onRegisterGuestButtonClick() {
 
-        Guest guest = userAuthService.registerGuest(username, emailAddress, contactNo, password, fullName);
+        Guest guest = userAuthService.registerGuest(
+                usernameField.getText(),
+                emailField.getText(),
+                contactNoField.getText(),
+                passwordField.getText(),
+                fullNameField.getText()
+        );
 
         if (guest != null) {
             System.out.println("Guest registration successful!");
@@ -64,4 +93,31 @@ public class UserAuthController {
         }
     }
 
+    public void switchToRegisterGuestView() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/RegisterView.fxml"));
+        fxmlLoader.setController(this);
+        try {
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            System.out.println("Switching back to login view.");
+        } catch (IOException e) {
+            System.out.println("Error loading login view: " + e.getMessage());
+            System.out.println("Switching back to login view.");
+        }
+    }
+
+    public void backToLoginButtonClick() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/LoginView.fxml"));
+        fxmlLoader.setController(this);
+        try {
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            System.out.println("Switching back to login view.");
+        } catch (IOException e) {
+            System.out.println("Error loading login view: " + e.getMessage());
+            System.out.println("Switching back to login view.");
+        }
+    }
 }

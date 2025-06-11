@@ -10,7 +10,7 @@
     -fx-background-radius: 30px;
 }
 
-.button#authButton {
+.authButton {
     -fx-background-color: rgb(31, 132, 255);
     background-color: rgb(31, 132, 255);
 
@@ -19,4 +19,20 @@
     border-radius: 30px;
 
     -fx-background-radius: 30px;
+}
+
+.authButton:hover {
+    -fx-background-color: rgb(0, 102, 204);
+    background-color: rgb(0, 102, 204);
+}
+
+.authButton#register {
+    -fx-background-color: transparent;
+    background-color: transparent;
+
+    -fx-text-fill: black;
+}
+
+.authButton#register:hover {
+    -fx-text-fill: rgb(31, 132, 255);
 }

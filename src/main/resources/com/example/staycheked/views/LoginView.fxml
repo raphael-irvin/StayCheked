@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" spacing="5.0" stylesheets="@../css/Main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" spacing="5.0" stylesheets="@../css/Main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="StayChecked">
          <font>
@@ -17,18 +17,21 @@
          </font>
       </Label>
       <Pane prefHeight="56.0" prefWidth="399.0" />
-      <VBox layoutX="110.0" layoutY="172.0" prefWidth="100.0" spacing="5.0">
+      <VBox layoutX="261.0" layoutY="347.0" prefWidth="399.0" spacing="5.0">
          <children>
             <Label text="Email Address">
                <font>
                   <Font size="18.0" />
-               </font></Label>
-            <TextField fx:id="emailField" prefHeight="38.0" prefWidth="399.0" promptText="youremailadress@gmail.com" styleClass="authTextField" stylesheets="@../css/Main.css">
+               </font>
+            </Label>
+            <TextField fx:id="emailField" prefHeight="40.0" prefWidth="399.0" promptText="youremailaddress@gmail.com" styleClass="authTextField" stylesheets="@../css/Main.css">
                <padding>
                   <Insets left="15.0" />
-               </padding></TextField>
+               </padding>
+            </TextField>
          </children>
       </VBox>
+      <VBox layoutX="110.0" layoutY="172.0" prefWidth="100.0" spacing="5.0" />
       <Pane prefHeight="11.0" prefWidth="399.0" />
       <VBox prefWidth="399.0" spacing="5.0">
          <children>
@@ -43,10 +46,16 @@
          </children>
       </VBox>
       <Pane prefHeight="33.0" prefWidth="400.0" />
-      <Button id="authButton" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="36.0" prefWidth="398.0" stylesheets="@../css/Main.css" text="Login">
+      <Button mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="36.0" prefWidth="398.0" styleClass="authButton" stylesheets="@../css/Main.css" text="Login">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
+      <Pane prefHeight="25.0" prefWidth="400.0" />
+      <Button id="register" mnemonicParsing="false" onAction="#switchToRegisterGuestView" prefHeight="36.0" styleClass="authButton" stylesheets="@../css/Main.css" text="Or Register">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
    <padding>
       <Insets left="250.0" right="250.0" />
