@@ -8,7 +8,6 @@ import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class TicketService {
 
@@ -18,6 +17,9 @@ public class TicketService {
 
         Ticket newTicket = new Ticket(recipient, sender, booking, subject, category);
         newTicket.addNewContent(new Content(newTicket.getTicketID(), sender, contents));
+
+        newTicket.getSubmittedTo().getReceivedTickets().add(newTicket);
+        newTicket.getSubmittedBy().getSubmittedTickets().add(newTicket);
 
         return newTicket;
     }
@@ -36,6 +38,7 @@ public class TicketService {
 
     public void cancelTicket(Ticket ticket) {
         ticket.getSubmittedTo().getReceivedTickets().remove(ticket);
+        ticket.getSubmittedBy().getSubmittedTickets().remove(ticket);
     }
 
 }

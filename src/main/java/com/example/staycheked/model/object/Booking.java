@@ -6,9 +6,6 @@ import com.example.staycheked.model.user.Guest;
 
 public class Booking {
 
-    //UID Tracker
-    private static int bookingIDTracker = 0;
-
     //These data should be pulled from the real database in a real application.
     private String bookingID;
     private Accommodation accommodation;

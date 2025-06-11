@@ -6,8 +6,4 @@ public class EmailService {
         // Logic to send email to accommodation
     }
 
-    public void sendEmailToGuest(String guestEmail, String subject, String message) {
-        // Logic to send email to guest
-    }
-
 }
