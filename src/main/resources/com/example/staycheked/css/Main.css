@@ -36,3 +36,24 @@
 .authButton#register:hover {
     -fx-text-fill: rgb(31, 132, 255);
 }
+
+.toggle-button {
+    -fx-background-color: transparent;
+    background-color: transparent;
+
+    -fx-text-fill: rgb(31, 132, 255);
+
+    -fx-border-color: rgb(221, 221, 221);
+    border-color: rgb(221, 221, 221);
+    -fx-border-radius: 30px;
+    border-radius: 30px;
+
+    -fx-background-radius: 30px;
+}
+
+.toggle-button#toggleAccommodationRegistrationSelected {
+    -fx-background-color: rgb(31, 132, 255);
+    background-color: rgb(31, 132, 255);
+
+    -fx-text-fill: white;
+}

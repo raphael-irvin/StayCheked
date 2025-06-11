@@ -9,8 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,6 +39,12 @@ public class UserAuthController {
     @FXML
     TextField accommodationNameField;
 
+    @FXML
+    TextField accommodationAddressField;
+
+    @FXML
+    ToggleButton toggleAccommodationRegistration;
+
     public void setUserAuthService(UserAuthService userAuthService) {
         this.userAuthService = userAuthService;
     }
@@ -56,6 +63,35 @@ public class UserAuthController {
         } else {
             System.out.println("Login failed. Please check your credentials.");
             // Show error message in the UI
+        }
+    }
+
+    public void onRegisterButtonClick() {
+        if (usernameField.getText().isEmpty() || emailField.getText().isEmpty() ||
+            contactNoField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            showErrorAlert("Please fill in all required fields.");
+            System.out.println("User registration failed. Missing required fields.");
+            return;
+        }
+
+        //Accommodation registration
+        if (toggleAccommodationRegistration.isSelected()) {
+            if (accommodationNameField.getText().isEmpty() || accommodationAddressField.getText().isEmpty()) {
+                showErrorAlert("Please fill in all required fields for accommodation registration.");
+                System.out.println("User registration failed. Missing required fields for accommodation registration.");
+                return;
+            }
+            onRegisterAccommodationButtonClick();
+        }
+
+        //Guest registration
+        if (!toggleAccommodationRegistration.isSelected()) {
+            if (fullNameField.getText().isEmpty()) {
+                showErrorAlert("Please fill in all required fields for guest registration.");
+                System.out.println("User registration failed. Missing required fields for guest registration.");
+                return;
+            }
+            onRegisterGuestButtonClick();
         }
     }
 
@@ -79,9 +115,16 @@ public class UserAuthController {
         }
     }
 
-    public void onRegisterAccommodationButtonClick(String username, String emailAddress, String contactNo, String password, String accommodationName, String location) {
+    public void onRegisterAccommodationButtonClick() {
 
-        Accommodation accommodation = userAuthService.registerAccommodation(username, emailAddress, contactNo, password, accommodationName, location);
+        Accommodation accommodation = userAuthService.registerAccommodation(
+                usernameField.getText(),
+                emailField.getText(),
+                contactNoField.getText(),
+                passwordField.getText(),
+                accommodationNameField.getText(),
+                accommodationAddressField.getText()
+        );
 
         if (accommodation != null) {
             System.out.println("Accommodation registration successful!");
@@ -93,17 +136,30 @@ public class UserAuthController {
         }
     }
 
-    public void switchToRegisterGuestView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/RegisterView.fxml"));
+    public void switchToRegisterGuestView() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/RegisterGuestView.fxml"));
         fxmlLoader.setController(this);
         try {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            System.out.println("Switching back to login view.");
+            System.out.println("Switching to register guest view.");
         } catch (IOException e) {
             System.out.println("Error loading login view: " + e.getMessage());
-            System.out.println("Switching back to login view.");
+        }
+    }
+
+    public void switchToRegisterAccommodationView() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/RegisterAccommodationView.fxml"));
+        fxmlLoader.setController(this);
+        try {
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            toggleAccommodationRegistration.setSelected(true);
+            stage.setScene(scene);
+            System.out.println("Switching to register accommodation view.");
+        } catch (IOException e) {
+            System.out.println("Error loading register accommodation view: " + e.getMessage());
         }
     }
 
@@ -119,5 +175,21 @@ public class UserAuthController {
             System.out.println("Error loading login view: " + e.getMessage());
             System.out.println("Switching back to login view.");
         }
+    }
+
+    public void onToggleAccommodationRegistrationButtonClick() {
+        if (toggleAccommodationRegistration.isSelected()) {
+            switchToRegisterAccommodationView();
+        } else if (!toggleAccommodationRegistration.isSelected()) {
+            switchToRegisterGuestView();
+        }
+    }
+
+    public void showErrorAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
