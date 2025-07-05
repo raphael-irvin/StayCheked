@@ -4,6 +4,7 @@ module com.example.staycheked {
     requires transitive javafx.graphics;
     requires jdk.jshell;
     requires java.desktop;
+    requires javafx.base;
 
     exports com.example.staycheked.service;
 

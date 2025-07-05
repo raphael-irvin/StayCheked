@@ -8,9 +8,9 @@
    <top>
       <HBox prefWidth="900.0" style="-fx-background-color: Gray;" BorderPane.alignment="TOP_LEFT">
          <children>
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="118.0" style="-fx-background-color: White;" text="About Staychecked" HBox.hgrow="ALWAYS" />
-            <Button fx:id="loginNavbar" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="35.0" text="Login" HBox.hgrow="ALWAYS" />
-            <Button layoutX="128.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" text="Register" HBox.hgrow="ALWAYS" />
+            <Button fx:id="dashboardNavbar" mnemonicParsing="false" prefHeight="35.0" prefWidth="118.0" style="-fx-background-color: White;" text="Dashboard" HBox.hgrow="ALWAYS" />
+            <Button fx:id="signOutNavbar" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" text="Sign Out" HBox.hgrow="ALWAYS" />
+            <Button fx:id="aboutNavbar" layoutX="128.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" text="About StayChecked" HBox.hgrow="ALWAYS" />
             <Button layoutX="174.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" text="Dashboard" visible="false" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
