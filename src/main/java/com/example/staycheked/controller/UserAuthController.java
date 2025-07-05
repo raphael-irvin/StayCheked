@@ -21,7 +21,6 @@ import java.io.IOException;
 public class UserAuthController {
 
     private UserAuthService userAuthService;
-    private Stage stage;
 
     @FXML
     TextField emailField;

@@ -2,7 +2,6 @@ package com.example.staycheked.dao;
 
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Content;
-import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.User;
 import com.example.staycheked.service.UtilService;
 
