@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class MainController {
 
     @FXML
-    BorderPane mainBorderPane = new BorderPane();
+    BorderPane mainBorderPane;
 
     @FXML
     Button aboutNavbar;
@@ -27,8 +27,11 @@ public class MainController {
     @FXML
     Button dashboardNavbar;
 
+    Button[] navButtons = new Button[3];
+
     public void initialize() {
         signOutNavbar.setOnAction(this::onNavbarSignOutClick);
+        navButtons[0] = aboutNavbar; navButtons[1] = signOutNavbar; navButtons[2] = dashboardNavbar;
     }
     
     public void onNavbarSignOutClick(ActionEvent event) {
@@ -44,6 +47,18 @@ public class MainController {
             System.out.println("Redirected to login view after sign out.");
         } catch (Exception e) {
             System.out.println("Error loading login view: " + e.getMessage());
+        }
+    }
+
+    private void onNavbarButtonClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+
+        for (Button button : navButtons) {
+            if (button.equals(clickedButton)) {
+                button.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;");
+            } else {
+                button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+            }
         }
     }
 }
