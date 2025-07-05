@@ -18,9 +18,8 @@ public class Main extends Application {
         DataStore.dataInitialization();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/LoginView.fxml"));
-        UserAuthController userAuthController = new UserAuthController();
+        UserAuthController userAuthController = new UserAuthController(new UserAuthService());
         fxmlLoader.setController(userAuthController);
-        userAuthController.setUserAuthService(new UserAuthService());
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         stage.setTitle("StayChecked");

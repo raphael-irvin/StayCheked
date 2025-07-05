@@ -46,17 +46,29 @@ public class UserAuthController {
     @FXML
     ToggleButton toggleAccommodationRegistration;
 
-    public void setUserAuthService(UserAuthService userAuthService) {
+    public UserAuthController(UserAuthService userAuthService) {
         this.userAuthService = userAuthService;
+        
     }
 
-    public void onLoginButtonClick() {
+    public void onLoginButtonClick(ActionEvent event) {
         User user = userAuthService.login(emailField.getText(), passwordField.getText());
 
         if (user != null) {
             System.out.println("Login successful!");
             Session.setCurrentUser(user);
             // Redirect to the main application view
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainView.fxml"));
+            fxmlLoader.setController(new MainController());
+            try {
+                Parent root = fxmlLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                System.out.println("Redirected to main application view after login.");
+            } catch (IOException e) {
+                System.out.println("Error loading main view: " + e.getMessage());
+            }
         } else {
             System.out.println("Login failed. Please check your credentials.");
             // Show error message in the UI
