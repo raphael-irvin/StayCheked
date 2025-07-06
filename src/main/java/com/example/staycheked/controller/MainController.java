@@ -1,46 +1,111 @@
 package com.example.staycheked.controller;
 
+import com.example.staycheked.Session;
+import com.example.staycheked.service.TicketService;
 import com.example.staycheked.service.UserAuthService;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
-
-import java.io.IOException;
-import java.util.List;
+import javafx.stage.Stage;
 
 public class MainController {
 
     @FXML
-    BorderPane mainBorderPane = new BorderPane();
+    BorderPane mainBorderPane;
 
     @FXML
-    Button stayCheckedNavbar = new Button("StayChecked");
+    Button signOutNavbar;
 
     @FXML
-    Button loginNavbar = new Button("Login");
+    Button dashboardNavbar;
 
     @FXML
-    Button registerNavbar = new Button("Register");
+    Button activeTicketButton;
 
-    List<Button> navbarButtons = List.of(stayCheckedNavbar, loginNavbar, registerNavbar);
+    @FXML
+    Button closedTicketButton;
 
+    @FXML
+    Button guestButton;
 
-    public void switchToLogin(ActionEvent event) throws IOException {
-        mainBorderPane.setCenter(null);
+    Button[] navButtons = new Button[3];
 
-        FXMLLoader loginLoader = new FXMLLoader();
-        loginLoader.setLocation(getClass().getResource("/com/example/staycheked/views/LoginView.fxml"));
-
-        UserAuthController userAuthController = new UserAuthController();
-        userAuthController.setUserAuthService(new UserAuthService());
-        loginLoader.setController(userAuthController);
-
-        Node loginView = loginLoader.load();
-        mainBorderPane.setCenter(loginView);
+    public void initialize() {
+        signOutNavbar.setOnAction(this::onNavbarSignOutClick);
+        navButtons[0] = activeTicketButton;
+        navButtons[1] = closedTicketButton;
+        navButtons[2] = guestButton;
+    }
+    
+    public void onNavbarSignOutClick(ActionEvent event) {
+        Session.clear();
+        System.out.println("Sign out clicked");
+        // Redirect to login view or perform other actions
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/LoginView.fxml"));
+        fxmlLoader.setController(new UserAuthController(new UserAuthService()));
+        try {
+            Parent root = fxmlLoader.load();
+            stage.setScene(new Scene(root));
+            System.out.println("Redirected to login view after sign out.");
+        } catch (Exception e) {
+            System.out.println("Error loading login view: " + e.getMessage());
+        }
     }
 
+    public void onActiveTicketButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ActiveTicketView.fxml"));
+            fxmlLoader.setController(new TicketController(new TicketService()));
+            Parent root = fxmlLoader.load();
+            mainBorderPane.setCenter(root);
+        } catch (Exception e) {
+            System.out.println("Error loading Active Ticket View: " + e.getMessage());
+        }
+    }
+
+    public void onClosedTicketButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        // try {
+        //     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ClosedTicketView.fxml"));
+        //     Parent root = fxmlLoader.load();
+        //     mainBorderPane.setCenter(root);
+        // } catch (Exception e) {
+        //     System.out.println("Error loading Closed Ticket View: " + e.getMessage());
+        // }
+    }
+
+    public void onGuestButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        // try {
+        //     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestView.fxml"));
+        //     Parent root = fxmlLoader.load();
+        //     mainBorderPane.setCenter(root);
+        // } catch (Exception e) {
+        //     System.out.println("Error loading Guest View: " + e.getMessage());
+        // }
+    }
+
+    private void onNavbarButtonClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+
+        for (Button button : navButtons) {
+            if (button.equals(clickedButton)) {
+                button.getStyleClass().remove("DashboardButton");
+                button.getStyleClass().add("DashboardButton-Active");
+            } else {
+                if (button.getStyleClass().contains("DashboardButton-Active")) {
+                    button.getStyleClass().remove("DashboardButton-Active");
+                }
+                button.getStyleClass().add("DashboardButton");
+            }
+        }
+    }
 }

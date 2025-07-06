@@ -1,10 +1,5 @@
 package com.example.staycheked.model.user;
 
-import com.example.staycheked.model.object.Ticket;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class User {
 
     //Properties

@@ -1,9 +1,12 @@
 module com.example.staycheked {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.graphics;
     requires jdk.jshell;
     requires java.desktop;
+    requires javafx.base;
 
+    exports com.example.staycheked.service;
 
     opens com.example.staycheked to javafx.fxml;
     exports com.example.staycheked;
