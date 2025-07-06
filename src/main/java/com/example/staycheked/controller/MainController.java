@@ -29,18 +29,14 @@ public class MainController {
     Button activeTicketButton;
 
     @FXML
-    Button closedTicketButton;
-
-    @FXML
     Button guestButton;
 
-    Button[] navButtons = new Button[3];
+    Button[] navButtons = new Button[2];
 
     public void initialize() {
         signOutNavbar.setOnAction(this::onNavbarSignOutClick);
         navButtons[0] = activeTicketButton;
-        navButtons[1] = closedTicketButton;
-        navButtons[2] = guestButton;
+        navButtons[1] = guestButton;
     }
     
     public void onNavbarSignOutClick(ActionEvent event) {
@@ -71,26 +67,16 @@ public class MainController {
         }
     }
 
-    public void onClosedTicketButtonClick(ActionEvent event) {
-        onNavbarButtonClick(event);
-        // try {
-        //     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ClosedTicketView.fxml"));
-        //     Parent root = fxmlLoader.load();
-        //     mainBorderPane.setCenter(root);
-        // } catch (Exception e) {
-        //     System.out.println("Error loading Closed Ticket View: " + e.getMessage());
-        // }
-    }
-
     public void onGuestButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
-        // try {
-        //     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestView.fxml"));
-        //     Parent root = fxmlLoader.load();
-        //     mainBorderPane.setCenter(root);
-        // } catch (Exception e) {
-        //     System.out.println("Error loading Guest View: " + e.getMessage());
-        // }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestView.fxml"));
+            fxmlLoader.setController(new GuestController());
+            Parent root = fxmlLoader.load();
+            mainBorderPane.setCenter(root);
+        } catch (Exception e) {
+            System.out.println("Error loading Guest View: " + e.getMessage());
+        }
     }
 
     private void onNavbarButtonClick(ActionEvent event) {
