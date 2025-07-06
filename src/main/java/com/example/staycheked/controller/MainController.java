@@ -1,6 +1,7 @@
 package com.example.staycheked.controller;
 
 import com.example.staycheked.Session;
+import com.example.staycheked.service.TicketService;
 import com.example.staycheked.service.UserAuthService;
 
 import javafx.event.ActionEvent;
@@ -19,19 +20,27 @@ public class MainController {
     BorderPane mainBorderPane;
 
     @FXML
-    Button aboutNavbar;
-
-    @FXML
     Button signOutNavbar;
 
     @FXML
     Button dashboardNavbar;
 
+    @FXML
+    Button activeTicketButton;
+
+    @FXML
+    Button closedTicketButton;
+
+    @FXML
+    Button guestButton;
+
     Button[] navButtons = new Button[3];
 
     public void initialize() {
         signOutNavbar.setOnAction(this::onNavbarSignOutClick);
-        navButtons[0] = aboutNavbar; navButtons[1] = signOutNavbar; navButtons[2] = dashboardNavbar;
+        navButtons[0] = activeTicketButton;
+        navButtons[1] = closedTicketButton;
+        navButtons[2] = guestButton;
     }
     
     public void onNavbarSignOutClick(ActionEvent event) {
@@ -50,14 +59,52 @@ public class MainController {
         }
     }
 
+    public void onActiveTicketButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ActiveTicketView.fxml"));
+            fxmlLoader.setController(new TicketController(new TicketService()));
+            Parent root = fxmlLoader.load();
+            mainBorderPane.setCenter(root);
+        } catch (Exception e) {
+            System.out.println("Error loading Active Ticket View: " + e.getMessage());
+        }
+    }
+
+    public void onClosedTicketButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        // try {
+        //     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ClosedTicketView.fxml"));
+        //     Parent root = fxmlLoader.load();
+        //     mainBorderPane.setCenter(root);
+        // } catch (Exception e) {
+        //     System.out.println("Error loading Closed Ticket View: " + e.getMessage());
+        // }
+    }
+
+    public void onGuestButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        // try {
+        //     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestView.fxml"));
+        //     Parent root = fxmlLoader.load();
+        //     mainBorderPane.setCenter(root);
+        // } catch (Exception e) {
+        //     System.out.println("Error loading Guest View: " + e.getMessage());
+        // }
+    }
+
     private void onNavbarButtonClick(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
 
         for (Button button : navButtons) {
             if (button.equals(clickedButton)) {
-                button.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;");
+                button.getStyleClass().remove("DashboardButton");
+                button.getStyleClass().add("DashboardButton-Active");
             } else {
-                button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+                if (button.getStyleClass().contains("DashboardButton-Active")) {
+                    button.getStyleClass().remove("DashboardButton-Active");
+                }
+                button.getStyleClass().add("DashboardButton");
             }
         }
     }
