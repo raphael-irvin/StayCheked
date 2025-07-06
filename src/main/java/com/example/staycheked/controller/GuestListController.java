@@ -9,7 +9,7 @@ import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.Guest;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class GuestController {
+public class GuestListController {
     @FXML
     private TableView<Guest> guestTable;
     @FXML

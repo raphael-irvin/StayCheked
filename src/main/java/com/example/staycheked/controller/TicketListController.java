@@ -12,7 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class TicketController {
+public class TicketListController {
 
     private TicketService ticketService;
 
@@ -46,7 +46,7 @@ public class TicketController {
         activeTicketTable.setItems(tickets);
     }
 
-    public TicketController(TicketService ticketService) {
+    public TicketListController(TicketService ticketService) {
         this.ticketService = ticketService;
     }
 

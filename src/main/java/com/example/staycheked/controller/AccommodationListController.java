@@ -12,7 +12,7 @@ import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.Accommodation;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class AccommodationController {
+public class AccommodationListController {
     @FXML
     private TableView<Accommodation> accommodationTable;
     @FXML

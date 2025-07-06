@@ -79,7 +79,7 @@ public class MainController {
         onNavbarButtonClick(event);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ticketView.fxml"));
-            fxmlLoader.setController(new TicketController(new TicketService()));
+            fxmlLoader.setController(new TicketListController(new TicketService()));
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
@@ -91,7 +91,7 @@ public class MainController {
         onNavbarButtonClick(event);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestView.fxml"));
-            fxmlLoader.setController(new GuestController());
+            fxmlLoader.setController(new GuestListController());
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
@@ -104,7 +104,7 @@ public class MainController {
         onNavbarButtonClick(event);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ticketView.fxml"));
-            fxmlLoader.setController(new TicketController(new TicketService()));
+            fxmlLoader.setController(new TicketListController(new TicketService()));
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
@@ -116,7 +116,7 @@ public class MainController {
         onNavbarButtonClick(event);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AccommodationView.fxml"));
-            fxmlLoader.setController(new AccommodationController());
+            fxmlLoader.setController(new AccommodationListController());
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
