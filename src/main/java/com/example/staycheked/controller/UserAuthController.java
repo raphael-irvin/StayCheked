@@ -57,10 +57,18 @@ public class UserAuthController {
         if (user != null) {
             System.out.println("Login successful!");
             Session.setCurrentUser(user);
+            FXMLLoader fxmlLoader = null;
             // Redirect to the main application view
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainView.fxml"));
+            if (user instanceof Guest) {
+                System.out.println("Logged in as Guest: " + user.getUsername());
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainGuestView.fxml"));
             fxmlLoader.setController(new MainController());
+            } else if (user instanceof Accommodation) {
+                System.out.println("Logged in as Accommodation: " + user.getUsername());
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainAccommodationView.fxml"));
+            }
+            fxmlLoader.setController(new MainController());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             try {
                 Parent root = fxmlLoader.load();
                 Scene scene = new Scene(root);

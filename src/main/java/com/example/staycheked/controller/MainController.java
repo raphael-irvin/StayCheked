@@ -1,6 +1,8 @@
 package com.example.staycheked.controller;
 
 import com.example.staycheked.Session;
+import com.example.staycheked.model.user.Accommodation;
+import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.service.TicketService;
 import com.example.staycheked.service.UserAuthService;
 
@@ -25,18 +27,35 @@ public class MainController {
     @FXML
     Button dashboardNavbar;
 
+    //Dashboard buttons for Accomodation
     @FXML
-    Button activeTicketButton;
-
+    Button accommodationTicketButton;
     @FXML
     Button guestButton;
+
+    //Dashboard buttons for Guest
+    @FXML
+    Button guestTicketButton;
+    @FXML
+    Button accommodationButton;
 
     Button[] navButtons = new Button[2];
 
     public void initialize() {
         signOutNavbar.setOnAction(this::onNavbarSignOutClick);
-        navButtons[0] = activeTicketButton;
-        navButtons[1] = guestButton;
+        if (Session.getCurrentUser() != null) {
+            if (Session.getCurrentUser() instanceof Accommodation) {
+                navButtons[0] = accommodationTicketButton;
+                navButtons[1] = guestButton;
+            } else if (Session.getCurrentUser() instanceof Guest) {
+                navButtons[0] = guestTicketButton;
+                navButtons[1] = accommodationButton;
+            } else {
+                System.out.println("Unknown user type.");
+            }
+        } else {
+            System.out.println("No user is currently logged in.");
+        }
     }
     
     public void onNavbarSignOutClick(ActionEvent event) {
@@ -55,10 +74,11 @@ public class MainController {
         }
     }
 
-    public void onActiveTicketButtonClick(ActionEvent event) {
+    //Functions for Accommodation Dashboard
+    public void onAccommodationTicketButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ActiveTicketView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ticketView.fxml"));
             fxmlLoader.setController(new TicketController(new TicketService()));
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
@@ -72,6 +92,31 @@ public class MainController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestView.fxml"));
             fxmlLoader.setController(new GuestController());
+            Parent root = fxmlLoader.load();
+            mainBorderPane.setCenter(root);
+        } catch (Exception e) {
+            System.out.println("Error loading Guest View: " + e.getMessage());
+        }
+    }
+
+    //Functions for Guest Dashboard
+    public void onGuestTicketButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ticketView.fxml"));
+            fxmlLoader.setController(new TicketController(new TicketService()));
+            Parent root = fxmlLoader.load();
+            mainBorderPane.setCenter(root);
+        } catch (Exception e) {
+            System.out.println("Error loading Guest Ticket View: " + e.getMessage());
+        }
+    }
+
+        public void onAccommodationButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AccommodationView.fxml"));
+            fxmlLoader.setController(new AccommodationController());
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {

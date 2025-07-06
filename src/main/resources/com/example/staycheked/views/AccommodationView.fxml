@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <VBox alignment="CENTER" fillWidth="false" spacing="10.0">
+            <Label alignment="CENTER" prefHeight="26.0" prefWidth="184.0" styleClass="header-label" text="Registered Accommodations">
+                <font>
+                   <Font name="System Bold Italic" size="17.0" />
+                </font>
+            </Label>
+            <TableView fx:id="accommodationTable" prefHeight="400.0" prefWidth="600.0">
+                <columns>
+                    <TableColumn fx:id="accommodationNameColumn" prefWidth="100" text="Accommodation Name" />
+                    <TableColumn fx:id="emailColumn" prefWidth="200" text="Email" />
+                    <TableColumn fx:id="phoneColumn" prefWidth="100" text="Phone" />
+                    <TableColumn fx:id="addressColumn" prefWidth="200" text="Address" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

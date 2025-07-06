@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefWidth="900.0" style="-fx-background-color: Gray;" BorderPane.alignment="TOP_LEFT">
+         <children>
+            <Button fx:id="dashboardNavbar" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" styleClass="navbarActive" text="Dashboard" HBox.hgrow="ALWAYS" />
+            <Button fx:id="signOutNavbar" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onNavbarSignOutClick" prefHeight="35.0" stylesheets="@../css/Authentication.css" text="Sign Out" HBox.hgrow="ALWAYS" />
+            <Button layoutX="174.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" text="Dashboard" visible="false" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="565.0" prefWidth="120.0" styleClass="DashboardNavbar" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="30.0" prefWidth="120.0" />
+            <Button fx:id="guestTicketButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onGuestTicketButtonClick" prefHeight="25.0" prefWidth="120.0" styleClass="DashboardButton" text="Tickets" />
+            <Pane prefHeight="10.0" prefWidth="119.0" />
+            <Pane layoutX="11.0" layoutY="76.0" prefHeight="10.0" prefWidth="119.0" />
+            <Button fx:id="accommodationButton" alignment="TOP_LEFT" layoutX="16.0" layoutY="86.0" mnemonicParsing="false" onAction="#onAccommodationButtonClick" prefHeight="25.0" prefWidth="120.0" styleClass="DashboardButton" text="Accommodations" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="StayChecked">
+               <font>
+                  <Font name="Quicksand Medium" size="51.0" />
+               </font>
+            </Label>
+            <Label text="Management System">
+               <font>
+                  <Font name="Quicksand Medium" size="24.0" />
+               </font>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="17.5" left="90.0" right="90.0" top="17.5" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>
