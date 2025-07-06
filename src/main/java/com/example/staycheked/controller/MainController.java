@@ -31,6 +31,8 @@ public class MainController {
     @FXML
     Button accommodationTicketButton;
     @FXML
+    Button bookingButton;
+    @FXML
     Button guestButton;
 
     //Dashboard buttons for Guest
@@ -39,15 +41,18 @@ public class MainController {
     @FXML
     Button accommodationButton;
 
-    Button[] navButtons = new Button[2];
+    Button[] navButtons;
 
     public void initialize() {
         signOutNavbar.setOnAction(this::onNavbarSignOutClick);
         if (Session.getCurrentUser() != null) {
             if (Session.getCurrentUser() instanceof Accommodation) {
+                navButtons = new Button[3];
                 navButtons[0] = accommodationTicketButton;
                 navButtons[1] = guestButton;
+                navButtons[2] = bookingButton;
             } else if (Session.getCurrentUser() instanceof Guest) {
+                navButtons = new Button[2];
                 navButtons[0] = guestTicketButton;
                 navButtons[1] = accommodationButton;
             } else {
@@ -84,6 +89,19 @@ public class MainController {
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
             System.out.println("Error loading Active Ticket View: " + e.getMessage());
+        }
+    }
+
+    public void onBookingButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/BookingView.fxml"));
+            fxmlLoader.setController(new BookingListController());
+            Parent root = fxmlLoader.load();
+            mainBorderPane.setCenter(root);
+        } catch (Exception e) {
+            System.out.println("Error loading Booking View: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

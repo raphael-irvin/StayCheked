@@ -25,6 +25,7 @@
             <Pane prefHeight="30.0" prefWidth="120.0" />
             <Button fx:id="accommodationTicketButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onAccommodationTicketButtonClick" prefHeight="25.0" prefWidth="120.0" styleClass="DashboardButton" text="Tickets" />
             <Pane prefHeight="10.0" prefWidth="119.0" />
+            <Button fx:id="bookingButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onBookingButtonClick" prefHeight="25.0" prefWidth="120.0" styleClass="DashboardButton" text="Bookings" />
             <Pane layoutX="11.0" layoutY="76.0" prefHeight="10.0" prefWidth="119.0" />
             <Button fx:id="guestButton" alignment="TOP_LEFT" layoutX="16.0" layoutY="86.0" mnemonicParsing="false" onAction="#onGuestButtonClick" prefHeight="25.0" prefWidth="120.0" styleClass="DashboardButton" text="Guests" />
          </children>
