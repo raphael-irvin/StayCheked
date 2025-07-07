@@ -83,12 +83,13 @@ public class MainController {
     public void onAccommodationTicketButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ticketView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/TicketView.fxml"));
             fxmlLoader.setController(new TicketListController(new TicketService()));
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
             System.out.println("Error loading Active Ticket View: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -121,12 +122,13 @@ public class MainController {
     public void onGuestTicketButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ticketView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/TicketView.fxml"));
             fxmlLoader.setController(new TicketListController(new TicketService()));
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
             System.out.println("Error loading Guest Ticket View: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
