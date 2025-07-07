@@ -15,6 +15,39 @@ public class TicketDAO {
 
     //Tested as of 06/06/2025
     public static boolean initialize() {
+        retrieveAllTickets();
+        return true;
+    }
+
+    public static boolean saveAllTickets() {
+        HashMap<String, Ticket> tickets = DataStore.tickets;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_SOURCE))) {
+            String line = "ticketID,accommodationEmail,guestEmail,bookingID,subject,category,status,lastUpdatedAt";
+            writer.write(line);
+            writer.newLine();
+            for (Ticket ticket : tickets.values()) {
+                line = String.join(",", ticket.getTicketID(),
+                        ticket.getSubmittedTo().getEmailAddress(),
+                        ticket.getSubmittedBy().getEmailAddress(),
+                        ticket.getBooking().getBookingID(),
+                        ticket.getSubject(),
+                        ticket.getCategory(),
+                        ticket.getStatus(),
+                        ticket.getLastUpdatedAt().format(UtilService.dateTimeFormatter));
+
+                System.out.println("Saving ticket: " + line); // Debugging output
+
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Ticket Data Saving Failed");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean retrieveAllTickets() {
         HashMap<String, Ticket> tickets = new HashMap<>();
 
         try (
@@ -58,38 +91,10 @@ public class TicketDAO {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Guest Data Initialization Failed");
+            System.out.println("Ticket Data Retrieval Failed");
             ;
         }
         DataStore.tickets = tickets;
-        return true;
-    }
-
-    public static boolean saveAllTickets() {
-        HashMap<String, Ticket> tickets = DataStore.tickets;
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_SOURCE))) {
-            String line = "ticketID,accommodationEmail,guestEmail,bookingID,subject,category,status,lastUpdatedAt";
-            writer.write(line);
-            writer.newLine();
-            for (Ticket ticket : tickets.values()) {
-                line = String.join(",", ticket.getTicketID(),
-                        ticket.getSubmittedTo().getEmailAddress(),
-                        ticket.getSubmittedBy().getEmailAddress(),
-                        ticket.getBooking().getBookingID(),
-                        ticket.getSubject(),
-                        ticket.getCategory(),
-                        ticket.getStatus(),
-                        ticket.getLastUpdatedAt().format(UtilService.dateTimeFormatter));
-
-                System.out.println("Saving ticket: " + line); // Debugging output
-
-                writer.write(line);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Ticket Data Saving Failed");
-            return false;
-        }
         return true;
     }
 

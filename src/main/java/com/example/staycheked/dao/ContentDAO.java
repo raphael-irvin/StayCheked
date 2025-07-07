@@ -16,7 +16,37 @@ public class ContentDAO {
 
     //Tested as of 06/06/2025
     public static boolean initialize() {
-        HashMap<String, ArrayList<Content>> contents = new HashMap<>();
+        retrieveAllContents();
+        return true;
+    }
+
+    public static boolean saveAllContents() {
+        HashMap<String, ArrayList<Content>> contents = DataStore.contents;
+        try (
+                BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_SOURCE))
+        ) {
+            String line = "ticketID,userEmail,lastUpdatedAt,message";
+            writer.write(line);
+            writer.newLine();
+
+            for (String ticketID : contents.keySet()) {
+                for (Content content : contents.get(ticketID)) {
+                    line = String.join(",",content.getTicketID(), content.getSender().getEmailAddress(), content.getDateTime().format(UtilService.dateTimeFormatter), content.getMessage());
+                    System.out.println("Saving content: " + line); // Debugging output
+                    writer.write(line);
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Content Data Saving Failed");
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean retrieveAllContents() {
+ HashMap<String, ArrayList<Content>> contents = new HashMap<>();
 
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))
@@ -54,35 +84,10 @@ public class ContentDAO {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Content Data Initialization Failed");
+            System.out.println("Content Data Retrieval Failed");
         }
         DataStore.contents = contents;
         System.out.println("SAVED IN CONTENT DATASTORE: " + DataStore.contents); // Debugging output to check if contents are loaded correctly
-        return true;
-    }
-
-    public static boolean saveAllContents() {
-        HashMap<String, ArrayList<Content>> contents = DataStore.contents;
-        try (
-                BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_SOURCE))
-        ) {
-            String line = "ticketID,userEmail,lastUpdatedAt,message";
-            writer.write(line);
-            writer.newLine();
-
-            for (String ticketID : contents.keySet()) {
-                for (Content content : contents.get(ticketID)) {
-                    line = String.join(",",content.getTicketID(), content.getSender().getEmailAddress(), content.getDateTime().format(UtilService.dateTimeFormatter), content.getMessage());
-                    System.out.println("Saving content: " + line); // Debugging output
-                    writer.write(line);
-                    writer.newLine();
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Content Data Saving Failed");
-            System.out.println("Error: " + e.getMessage());
-            return false;
-        }
         return true;
     }
 

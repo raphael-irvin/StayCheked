@@ -14,45 +14,7 @@ public class BookingDAO {
 
     //TESTED as of 06/06/2025
     public static boolean initialize() {
-        HashMap<String, Booking> bookings = new HashMap<>();
-
-        try (
-                BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))
-        ) {
-            String line;
-            reader.readLine(); // Skip header line
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 6) {
-                    String bookingID = parts[0];
-                    Accommodation accommodation = DataStore.findAccommodationByEmailAddress(parts[1]);
-                    String guestIdentificationLastName = parts[2];
-                    String room = parts[3];
-                    String status = parts[4];
-
-                    Guest guest = null;
-                    if (!parts[5].equalsIgnoreCase("null")) {
-                        guest = DataStore.findGuestByEmailAddress(parts[5]);
-                    }
-
-                    Booking booking = new Booking(bookingID, accommodation, guestIdentificationLastName, room, status, guest);
-                    bookings.put(bookingID, booking);
-
-                    // For debugging purposes, print the guest details
-                    System.out.println("Booking ID: " + bookingID);
-                    System.out.println("Accommodation: " + (accommodation != null ? accommodation.getAccommodationName() : "null"));
-                    System.out.println("Guest Last Name: " + guestIdentificationLastName);
-                    System.out.println("Room: " + room);
-                    System.out.println("Status: " + status);
-                    System.out.println("Guest: " + (guest != null ? guest.getFullName() : "null"));
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Guest Data Initialization Failed");
-            return false;
-        }
-        DataStore.bookings = bookings;
-        System.out.println("SAVED IN DATASTORE: " + DataStore.bookings); // Debugging output to check if bookings are loaded correctly
+        retrieveAllBookings();
         return true;
     }
 
@@ -83,6 +45,42 @@ public class BookingDAO {
             System.out.println("Failed to save bookings");
             return false;
         }
+        return true;
+    }
+
+    public static boolean retrieveAllBookings() {
+        HashMap<String, Booking> bookings = new HashMap<>();
+
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))
+        ) {
+            String line;
+            reader.readLine(); // Skip header line
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 6) {
+                    String bookingID = parts[0];
+                    Accommodation accommodation = DataStore.findAccommodationByEmailAddress(parts[1]);
+                    String guestIdentificationLastName = parts[2];
+                    String room = parts[3];
+                    String status = parts[4];
+
+                    Guest guest = null;
+                    if (!parts[5].equalsIgnoreCase("null")) {
+                        guest = DataStore.findGuestByEmailAddress(parts[5]);
+                    }
+
+                    Booking booking = new Booking(bookingID, accommodation, guestIdentificationLastName, room, status, guest);
+                    bookings.put(bookingID, booking);
+                    // For debugging purposes, print the booking details
+                    System.out.println("Saved Booking with Booking ID: " + bookingID);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Booking Data Retrieval Failed");
+            return false;
+        }
+        DataStore.bookings = bookings;
         return true;
     }
 
