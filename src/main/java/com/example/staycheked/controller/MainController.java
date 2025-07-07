@@ -115,6 +115,7 @@ public class MainController {
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
             System.out.println("Error loading Guest View: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

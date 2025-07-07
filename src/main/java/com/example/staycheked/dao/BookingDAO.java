@@ -72,6 +72,7 @@ public class BookingDAO {
 
                     Booking booking = new Booking(bookingID, accommodation, guestIdentificationLastName, room, status, guest);
                     bookings.put(bookingID, booking);
+                    accommodation.addBooking(booking);
                     // For debugging purposes, print the booking details
                     System.out.println("Saved Booking with Booking ID: " + bookingID);
                 }

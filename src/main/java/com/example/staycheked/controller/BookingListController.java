@@ -1,7 +1,12 @@
 package com.example.staycheked.controller;
 
+import java.util.HashMap;
+
+import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Booking;
+import com.example.staycheked.model.user.Accommodation;
+import com.example.staycheked.model.user.Guest;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,9 +29,36 @@ public class BookingListController {
     private TableColumn<Booking, String> statusColumn;
     @FXML
     private TableColumn<Booking, String> guestColumn;
+    @FXML
+    private TableColumn<Booking, String> AccommodationColumn;
 
     @FXML
     public void initialize() {
+
+        if (Session.getCurrentUser() instanceof Guest) {
+            // Filter bookings for the current guest
+            Guest currentGuest = (Guest) Session.getCurrentUser();
+            HashMap<String, Booking> matchingBookings = new HashMap<>();
+            for (Booking booking : DataStore.bookings.values()) {
+                if (booking.getGuest() != null && booking.getGuest().getUserID().equals(currentGuest.getUserID())) {
+                    matchingBookings.put(booking.getBookingID(), booking);
+                }
+            }
+            DataStore.bookings = matchingBookings;
+        } else if (Session.getCurrentUser() instanceof Accommodation) {
+            // Filter bookings for the current accommodation
+            Accommodation currentAccommodation = (Accommodation) Session.getCurrentUser();
+            HashMap<String, Booking> matchingBookings = new HashMap<>();
+            for (Booking booking : DataStore.bookings.values()) {
+                if (booking.getAccommodation() != null && booking.getAccommodation().getUserID().equals(currentAccommodation.getUserID())) {
+                    matchingBookings.put(booking.getBookingID(), booking);
+                }
+            }
+            DataStore.bookings = matchingBookings;
+        } else {
+            System.out.println("Unknown user type.");
+        }
+
         bookingIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookingID"));
         guestLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("guestIdentificationLastName"));
         roomColumn.setCellValueFactory(new PropertyValueFactory<>("room"));

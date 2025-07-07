@@ -1,8 +1,13 @@
 package com.example.staycheked.controller;
 
+import java.util.HashMap;
+
+import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Booking;
 import com.example.staycheked.model.object.Ticket;
+import com.example.staycheked.model.user.Accommodation;
+import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.service.TicketService;
 
 import javafx.collections.FXCollections;
@@ -30,6 +35,28 @@ public class TicketListController {
     TableColumn<Ticket, String> actionColumn;
 
     public void initialize() {
+        HashMap<String, Ticket> matchingActiveTickets = new HashMap<>();
+
+        if (Session.getCurrentUser() instanceof Guest) {
+            //Find Tickets that belong to the current guest
+            Guest currentGuest = (Guest) Session.getCurrentUser();
+            for (Ticket ticket : DataStore.tickets.values()) {
+                if (ticket.getSubmittedBy() != null && ticket.getSubmittedBy().getUserID().equals(currentGuest.getUserID())) {
+                    matchingActiveTickets.put(ticket.getTicketID(), ticket);
+                }
+            }
+        } else if (Session.getCurrentUser() instanceof Accommodation) {
+            //Find Tickets that belong to the current accommodation
+            Accommodation currentAccommodation = (Accommodation) Session.getCurrentUser();
+            for (Ticket ticket : DataStore.tickets.values()) {
+                if (ticket.getSubmittedTo() != null && ticket.getSubmittedTo().getUserID().equals(currentAccommodation.getUserID())) {
+                    matchingActiveTickets.put(ticket.getTicketID(), ticket);
+                }
+            }
+        } else {
+            System.out.println("Unknown user type.");
+        }
+
         // Initialize the table columns with appropriate cell value factories
         idColumn.setCellValueFactory(new PropertyValueFactory<>("ticketID"));
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
@@ -42,7 +69,7 @@ public class TicketListController {
             )
         );
         // Load active tickets into the table
-        ObservableList<Ticket> tickets = FXCollections.observableArrayList(DataStore.tickets.values());
+        ObservableList<Ticket> tickets = FXCollections.observableArrayList(matchingActiveTickets.values());
         activeTicketTable.setItems(tickets);
     }
 

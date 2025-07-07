@@ -81,8 +81,8 @@ public class Accommodation extends User{
         return bookings;
     }
 
-    public void setBookings(ArrayList<Booking> bookings) {
-        this.bookings = bookings;
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
     }
 
 }
