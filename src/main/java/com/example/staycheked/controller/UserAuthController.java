@@ -58,12 +58,17 @@ public class UserAuthController {
             System.out.println("Login successful!");
             Session.setCurrentUser(user);
             FXMLLoader fxmlLoader = null;
+
             // Redirect to the main application view
+            // Guest user
             if (user instanceof Guest) {
                 System.out.println("Logged in as Guest: " + user.getUsername());
                 fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainGuestView.fxml"));
             fxmlLoader.setController(new MainController());
-            } else if (user instanceof Accommodation) {
+            } 
+
+            // Accommodation user
+            else if (user instanceof Accommodation) { 
                 System.out.println("Logged in as Accommodation: " + user.getUsername());
                 fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainAccommodationView.fxml"));
             }

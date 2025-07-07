@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="436.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <VBox alignment="CENTER" fillWidth="false" spacing="10.0">
+            <Label alignment="CENTER" prefHeight="26.0" prefWidth="184.0" styleClass="header-label" text="Your Verified Bookings">
+                <font>
+                   <Font name="System Bold Italic" size="17.0" />
+                </font>
+            </Label>
+            <TableView fx:id="bookingTable" prefHeight="400.0" prefWidth="700.0">
+                <columns>
+                    <TableColumn fx:id="bookingIdColumn" prefWidth="100" text="Booking ID" />
+                    <TableColumn fx:id="guestLastNameColumn" prefWidth="120" text="Identification Name" />
+                    <TableColumn fx:id="roomColumn" prefWidth="100" text="Room" />
+                    <TableColumn fx:id="statusColumn" prefWidth="100" text="Status" />
+                    <TableColumn fx:id="accommodationColumn" prefWidth="130.0" text="Accommodation" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

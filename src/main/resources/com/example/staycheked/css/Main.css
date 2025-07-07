@@ -35,3 +35,9 @@
     background-color: rgb(31, 132, 255);
     -fx-text-fill: white;
 }
+
+.ActionBar {
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill: black;
+}

@@ -1,8 +1,10 @@
 package com.example.staycheked.controller;
 
 import com.example.staycheked.Session;
+import com.example.staycheked.controller.ActionBars.GuestActionBarController;
 import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
+import com.example.staycheked.service.BookingAuthService;
 import com.example.staycheked.service.TicketService;
 import com.example.staycheked.service.UserAuthService;
 
@@ -39,6 +41,8 @@ public class MainController {
     @FXML
     Button guestTicketButton;
     @FXML
+    Button guestBookingButton;
+    @FXML
     Button accommodationButton;
 
     Button[] navButtons;
@@ -52,14 +56,28 @@ public class MainController {
                 navButtons[1] = guestButton;
                 navButtons[2] = bookingButton;
             } else if (Session.getCurrentUser() instanceof Guest) {
-                navButtons = new Button[2];
+                navButtons = new Button[3];
                 navButtons[0] = guestTicketButton;
-                navButtons[1] = accommodationButton;
+                navButtons[1] = guestBookingButton;
+                navButtons[2] = accommodationButton;
             } else {
                 System.out.println("Unknown user type.");
             }
         } else {
             System.out.println("No user is currently logged in.");
+        }
+
+        //Initialize Bottom Action Bar
+        if (Session.getCurrentUser() instanceof Guest) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ActionBars/GuestActionBar.fxml"));
+            fxmlLoader.setController(new GuestActionBarController(new BookingAuthService()));
+            try {
+                Parent root = fxmlLoader.load();
+                mainBorderPane.setBottom(root);
+            } catch (Exception e) {
+                System.out.println("Error loading Guest Action Bar: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
     
@@ -96,9 +114,10 @@ public class MainController {
     public void onBookingButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/BookingView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AccommodationBookingView.fxml"));
             fxmlLoader.setController(new BookingListController());
             Parent root = fxmlLoader.load();
+            mainBorderPane.setCenter(null);
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
             System.out.println("Error loading Booking View: " + e.getMessage());
@@ -133,7 +152,21 @@ public class MainController {
         }
     }
 
-        public void onAccommodationButtonClick(ActionEvent event) {
+    public void onGuestBookingButtonClick(ActionEvent event) {
+        onNavbarButtonClick(event);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestBookingView.fxml"));
+            fxmlLoader.setController(new BookingListController());
+            Parent root = fxmlLoader.load();
+            mainBorderPane.setCenter(null);
+            mainBorderPane.setCenter(root);
+        } catch (Exception e) {
+            System.out.println("Error loading Guest Booking View: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void onAccommodationButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AccommodationView.fxml"));

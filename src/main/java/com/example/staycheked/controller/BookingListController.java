@@ -16,7 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class BookingListController {
-
+    
+    //General Shared Columns
     @FXML
     private TableView<Booking> bookingTable;
     @FXML
@@ -27,49 +28,64 @@ public class BookingListController {
     private TableColumn<Booking, String> roomColumn;
     @FXML
     private TableColumn<Booking, String> statusColumn;
+
+    //Specific Columns for Guest and Accommodation
     @FXML
     private TableColumn<Booking, String> guestColumn;
     @FXML
-    private TableColumn<Booking, String> AccommodationColumn;
+    private TableColumn<Booking, String> accommodationColumn;
 
     @FXML
     public void initialize() {
+        HashMap<String, Booking> matchingBookings = new HashMap<>();
 
+        //Guest user
         if (Session.getCurrentUser() instanceof Guest) {
             // Filter bookings for the current guest
             Guest currentGuest = (Guest) Session.getCurrentUser();
-            HashMap<String, Booking> matchingBookings = new HashMap<>();
             for (Booking booking : DataStore.bookings.values()) {
                 if (booking.getGuest() != null && booking.getGuest().getUserID().equals(currentGuest.getUserID())) {
                     matchingBookings.put(booking.getBookingID(), booking);
                 }
             }
-            DataStore.bookings = matchingBookings;
-        } else if (Session.getCurrentUser() instanceof Accommodation) {
+            //Set Collumns Specific to Guest
+            accommodationColumn.setCellValueFactory(cellData -> 
+            new javafx.beans.property.SimpleStringProperty(
+                cellData.getValue().getAccommodation() != null ? cellData.getValue().getAccommodation().getUsername() : "N/A"
+                )
+            );
+        } 
+        
+        // Accommodation user
+        else if (Session.getCurrentUser() instanceof Accommodation) {
             // Filter bookings for the current accommodation
             Accommodation currentAccommodation = (Accommodation) Session.getCurrentUser();
-            HashMap<String, Booking> matchingBookings = new HashMap<>();
             for (Booking booking : DataStore.bookings.values()) {
                 if (booking.getAccommodation() != null && booking.getAccommodation().getUserID().equals(currentAccommodation.getUserID())) {
                     matchingBookings.put(booking.getBookingID(), booking);
                 }
             }
-            DataStore.bookings = matchingBookings;
-        } else {
-            System.out.println("Unknown user type.");
-        }
-
-        bookingIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookingID"));
-        guestLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("guestIdentificationLastName"));
-        roomColumn.setCellValueFactory(new PropertyValueFactory<>("room"));
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-        guestColumn.setCellValueFactory(cellData -> 
+            //Set Collumns Specific to Accommodation
+            guestColumn.setCellValueFactory(cellData -> 
             new javafx.beans.property.SimpleStringProperty(
                 cellData.getValue().getGuest() != null ? cellData.getValue().getGuest().getUsername() : "N/A"
                 )
             );
+        } 
+        
+        // Unknown user type
+        else {
+            System.out.println("Unknown user type.");
+        }
 
-        ObservableList<Booking> Bookings = FXCollections.observableArrayList(DataStore.bookings.values());
+        //Set General Columns
+        guestLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("guestIdentificationLastName"));
+        bookingIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookingID"));
+        roomColumn.setCellValueFactory(new PropertyValueFactory<>("room"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        //Put Bookings into Table
+        ObservableList<Booking> Bookings = FXCollections.observableArrayList(matchingBookings.values());
         bookingTable.setItems(Bookings);
     }
 

@@ -18,4 +18,6 @@ module com.example.staycheked {
     opens com.example.staycheked.model to javafx.fxml;
     exports com.example.staycheked.controller;
     opens com.example.staycheked.controller to javafx.fxml;
+    exports com.example.staycheked.controller.ActionBars;
+    opens com.example.staycheked.controller.ActionBars to javafx.fxml;
 }
