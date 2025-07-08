@@ -13,10 +13,8 @@ import java.util.Optional;
 
 import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
-import com.example.staycheked.model.object.Content;
-import com.example.staycheked.model.object.Ticket;
-import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.service.BookingAuthService;
+import com.example.staycheked.service.TicketService;
 
 public class GuestActionBarController {
 
@@ -26,9 +24,11 @@ public class GuestActionBarController {
     Button newSupportTicketButton;
 
     BookingAuthService bookingAuthService;
+    TicketService ticketService;
 
-    public GuestActionBarController(BookingAuthService bookingAuthService) {
+    public GuestActionBarController(BookingAuthService bookingAuthService, TicketService ticketService) {
         this.bookingAuthService = bookingAuthService;
+        this.ticketService = ticketService;
     }
 
     public void initialize() {
@@ -171,14 +171,15 @@ public class GuestActionBarController {
                 String enquiry = enquiryField.getText();
                 // Only create ticket if all fields are filled (event filter ensures this)
                 if (selectedBooking != null && selectedCategory != null && !subject.isEmpty() && !enquiry.isEmpty()) {
-                    Ticket newTicket = new Ticket(
-                        DataStore.findBookingByID(selectedBooking.split(" - ")[0]).getAccommodation(),
-                        (Guest) Session.getCurrentUser(),
+                    ticketService.postNewTicket(
+                        DataStore.findBookingByID(selectedBooking.split(" - ")[0]).getAccommodation().getEmailAddress(),
+                        Session.getCurrentUser().getEmailAddress(),
                         DataStore.findBookingByID(selectedBooking.split(" - ")[0]),
                         subject,
-                        selectedCategory
+                        selectedCategory,
+                        enquiry
                     );
-                    newTicket.addNewContent(new Content(newTicket.getTicketID(), Session.getCurrentUser(), enquiry));
+
                     System.out.println("Support ticket created: " + selectedBooking + ", " + selectedCategory + ", " + subject + ", " + enquiry);
                 }
             }

@@ -70,7 +70,7 @@ public class MainController {
         //Initialize Bottom Action Bar
         if (Session.getCurrentUser() instanceof Guest) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ActionBars/GuestActionBar.fxml"));
-            fxmlLoader.setController(new GuestActionBarController(new BookingAuthService()));
+            fxmlLoader.setController(new GuestActionBarController(new BookingAuthService(), new TicketService()));
             try {
                 Parent root = fxmlLoader.load();
                 mainBorderPane.setBottom(root);
