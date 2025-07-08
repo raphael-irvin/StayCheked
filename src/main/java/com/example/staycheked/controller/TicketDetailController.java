@@ -1,5 +1,6 @@
 package com.example.staycheked.controller;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.model.object.Content;
 import com.example.staycheked.model.object.Ticket;
 import com.example.staycheked.service.TicketService;
@@ -73,10 +74,10 @@ public class TicketDetailController {
         lastUpdatedLabel.setText("Requested by " + ticket.getSubmittedBy().getUsername() + " - Last Updated at "+ ticket.getLastUpdatedAt().toString());
 
         contentListView.getItems().clear();
-        System.out.println("DEBUG - TicketDetailController: Populating content list view for ticket ID: " + ticket.getTicketID());
-        System.out.println("DEBUG - TicketDetailController: Content count: " + ticket.getContents().size());
+        Main.debug("TicketDetailController", "Populating content list view for ticket ID: " + ticket.getTicketID());
+        Main.debug("TicketDetailController", "Content count: " + ticket.getContents().size());
         for (Content content : ticket.getContents()) {
-            System.out.println("DEBUG - TicketDetailController: Adding content to list view: " + content.getMessage());
+            Main.debug("TicketDetailController", "Adding content to list view: " + content.getMessage());
             contentListView.getItems().add(
                 content.getDateTime() + " | " + content.getSender().getUsername() + ": " + content.getMessage()
             );

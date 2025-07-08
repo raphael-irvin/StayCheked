@@ -1,5 +1,6 @@
 package com.example.staycheked.dao;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.Guest;
 
@@ -30,13 +31,13 @@ public class GuestDAO {
                 line = String.join(",", guest.getUserID(), guest.getUsername(), guest.getEmailAddress(),
                         guest.getContactNo(), guest.getPassword(), guest.getFullName());
 
-                System.out.println("Saving guest: " + line); // Debugging output
+                Main.debug("GuestDAO", "Saving guest: " + line);
 
                 writer.write(line);
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Failed to save guest data: " + e.getMessage());
+            Main.debug("GuestDAO", "Failed to save guest data: " + e.getMessage());
             return false;
         }
         return true;
@@ -63,17 +64,17 @@ public class GuestDAO {
                     guests.put(emailAddress, guest);
 
                     // For debugging purposes, print the guest details
-                    System.out.println(emailAddress);
-                    System.out.println(guest.getUserID());
-                    System.out.println(guest.getUsername());
-                    System.out.println(guest.getEmailAddress());
-                    System.out.println(guest.getContactNo());
-                    System.out.println(guest.getPassword());
-                    System.out.println(guest.getFullName());
+                    Main.debug("GuestDAO", emailAddress);
+                    Main.debug("GuestDAO", guest.getUserID());
+                    Main.debug("GuestDAO", guest.getUsername());
+                    Main.debug("GuestDAO", guest.getEmailAddress());
+                    Main.debug("GuestDAO", guest.getContactNo());
+                    Main.debug("GuestDAO", guest.getPassword());
+                    Main.debug("GuestDAO", guest.getFullName());
                 }
             }
         } catch (IOException e) {
-            System.out.println("Guest Data Retrieval Failed");
+            Main.debug("GuestDAO", "Guest Data Retrieval Failed");
             ;
         }
         DataStore.guests = guests;

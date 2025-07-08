@@ -27,6 +27,11 @@ public class Main extends Application {
         stage.show();
     }
 
+    // Centralized debug output method
+    public static void debug(String className, String message) {
+        System.out.println("DEBUG - " + className + ": " + message);
+    }
+
     public static void main(String[] args) {
         launch();
     }

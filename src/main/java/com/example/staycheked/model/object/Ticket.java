@@ -1,5 +1,6 @@
 package com.example.staycheked.model.object;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.dao.TicketDAO;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.Accommodation;
@@ -56,9 +57,9 @@ public class Ticket {
     }
 
     public void addNewContent(Content content) {
-        System.out.println("DEBUG - Ticket: Adding new content to ticket ID: " + this.ticketID); //DEBUGGING OUTPUT
+        Main.debug("Ticket", "Adding new content to ticket ID: " + this.ticketID);
         contents.add(content);
-        System.out.println("DEBUG - Ticket: Content added. Total contents in ticket: " + contents.size()); //DEBUGGING OUTPUT
+        Main.debug("Ticket", "Content added. Total contents in ticket: " + contents.size());
         lastUpdatedAt = content.getDateTime();
     }
 

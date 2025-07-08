@@ -1,5 +1,6 @@
 package com.example.staycheked.model.object;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.dao.ContentDAO;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.User;
@@ -15,17 +16,17 @@ public class Content {
     private LocalDateTime dateTime;
     private String message;
 
-    // Constructor for creating new Content with all properties (Initialization)`
+    // Constructor for creating new Content with all properties (Initialization)
     public Content(String ticketID, User sender, LocalDateTime dateTime, String message) {
         this.ticketID = ticketID;
         this.sender = sender;
         this.dateTime = dateTime;
         this.message = message;
 
-        System.out.println("DEBUG - Content: Creating new content for ticket ID: " + ticketID); //DEBUGGING OUTPUT
-        System.out.println("DEBUG - Content: Does Ticket Exist in DataStore: " + DataStore.tickets.get(ticketID)); //DEBUGGING OUTPUT
+        Main.debug("Content", "Creating new content for ticket ID: " + ticketID);
+        Main.debug("Content", "Does Ticket Exist in DataStore: " + DataStore.tickets.get(ticketID));
         DataStore.tickets.get(ticketID).addNewContent(this);
-        System.out.println("DEBUG - Content: Sucessfully Inserted to Ticket Object, Contents in Ticket now: " + DataStore.tickets.get(ticketID).getContents().size()); //DEBUGGING OUTPUT
+        Main.debug("Content", "Successfully Inserted to Ticket Object, Contents in Ticket now: " + DataStore.tickets.get(ticketID).getContents().size());
     }
 
     // Constructor for creating new Content with minimal properties (RUNTIME)
@@ -34,9 +35,13 @@ public class Content {
         this.sender = sender;
         this.message = message;
         this.dateTime = LocalDateTime.now();
+        Main.debug("Content", "Creating new runtime content for ticket ID: " + ticketID);
         DataStore.contents.computeIfAbsent(ticketID, _ -> new ArrayList<>()).add(this); // Add content to the DataStore
+        Main.debug("Content", "Added content to DataStore.contents for ticket ID: " + ticketID + ", total contents: " + DataStore.contents.get(ticketID).size());
         ContentDAO.saveAllContents(); // Save the new content to the database
+        Main.debug("Content", "Saved all contents to database for ticket ID: " + ticketID);
         ContentDAO.retrieveAllContents(); // Refresh the contents from the database
+        Main.debug("Content", "Retrieved all contents from database for ticket ID: " + ticketID);
     }
 
     public Ticket getTicket() {

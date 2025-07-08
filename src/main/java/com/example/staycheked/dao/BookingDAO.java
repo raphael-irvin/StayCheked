@@ -1,5 +1,6 @@
 package com.example.staycheked.dao;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Booking;
 import com.example.staycheked.model.user.Accommodation;
@@ -20,7 +21,7 @@ public class BookingDAO {
 
     public static boolean saveAllBookings() {
         HashMap<String, Booking> bookings = DataStore.bookings;
-        System.out.println("ACCESSING DATASTORE: " + DataStore.bookings); // Debugging output to check if bookings are loaded correctly
+        Main.debug("BookingDAO", "ACCESSING DATASTORE: " + DataStore.bookings); // Debugging output to check if bookings are loaded correctly
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_SOURCE))
         ) {
@@ -37,12 +38,12 @@ public class BookingDAO {
                         booking.getStatus(),
                         guestEmail
                 );
-                System.out.println("Saving booking: " + line); // Debugging output
+                Main.debug("BookingDAO", "Saving booking: " + line); // Debugging output
                 writer.write(line);
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Failed to save bookings");
+            Main.debug("BookingDAO", "Failed to save bookings");
             return false;
         }
         return true;
@@ -74,11 +75,11 @@ public class BookingDAO {
                     bookings.put(bookingID, booking);
                     accommodation.addBooking(booking);
                     // For debugging purposes, print the booking details
-                    System.out.println("Saved Booking with Booking ID: " + bookingID);
+                    Main.debug("BookingDAO", "Saved Booking with Booking ID: " + bookingID);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Booking Data Retrieval Failed");
+            Main.debug("BookingDAO", "Booking Data Retrieval Failed");
             return false;
         }
         DataStore.bookings = bookings;

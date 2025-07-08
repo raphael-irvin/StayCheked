@@ -15,6 +15,7 @@ import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.service.BookingAuthService;
 import com.example.staycheked.service.TicketService;
+import com.example.staycheked.Main;
 
 public class GuestActionBarController {
 
@@ -83,7 +84,7 @@ public class GuestActionBarController {
                 successDialog.setContentText("Successful Verification");
                 successDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
                 successDialog.showAndWait();
-                System.out.println("Booking verified for " + lastName + " with Booking ID: " + bookingId);
+                Main.debug("GuestActionBarController", "Booking verified for " + lastName + " with Booking ID: " + bookingId);
             } else {
                 // Failed Verification Dialog
                 Dialog<Void> successDialog = new Dialog<>();
@@ -92,7 +93,7 @@ public class GuestActionBarController {
                 successDialog.setContentText("Failed Verification. Please check your details.");
                 successDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
                 successDialog.showAndWait();
-                System.out.println("Booking verification failed.");
+                Main.debug("GuestActionBarController", "Booking verification failed.");
             }
         });
     }
@@ -180,7 +181,7 @@ public class GuestActionBarController {
                         enquiry
                     );
 
-                    System.out.println("Support ticket created: " + selectedBooking + ", " + selectedCategory + ", " + subject + ", " + enquiry);
+                    Main.debug("GuestActionBarController", "Support ticket created: " + selectedBooking + ", " + selectedCategory + ", " + subject + ", " + enquiry);
                 }
             }
             return null;

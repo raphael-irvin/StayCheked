@@ -1,5 +1,6 @@
 package com.example.staycheked.model;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.dao.*;
 import com.example.staycheked.model.object.Booking;
 import com.example.staycheked.model.object.Content;
@@ -78,19 +79,19 @@ public class DataStore {
     }
 
     public static void dataInitialization() {
-        System.out.println("Debugging: Initializitation of DataStore started.");
+        Main.debug("DataStore", "Initializitation of DataStore started.");
         AccommodationDAO.initialize();
-        System.out.println("Debugging: AccommodationDAO initialized.");
+        Main.debug("DataStore", "AccommodationDAO initialized.");
         GuestDAO.initialize();
-        System.out.println("Debugging: GuestDAO initialized.");
+        Main.debug("DataStore", "GuestDAO initialized.");
         AdminDAO.initialize();
-        System.out.println("Debugging: AdminDAO initialized.");
+        Main.debug("DataStore", "AdminDAO initialized.");
         BookingDAO.initialize();
-        System.out.println("Debugging: BookingDAO initialized.");
+        Main.debug("DataStore", "BookingDAO initialized.");
         TicketDAO.initialize();
-        System.out.println("Debugging: TicketDAO initialized.");
+        Main.debug("DataStore", "TicketDAO initialized.");
         ContentDAO.initialize();
-        System.out.println("Debugging: ContentDAO initialized.");
+        Main.debug("DataStore", "ContentDAO initialized.");
     }
 
     public static void saveAllData() {

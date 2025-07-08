@@ -1,5 +1,6 @@
 package com.example.staycheked.dao;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Ticket;
 import com.example.staycheked.service.UtilService;
@@ -35,13 +36,13 @@ public class TicketDAO {
                         ticket.getStatus(),
                         ticket.getLastUpdatedAt().format(UtilService.dateTimeFormatter));
 
-                System.out.println("Saving ticket: " + line); // Debugging output
+                Main.debug("TicketDAO", "Saving ticket: " + line); // Debugging output
 
                 writer.write(line);
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Ticket Data Saving Failed");
+            Main.debug("TicketDAO", "Ticket Data Saving Failed");
             return false;
         }
         return true;
@@ -49,7 +50,7 @@ public class TicketDAO {
 
     public static boolean retrieveAllTickets() {
         HashMap<String, Ticket> tickets = new HashMap<>();
-        System.out.println("Debug: Ticket Initialization Start Point"); // Debugging output
+        Main.debug("TicketDAO", "Ticket Initialization Start Point"); // Debugging output
 
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))
@@ -80,17 +81,17 @@ public class TicketDAO {
                     tickets.put(ticketID, ticket);
 
                     // For debugging purposes, print the guest details
-                    System.out.println(ticketID);
-                    System.out.println(ticket.getSubmittedTo().getEmailAddress());
-                    System.out.println(ticket.getSubmittedBy().getEmailAddress());
-                    System.out.println(ticket.getBooking().getBookingID());
-                    System.out.println(ticket.getSubject());
-                    System.out.println(ticket.getCategory());
-                    System.out.println(ticket.getStatus());
+                    Main.debug("TicketDAO", ticketID);
+                    Main.debug("TicketDAO", ticket.getSubmittedTo().getEmailAddress());
+                    Main.debug("TicketDAO", ticket.getSubmittedBy().getEmailAddress());
+                    Main.debug("TicketDAO", ticket.getBooking().getBookingID());
+                    Main.debug("TicketDAO", ticket.getSubject());
+                    Main.debug("TicketDAO", ticket.getCategory());
+                    Main.debug("TicketDAO", ticket.getStatus());
                 }
             }
         } catch (IOException e) {
-            System.out.println("Ticket Data Retrieval Failed");
+            Main.debug("TicketDAO", "Ticket Data Retrieval Failed");
             ;
         }
         DataStore.tickets = tickets;

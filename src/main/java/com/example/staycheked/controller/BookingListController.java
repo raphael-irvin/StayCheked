@@ -2,6 +2,7 @@ package com.example.staycheked.controller;
 
 import java.util.HashMap;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Booking;
@@ -75,7 +76,7 @@ public class BookingListController {
         
         // Unknown user type
         else {
-            System.out.println("Unknown user type.");
+            Main.debug("BookingListController", "Unknown user type.");
         }
 
         //Set General Columns

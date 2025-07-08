@@ -1,5 +1,6 @@
 package com.example.staycheked.dao;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.Admin;
 
@@ -18,7 +19,7 @@ public class AdminDAO {
 
     public static boolean saveAllAdmins() {
         HashMap<String, Admin> admins = DataStore.admins;
-        System.out.println("ACCESSING DATASTORE: " + DataStore.admins); // Debugging output to check if admins are loaded correctly
+        Main.debug("AdminDAO", "ACCESSING DATASTORE: " + DataStore.admins); // Debugging output to check if admins are loaded correctly
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_SOURCE))
         ) {
@@ -29,15 +30,15 @@ public class AdminDAO {
                 line = String.join(",", admin.getUserID(), admin.getUsername(), admin.getEmailAddress(),
                         admin.getContactNo(), admin.getPassword());
 
-                System.out.println("Saving admin: " + line); // Debugging output
+                Main.debug("AdminDAO", "Saving admin: " + line); // Debugging output
 
                 writer.write(line);
                 writer.newLine();
             }
             return true;
         } catch (IOException e) {
-            System.out.println("Admin Data Saving Failed");
-            System.out.println(e.getMessage());
+            Main.debug("AdminDAO", "Admin Data Saving Failed");
+            Main.debug("AdminDAO", e.getMessage());
             return false;
         }
     }
@@ -63,18 +64,18 @@ public class AdminDAO {
                     admins.put(emailAddress, admin);
 
                     // For debugging purposes, print the admin details
-                    System.out.println("Admin Email: " + emailAddress);
-                    System.out.println("User ID: " + userID);
-                    System.out.println("Username: " + username);
-                    System.out.println("Contact No: " + contactNo);
+                    Main.debug("AdminDAO", "Admin Email: " + emailAddress);
+                    Main.debug("AdminDAO", "User ID: " + userID);
+                    Main.debug("AdminDAO", "Username: " + username);
+                    Main.debug("AdminDAO", "Contact No: " + contactNo);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Admin Data Retrieval Failed");
+            Main.debug("AdminDAO", "Admin Data Retrieval Failed");
             return false;
         }
         DataStore.admins = admins;
-        System.out.println("SAVED IN DATASTORE: " + DataStore.admins); // Debugging output to check if admins are loaded correctly
+        Main.debug("AdminDAO", "SAVED IN DATASTORE: " + DataStore.admins); // Debugging output to check if admins are loaded correctly
         return true;
     }
 

@@ -1,5 +1,6 @@
 package com.example.staycheked.controller;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.Session;
 import com.example.staycheked.controller.ActionBars.GuestActionBarController;
 import com.example.staycheked.model.user.Accommodation;
@@ -61,10 +62,10 @@ public class MainController {
                 navButtons[1] = guestBookingButton;
                 navButtons[2] = accommodationButton;
             } else {
-                System.out.println("Unknown user type.");
+                Main.debug("MainController", "Unknown user type.");
             }
         } else {
-            System.out.println("No user is currently logged in.");
+            Main.debug("MainController", "No user is currently logged in.");
         }
 
         //Initialize Bottom Action Bar
@@ -75,7 +76,7 @@ public class MainController {
                 Parent root = fxmlLoader.load();
                 mainBorderPane.setBottom(root);
             } catch (Exception e) {
-                System.out.println("Error loading Guest Action Bar: " + e.getMessage());
+                Main.debug("MainController", "Error loading Guest Action Bar: " + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -83,7 +84,7 @@ public class MainController {
     
     public void onNavbarSignOutClick(ActionEvent event) {
         Session.clear();
-        System.out.println("Sign out clicked");
+        Main.debug("MainController", "Sign out clicked");
         // Redirect to login view or perform other actions
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/LoginView.fxml"));
@@ -91,9 +92,9 @@ public class MainController {
         try {
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
-            System.out.println("Redirected to login view after sign out.");
+            Main.debug("MainController", "Redirected to login view after sign out.");
         } catch (Exception e) {
-            System.out.println("Error loading login view: " + e.getMessage());
+            Main.debug("MainController", "Error loading login view: " + e.getMessage());
         }
     }
 
@@ -106,7 +107,7 @@ public class MainController {
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
-            System.out.println("Error loading Active Ticket View: " + e.getMessage());
+            Main.debug("MainController", "Error loading Active Ticket View: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -120,7 +121,7 @@ public class MainController {
             mainBorderPane.setCenter(null);
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
-            System.out.println("Error loading Booking View: " + e.getMessage());
+            Main.debug("MainController", "Error loading Booking View: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -133,7 +134,7 @@ public class MainController {
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
-            System.out.println("Error loading Guest View: " + e.getMessage());
+            Main.debug("MainController", "Error loading Guest View: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -147,7 +148,7 @@ public class MainController {
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
-            System.out.println("Error loading Guest Ticket View: " + e.getMessage());
+            Main.debug("MainController", "Error loading Guest Ticket View: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -161,7 +162,7 @@ public class MainController {
             mainBorderPane.setCenter(null);
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
-            System.out.println("Error loading Guest Booking View: " + e.getMessage());
+            Main.debug("MainController", "Error loading Guest Booking View: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -174,7 +175,7 @@ public class MainController {
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
         } catch (Exception e) {
-            System.out.println("Error loading Guest View: " + e.getMessage());
+            Main.debug("MainController", "Error loading Guest View: " + e.getMessage());
         }
     }
 

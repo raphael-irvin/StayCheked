@@ -1,5 +1,6 @@
 package com.example.staycheked.controller;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.Session;
 import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
@@ -55,21 +56,21 @@ public class UserAuthController {
         User user = userAuthService.login(emailField.getText(), passwordField.getText());
 
         if (user != null) {
-            System.out.println("Login successful!");
+            Main.debug("UserAuthController", "Login successful!");
             Session.setCurrentUser(user);
             FXMLLoader fxmlLoader = null;
 
             // Redirect to the main application view
             // Guest user
             if (user instanceof Guest) {
-                System.out.println("Logged in as Guest: " + user.getUsername());
+                Main.debug("UserAuthController", "Logged in as Guest: " + user.getUsername());
                 fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainGuestView.fxml"));
             fxmlLoader.setController(new MainController());
             } 
 
             // Accommodation user
             else if (user instanceof Accommodation) { 
-                System.out.println("Logged in as Accommodation: " + user.getUsername());
+                Main.debug("UserAuthController", "Logged in as Accommodation: " + user.getUsername());
                 fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainAccommodationView.fxml"));
             }
             fxmlLoader.setController(new MainController());
@@ -78,12 +79,12 @@ public class UserAuthController {
                 Parent root = fxmlLoader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                System.out.println("Redirected to main application view after login.");
+                Main.debug("UserAuthController", "Redirected to main application view after login.");
             } catch (IOException e) {
-                System.out.println("Error loading main view: " + e.getMessage());
+                Main.debug("UserAuthController", "Error loading main view: " + e.getMessage());
             }
         } else {
-            System.out.println("Login failed. Please check your credentials.");
+            Main.debug("UserAuthController", "Login failed. Please check your credentials.");
             // Show error message in the UI
         }
     }
@@ -92,7 +93,7 @@ public class UserAuthController {
         if (usernameField.getText().isEmpty() || emailField.getText().isEmpty() ||
             contactNoField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             showErrorAlert("Please fill in all required fields.");
-            System.out.println("User registration failed. Missing required fields.");
+            Main.debug("UserAuthController", "User registration failed. Missing required fields.");
             return;
         }
 
@@ -100,7 +101,7 @@ public class UserAuthController {
         if (toggleAccommodationRegistration.isSelected()) {
             if (accommodationNameField.getText().isEmpty() || accommodationAddressField.getText().isEmpty()) {
                 showErrorAlert("Please fill in all required fields for accommodation registration.");
-                System.out.println("User registration failed. Missing required fields for accommodation registration.");
+                Main.debug("UserAuthController", "User registration failed. Missing required fields for accommodation registration.");
                 return;
             }
             onRegisterAccommodationButtonClick();
@@ -110,7 +111,7 @@ public class UserAuthController {
         if (!toggleAccommodationRegistration.isSelected()) {
             if (fullNameField.getText().isEmpty()) {
                 showErrorAlert("Please fill in all required fields for guest registration.");
-                System.out.println("User registration failed. Missing required fields for guest registration.");
+                Main.debug("UserAuthController", "User registration failed. Missing required fields for guest registration.");
                 return;
             }
             onRegisterGuestButtonClick();
@@ -128,11 +129,11 @@ public class UserAuthController {
         );
 
         if (guest != null) {
-            System.out.println("Guest registration successful!");
+            Main.debug("UserAuthController", "Guest registration successful!");
             Session.setCurrentUser(guest);
             // Redirect to the main application view
         } else {
-            System.out.println("Guest registration failed. Please check your details.");
+            Main.debug("UserAuthController", "Guest registration failed. Please check your details.");
             // Show error message in the UI
         }
     }
@@ -149,11 +150,11 @@ public class UserAuthController {
         );
 
         if (accommodation != null) {
-            System.out.println("Accommodation registration successful!");
+            Main.debug("UserAuthController", "Accommodation registration successful!");
             Session.setCurrentUser(accommodation);
             // Redirect to the main application view
         } else {
-            System.out.println("Accommodation registration failed. Please check your details.");
+            Main.debug("UserAuthController", "Accommodation registration failed. Please check your details.");
             // Show error message in the UI
         }
     }
@@ -166,9 +167,9 @@ public class UserAuthController {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            System.out.println("Switching to register guest view.");
+            Main.debug("UserAuthController", "Switching to register guest view.");
         } catch (IOException e) {
-            System.out.println("Error loading login view: " + e.getMessage());
+            Main.debug("UserAuthController", "Error loading login view: " + e.getMessage());
         }
     }
 
@@ -181,9 +182,9 @@ public class UserAuthController {
             Scene scene = new Scene(root);
             toggleAccommodationRegistration.setSelected(true);
             stage.setScene(scene);
-            System.out.println("Switching to register accommodation view.");
+            Main.debug("UserAuthController", "Switching to register accommodation view.");
         } catch (IOException e) {
-            System.out.println("Error loading register accommodation view: " + e.getMessage());
+            Main.debug("UserAuthController", "Error loading register accommodation view: " + e.getMessage());
         }
     }
 
@@ -195,10 +196,10 @@ public class UserAuthController {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            System.out.println("Switching back to login view.");
+            Main.debug("UserAuthController", "Switching back to login view.");
         } catch (IOException e) {
-            System.out.println("Error loading login view: " + e.getMessage());
-            System.out.println("Switching back to login view.");
+            Main.debug("UserAuthController", "Error loading login view: " + e.getMessage());
+            Main.debug("UserAuthController", "Switching back to login view.");
         }
     }
 

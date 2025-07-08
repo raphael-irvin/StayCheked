@@ -3,6 +3,7 @@ package com.example.staycheked.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Ticket;
@@ -54,7 +55,7 @@ public class TicketListController {
                 }
             }
         } else {
-            System.out.println("Unknown user type.");
+            Main.debug("TicketListController", "Unknown user type.");
         }
 
         // Initialize the table columns with appropriate cell value factories
@@ -91,7 +92,7 @@ public class TicketListController {
                         if (node instanceof javafx.scene.layout.BorderPane borderPane) {
                             borderPane.setCenter(root);
                         } else {
-                            System.out.println("Could not find parent BorderPane to set center.");
+                            Main.debug("TicketListController", "Could not find parent BorderPane to set center.");
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -108,23 +109,23 @@ public class TicketListController {
 
     public void onReplyTicketButtonClick(String ticketID, String reply) {
         if (ticketService.replyTicket(DataStore.findTicketByID(ticketID), reply)) {
-            System.out.println("Reply submitted successfully!");
+            Main.debug("TicketListController", "Reply submitted successfully!");
             // Redirect to the main application view or show success message
         } else {
-            System.out.println("Reply submission failed. Please check your details.");
+            Main.debug("TicketListController", "Reply submission failed. Please check your details.");
             // Show error message in the UI
         }
     }
 
     public void onCloseTicketButtonClick(String ticketID) {
         ticketService.closeTicket(DataStore.findTicketByID(ticketID));
-        System.out.println("Ticket closed successfully!");
+        Main.debug("TicketListController", "Ticket closed successfully!");
         // Redirect to the main application view or show success message
     }
 
     public void onCancelTicketButtonClick(String ticketID) {
         ticketService.cancelTicket(DataStore.findTicketByID(ticketID));
-        System.out.println("Ticket cancelled successfully!");
+        Main.debug("TicketListController", "Ticket cancelled successfully!");
         // Redirect to the main application view or show success message
     }
 

@@ -1,5 +1,6 @@
 package com.example.staycheked.dao;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Content;
 import com.example.staycheked.model.object.Ticket;
@@ -37,14 +38,14 @@ public class ContentDAO {
                     String escapedMessage = rawContentMessage.replace(",", "$");
 
                     line = String.join(",",content.getTicketID(), content.getSender().getEmailAddress(), content.getDateTime().format(UtilService.dateTimeFormatter), escapedMessage);
-                    System.out.println("Saving content: " + line); // Debugging output
+                    Main.debug("ContentDAO", "Saving content: " + line); // Debugging output
                     writer.write(line);
                     writer.newLine();
                 }
             }
         } catch (IOException e) {
-            System.out.println("Content Data Saving Failed");
-            System.out.println("Error: " + e.getMessage());
+            Main.debug("ContentDAO", "Content Data Saving Failed");
+            Main.debug("ContentDAO", "Error: " + e.getMessage());
             return false;
         }
         return true;
@@ -54,7 +55,7 @@ public class ContentDAO {
 
     //Refresh Ticket's Content Property to Avoid Duplicate Content
     for (Ticket ticket : DataStore.tickets.values()) {
-        System.out.println("DEBUG - ContentDAO: Clearing existing contents for ticket ID: " + ticket.getTicketID()); // Debugging output
+        Main.debug("ContentDAO", "Clearing existing contents for ticket ID: " + ticket.getTicketID()); // Debugging output
         ticket.getContents().clear(); // Clear existing contents
     }
 
@@ -63,7 +64,7 @@ public class ContentDAO {
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))
         ) {
-            System.out.println("Initializing Content Data..."); // Debugging output
+            Main.debug("ContentDAO", "Initializing Content Data..."); // Debugging output
             String line;
             reader.readLine(); // Skip header line
             while ((line = reader.readLine()) != null) {
@@ -83,27 +84,27 @@ public class ContentDAO {
                     Content content = new Content(ticketID, sender, lastUpdatedAt, message);
 
                     if (!contents.containsKey(ticketID)) {
-                        System.out.println("Creating new content list for ticketID: " + ticketID); // Debugging output
+                        Main.debug("ContentDAO", "Creating new content list for ticketID: " + ticketID); // Debugging output
                         contents.put(ticketID, new ArrayList<>());
                         contents.get(ticketID).add(content);
                     } else {
-                        System.out.println("Adding content to existing ticketID: " + ticketID); // Debugging output
+                        Main.debug("ContentDAO", "Adding content to existing ticketID: " + ticketID); // Debugging output
                         contents.get(ticketID).add(content);
                     }
 
                     // For debugging purposes, print the guest details
-                    System.out.println("Ticket ID: " + ticketID);
-                    System.out.println("Sender Email: " + userEmail);
-                    System.out.println("Last Updated At: " + lastUpdatedAt);
-                    System.out.println("Message: " + message);
+                    Main.debug("ContentDAO", "Ticket ID: " + ticketID);
+                    Main.debug("ContentDAO", "Sender Email: " + userEmail);
+                    Main.debug("ContentDAO", "Last Updated At: " + lastUpdatedAt);
+                    Main.debug("ContentDAO", "Message: " + message);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Content Data Retrieval Failed");
+            Main.debug("ContentDAO", "Content Data Retrieval Failed");
         }
 
         DataStore.contents = contents;
-        System.out.println("SAVED IN CONTENT DATASTORE: " + DataStore.contents); // Debugging output to check if contents are loaded correctly
+        Main.debug("ContentDAO", "SAVED IN CONTENT DATASTORE: " + DataStore.contents); // Debugging output to check if contents are loaded correctly
         return true;
     }
 

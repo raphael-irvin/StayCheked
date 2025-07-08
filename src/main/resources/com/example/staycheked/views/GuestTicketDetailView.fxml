@@ -11,43 +11,40 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <center>
-        <VBox alignment="CENTER" fillWidth="false">
-         <Label fx:id="ticketIdLabel" alignment="TOP_CENTER" styleClass="header-label" text="(Ticket ID)">
-            <font>
-               <Font name="System Italic" size="12.0" />
-            </font>
-         </Label>
-            <Label fx:id="subjectLabel" alignment="TOP_CENTER" styleClass="header-label" text="[Ticket Title]">
-            <font>
-               <Font name="System Bold Italic" size="17.0" />
-            </font></Label>
-         <Label fx:id="lastUpdatedLabel" alignment="TOP_CENTER" styleClass="header-label" text="Last updated at [DateTime]">
-            <font>
-               <Font name="System Italic" size="12.0" />
-            </font>
-         </Label>
+        <VBox alignment="CENTER" fillWidth="false" prefWidth="357.0" spacing="20.0">
+         <VBox alignment="CENTER">
+            <children>
+               <Label fx:id="ticketIdLabel" alignment="TOP_CENTER" styleClass="header-label" text="(Ticket ID)">
+                  <font>
+                     <Font name="System Italic" size="12.0" />
+                  </font>
+               </Label>
+                  <Label fx:id="subjectLabel" alignment="TOP_CENTER" styleClass="header-label" text="[Ticket Title]">
+                  <font>
+                     <Font name="System Bold Italic" size="17.0" />
+                  </font>
+               </Label>
+               <Label fx:id="lastUpdatedLabel" alignment="TOP_CENTER" styleClass="header-label" text="Last updated at [DateTime]">
+                  <font>
+                     <Font name="System Italic" size="12.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
          <ListView fx:id="contentListView" prefHeight="200.0" prefWidth="337.0">
             <VBox.margin>
                <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
          </ListView>
+         <VBox alignment="CENTER" prefHeight="60.0" prefWidth="340.0" spacing="10.0">
+            <children>
+               <TextField fx:id="responseField" prefHeight="25.0" prefWidth="233.0" promptText="Please input your queries/response" />
+               <Button fx:id="sendResponseButton" mnemonicParsing="false" text="Send" />
+            </children>
+         </VBox>
          <BorderPane.margin>
             <Insets top="10.0" />
          </BorderPane.margin>
         </VBox>
     </center>
-   <bottom>
-      <VBox spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="responseField" promptText="Please input your queries/response" />
-            <Button fx:id="sendResponseButton" mnemonicParsing="false" text="Send" />
-         </children>
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-         <BorderPane.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </bottom>
 </BorderPane>

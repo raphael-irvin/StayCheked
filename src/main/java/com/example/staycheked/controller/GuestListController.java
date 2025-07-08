@@ -15,6 +15,7 @@ import com.example.staycheked.model.object.Booking;
 import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
 import javafx.scene.control.cell.PropertyValueFactory;
+import com.example.staycheked.Main;
 
 public class GuestListController {
     @FXML
@@ -45,7 +46,7 @@ public class GuestListController {
                 }
             }
         } else {
-            System.out.println("Unknown user type.");
+            Main.debug("GuestListController", "Unknown user type.");
         }
 
         guestIdColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));

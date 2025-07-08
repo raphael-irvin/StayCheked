@@ -1,5 +1,6 @@
 package com.example.staycheked.dao;
 
+import com.example.staycheked.Main;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.Accommodation;
 
@@ -18,7 +19,7 @@ public class AccommodationDAO {
 
     public static boolean saveAllAccommodations() {
         HashMap<String, Accommodation> accommodations = DataStore.accommodations;
-        System.out.println("ACCESSING DATASTORE: " + DataStore.accommodations); // Debugging output to check if accommodations are loaded correctly
+        Main.debug("AccommodationDAO", "ACCESSING DATASTORE: " + DataStore.accommodations); // Debugging output to check if accommodations are loaded correctly
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_SOURCE))
         ) {
@@ -31,13 +32,13 @@ public class AccommodationDAO {
                         accommodation.getContactNo(), accommodation.getPassword(), accommodation.getAccommodationName(),
                         accommodation.getLocation(), accommodation.getStatus() ? "verified" : "unverified");
 
-                System.out.println("Saving accommodation: " + line); // Debugging output
+                Main.debug("AccommodationDAO", "Saving accommodation: " + line); // Debugging output
 
                 writer.write(line);
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Accommodation Data Saving Failed");
+            Main.debug("AccommodationDAO", "Accommodation Data Saving Failed");
             return false;
         }
         return true;
@@ -66,23 +67,23 @@ HashMap<String, Accommodation> accommodations = new HashMap<>();
                     accommodations.put(emailAddress, accommodation);
 
                     // For debugging purposes, print the guest details
-                    System.out.println(emailAddress);
-                    System.out.println(accommodation.getUserID());
-                    System.out.println(accommodation.getUsername());
-                    System.out.println(accommodation.getEmailAddress());
-                    System.out.println(accommodation.getContactNo());
-                    System.out.println(accommodation.getPassword());
-                    System.out.println(accommodation.getAccommodationName());
-                    System.out.println(accommodation.getLocation());
-                    System.out.println(accommodation.getStatus());
+                    Main.debug("AccommodationDAO", emailAddress);
+                    Main.debug("AccommodationDAO", accommodation.getUserID());
+                    Main.debug("AccommodationDAO", accommodation.getUsername());
+                    Main.debug("AccommodationDAO", accommodation.getEmailAddress());
+                    Main.debug("AccommodationDAO", accommodation.getContactNo());
+                    Main.debug("AccommodationDAO", accommodation.getPassword());
+                    Main.debug("AccommodationDAO", accommodation.getAccommodationName());
+                    Main.debug("AccommodationDAO", accommodation.getLocation());
+                    Main.debug("AccommodationDAO", String.valueOf(accommodation.getStatus()));
                 }
             }
         } catch (IOException e) {
-            System.out.println("Accommodation Data Retrieval Failed");
+            Main.debug("AccommodationDAO", "Accommodation Data Retrieval Failed");
             return false;
         }
         DataStore.accommodations = accommodations;
-        System.out.println("SAVED IN DATASTORE: " + DataStore.accommodations); // Debugging output to check if accommodations are loaded correctly
+        Main.debug("AccommodationDAO", "SAVED IN DATASTORE: " + DataStore.accommodations); // Debugging output to check if accommodations are loaded correctly
         return true;
     }
 
