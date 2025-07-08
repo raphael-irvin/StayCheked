@@ -1,5 +1,6 @@
 package com.example.staycheked.model.object;
 
+import com.example.staycheked.dao.ContentDAO;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.User;
 
@@ -19,6 +20,9 @@ public class Content {
         this.sender = sender;
         this.dateTime = dateTime;
         this.message = message;
+
+        DataStore.tickets.get(ticketID).addNewContent(this);
+        System.out.println("Content added to ticket: " + ticketID); //DEBUGGING OUTPUT
     }
 
     // Constructor for creating new Content with minimal properties (RUNTIME)
@@ -27,6 +31,8 @@ public class Content {
         this.sender = sender;
         this.message = message;
         this.dateTime = LocalDateTime.now();
+        ContentDAO.saveAllContents(); // Save the new content to the database
+        ContentDAO.retrieveAllContents(); // Refresh the contents from the database
     }
 
     public Ticket getTicket() {

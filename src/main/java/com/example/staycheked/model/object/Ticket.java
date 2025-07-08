@@ -1,5 +1,6 @@
 package com.example.staycheked.model.object;
 
+import com.example.staycheked.dao.TicketDAO;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
@@ -19,19 +20,20 @@ public class Ticket {
     private Booking booking;
     private String subject;
     private String category;
-    private ArrayList<Content> contents = new ArrayList<>();
+    private ArrayList<Content> contents;
     private String status;
     private LocalDateTime lastUpdatedAt;
 
 
     //Constructor for creating new Ticket with all properties (Initialization)
-    public Ticket(String ticketID, Accommodation submittedTo, Guest submittedBy, Booking booking, String subject, String category, String status, LocalDateTime lastUpdatedAt) {
+    public Ticket(String ticketID, Booking booking, String subject, String category, String status, LocalDateTime lastUpdatedAt) {
         this.ticketID = ticketID;
-        this.submittedTo = submittedTo;
-        this.submittedBy = submittedBy;
+        this.submittedTo = booking.getAccommodation();
+        this.submittedBy = booking.getGuest();
         this.booking = booking;
         this.subject = subject;
         this.category = category;
+        this.contents = new ArrayList<>();
         this.status = status;
         this.lastUpdatedAt = lastUpdatedAt;
 
@@ -46,10 +48,13 @@ public class Ticket {
         this.booking = booking;
         this.subject = subject;
         this.category = category;
+        this.contents = new ArrayList<>();
         this.status = "Open"; // Default status
         this.lastUpdatedAt = LocalDateTime.now();
 
         DataStore.tickets.put(this.ticketID, this);
+        TicketDAO.saveAllTickets(); // Save the new ticket to the database
+        TicketDAO.retrieveAllTickets(); // Refresh the tickets from the database
     }
 
     public void addNewContent(Content content) {
@@ -58,6 +63,11 @@ public class Ticket {
     }
 
     public String generateTicketID() {
+        //Make sure the ticketIDTracker is set to the last ticketID in the database
+        DataStore.tickets.values().stream()
+                .mapToInt(ticket -> Integer.parseInt(ticket.getTicketID()))
+                .max()
+                .ifPresent(max -> ticketIDTracker = max);
         return String.valueOf(++ticketIDTracker);
     }
 

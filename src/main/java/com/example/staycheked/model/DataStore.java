@@ -78,12 +78,19 @@ public class DataStore {
     }
 
     public static void dataInitialization() {
+        System.out.println("Debugging: Initializitation of DataStore started.");
         AccommodationDAO.initialize();
+        System.out.println("Debugging: AccommodationDAO initialized.");
         GuestDAO.initialize();
+        System.out.println("Debugging: GuestDAO initialized.");
         AdminDAO.initialize();
+        System.out.println("Debugging: AdminDAO initialized.");
         BookingDAO.initialize();
+        System.out.println("Debugging: BookingDAO initialized.");
         TicketDAO.initialize();
+        System.out.println("Debugging: TicketDAO initialized.");
         ContentDAO.initialize();
+        System.out.println("Debugging: ContentDAO initialized.");
     }
 
     public static void saveAllData() {

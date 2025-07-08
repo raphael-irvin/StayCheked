@@ -49,6 +49,7 @@ public class TicketDAO {
 
     public static boolean retrieveAllTickets() {
         HashMap<String, Ticket> tickets = new HashMap<>();
+        System.out.println("Debug: Ticket Initialization Start Point"); // Debugging output
 
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))
@@ -59,9 +60,9 @@ public class TicketDAO {
                 String[] parts = line.split(",");
                 if (parts.length == 8) {
                     String ticketID = parts[0];
-                    String accommodationEmail = parts[1];
-                    String guestEmail = parts[2];
-                    String bookingID = parts[3];
+                    // String accommodationEmail = parts[1]; -> Not used in this context
+                    // String guestEmail = parts[2]; -> Not used in this context
+                    String bookingID = parts[3]; 
                     String subject = parts[4];
                     String category = parts[5];
                     String status = parts[6];
@@ -70,8 +71,6 @@ public class TicketDAO {
                     LocalDateTime lastUpdatedAt = LocalDateTime.parse(lastUpdatedAtString, UtilService.dateTimeFormatter);
 
                     Ticket ticket = new Ticket(ticketID,
-                            DataStore.findAccommodationByEmailAddress(accommodationEmail),
-                            DataStore.findGuestByEmailAddress(guestEmail),
                             DataStore.findBookingByID(bookingID),
                             subject,
                             category,

@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
-import com.example.staycheked.model.object.Booking;
 import com.example.staycheked.model.object.Ticket;
 import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
@@ -49,7 +48,7 @@ public class TicketListController {
             //Find Tickets that belong to the current accommodation
             Accommodation currentAccommodation = (Accommodation) Session.getCurrentUser();
             for (Ticket ticket : DataStore.tickets.values()) {
-                if (ticket.getSubmittedTo() != null && ticket.getSubmittedTo().getUserID().equals(currentAccommodation.getUserID())) {
+                if (ticket.getSubmittedTo() != null && ticket.getSubmittedTo() == currentAccommodation) {
                     matchingActiveTickets.put(ticket.getTicketID(), ticket);
                 }
             }
@@ -75,16 +74,6 @@ public class TicketListController {
 
     public TicketListController(TicketService ticketService) {
         this.ticketService = ticketService;
-    }
-
-    public void onPostTicketButtonClick(String accommodationEmail, String guestEmail, Booking booking, String subject, String category, String contents) {
-        if (ticketService.postNewTicket(accommodationEmail, guestEmail, booking, subject, category, contents) != null) {
-            System.out.println("Ticket submitted successfully!");
-            // Redirect to the main application view or show success message
-        } else {
-            System.out.println("Ticket submission failed. Please check your details.");
-            // Show error message in the UI
-        }
     }
 
     public void onReplyTicketButtonClick(String ticketID, String reply) {

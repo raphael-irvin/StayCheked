@@ -11,12 +11,19 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import java.util.Optional;
 
+import com.example.staycheked.Session;
+import com.example.staycheked.model.DataStore;
+import com.example.staycheked.model.object.Content;
+import com.example.staycheked.model.object.Ticket;
+import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.service.BookingAuthService;
 
 public class GuestActionBarController {
 
     @FXML
     Button verifyBookingButton;
+    @FXML
+    Button newSupportTicketButton;
 
     BookingAuthService bookingAuthService;
 
@@ -26,8 +33,10 @@ public class GuestActionBarController {
 
     public void initialize() {
         verifyBookingButton.setOnAction(e -> showVerifyBookingDialog(e));
+        newSupportTicketButton.setOnAction(e -> showNewSupportTicketDialog(e));
     }
 
+    //Verify Booking Dialog
     private void showVerifyBookingDialog(ActionEvent event) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Verify Booking");
@@ -86,5 +95,96 @@ public class GuestActionBarController {
                 System.out.println("Booking verification failed.");
             }
         });
+    }
+
+    private void showNewSupportTicketDialog(ActionEvent event) {
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("New Support Ticket");
+        dialog.setHeaderText("Submit a new support ticket");
+
+        ButtonType confirmButtonType = new ButtonType("Confirm", ButtonType.OK.getButtonData());
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonType.CANCEL.getButtonData());
+        dialog.getDialogPane().getButtonTypes().addAll(confirmButtonType, cancelButtonType);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        // Booking selection ComboBox
+        javafx.scene.control.ComboBox<String> bookingComboBox = new javafx.scene.control.ComboBox<>();
+        bookingComboBox.setPromptText("Select Booking");
+        bookingComboBox.getItems().addAll(
+            BookingAuthService.getVerifiedBookingsBasedOnLoggedUser(Session.getCurrentUser()).stream()
+                .map(booking -> booking.getBookingID() + " - " + booking.getAccommodation().getAccommodationName())
+                .toList()
+        );
+
+        // Category ComboBox
+        javafx.scene.control.ComboBox<String> categoryComboBox = new javafx.scene.control.ComboBox<>();
+        categoryComboBox.getItems().addAll(
+            "Broken Utilities (Maintenance)",
+            "Internet Facilities",
+            "Housekeeping",
+            "Others/Unspecified"
+        );
+        categoryComboBox.setPromptText("Select Category");
+
+        TextField subjectField = new TextField();
+        subjectField.setPromptText("Subject");
+        TextField enquiryField = new TextField();
+        enquiryField.setPromptText("Enquiry");
+
+        grid.add(new Label("Booking:"), 0, 0);
+        grid.add(bookingComboBox, 1, 0);
+        grid.add(new Label("Category:"), 0, 1);
+        grid.add(categoryComboBox, 1, 1);
+        grid.add(new Label("Subject:"), 0, 2);
+        grid.add(subjectField, 1, 2);
+        grid.add(new Label("Enquiry:"), 0, 3);
+        grid.add(enquiryField, 1, 3);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Add event filter to Confirm button to prevent dialog closing on invalid input
+        Button confirmButton = (Button) dialog.getDialogPane().lookupButton(confirmButtonType);
+        confirmButton.addEventFilter(javafx.event.ActionEvent.ACTION, evt -> {
+            String selectedBooking = bookingComboBox.getValue();
+            String selectedCategory = categoryComboBox.getValue();
+            String subject = subjectField.getText();
+            String enquiry = enquiryField.getText();
+            if (selectedBooking == null || selectedCategory == null || subject.isEmpty() || enquiry.isEmpty()) {
+                Dialog<Void> errorDialog = new Dialog<>();
+                errorDialog.setTitle("Error");
+                errorDialog.setHeaderText(null);
+                errorDialog.setContentText("Please fill in all fields.");
+                errorDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+                errorDialog.showAndWait();
+                evt.consume(); // Prevent dialog from closing
+            }
+        });
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == confirmButtonType) {
+                String selectedBooking = bookingComboBox.getValue();
+                String selectedCategory = categoryComboBox.getValue();
+                String subject = subjectField.getText();
+                String enquiry = enquiryField.getText();
+                // Only create ticket if all fields are filled (event filter ensures this)
+                if (selectedBooking != null && selectedCategory != null && !subject.isEmpty() && !enquiry.isEmpty()) {
+                    Ticket newTicket = new Ticket(
+                        DataStore.findBookingByID(selectedBooking.split(" - ")[0]).getAccommodation(),
+                        (Guest) Session.getCurrentUser(),
+                        DataStore.findBookingByID(selectedBooking.split(" - ")[0]),
+                        subject,
+                        selectedCategory
+                    );
+                    newTicket.addNewContent(new Content(newTicket.getTicketID(), Session.getCurrentUser(), enquiry));
+                    System.out.println("Support ticket created: " + selectedBooking + ", " + selectedCategory + ", " + subject + ", " + enquiry);
+                }
+            }
+            return null;
+        });
+
+        dialog.showAndWait();
     }
 }
