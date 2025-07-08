@@ -1,5 +1,4 @@
 ticketID,accommodationEmail,guestEmail,bookingID,subject,category,status,lastUpdatedAt
 1,accomb@gmail.com,usera@gmail.com,48929122,Broken TV,Broken Utilities (Maintenance),Closed,31/05/2025 17:20
 2,accoma@gmail.com,usera@gmail.com,23059312,Wifi Not Available,Broken Utilities (Maintenance),Open,06/06/2025 11:40
-3,accoma@gmail.com,g,13579135,Broken Showerhead,Broken Utilities (Maintenance),Open,08/07/2025 12:18
-4,accoma@gmail.com,g,13579135,Request Cleaning for Bathroom,Housekeeping,Open,08/07/2025 12:41
+3,accoma@gmail.com,g,13579135,Broken Internet,Internet Facilities,Open,08/07/2025 22:27

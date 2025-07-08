@@ -1,5 +1,6 @@
 package com.example.staycheked.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import com.example.staycheked.Session;
@@ -12,6 +13,8 @@ import com.example.staycheked.service.TicketService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,8 +33,6 @@ public class TicketListController {
     TableColumn<Ticket, String> statusColumn;
     @FXML
     TableColumn<Ticket, String> dateColumn;
-    @FXML
-    TableColumn<Ticket, String> actionColumn;
 
     public void initialize() {
         HashMap<String, Ticket> matchingActiveTickets = new HashMap<>();
@@ -70,6 +71,35 @@ public class TicketListController {
         // Load active tickets into the table
         ObservableList<Ticket> tickets = FXCollections.observableArrayList(matchingActiveTickets.values());
         activeTicketTable.setItems(tickets);
+
+        //Setup Row Factory for double-click action
+        activeTicketTable.setRowFactory(_ -> {
+            javafx.scene.control.TableRow<Ticket> row = new javafx.scene.control.TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Ticket selectedTicket = row.getItem();
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestTicketDetailView.fxml"));
+                        fxmlLoader.setController(new TicketDetailController(new TicketService(), selectedTicket));
+                        Parent root = fxmlLoader.load();
+
+                        // Find the BorderPane (assumes the table is inside a BorderPane center)
+                        javafx.scene.Node node = activeTicketTable;
+                        while (node != null && !(node instanceof javafx.scene.layout.BorderPane)) {
+                            node = node.getParent();
+                        }
+                        if (node instanceof javafx.scene.layout.BorderPane borderPane) {
+                            borderPane.setCenter(root);
+                        } else {
+                            System.out.println("Could not find parent BorderPane to set center.");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
+        });
     }
 
     public TicketListController(TicketService ticketService) {

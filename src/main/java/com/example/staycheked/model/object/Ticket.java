@@ -20,7 +20,7 @@ public class Ticket {
     private Booking booking;
     private String subject;
     private String category;
-    private ArrayList<Content> contents;
+    private ArrayList<Content> contents = new ArrayList<>();
     private String status;
     private LocalDateTime lastUpdatedAt;
 
@@ -33,7 +33,6 @@ public class Ticket {
         this.booking = booking;
         this.subject = subject;
         this.category = category;
-        this.contents = new ArrayList<>();
         this.status = status;
         this.lastUpdatedAt = lastUpdatedAt;
 
@@ -48,7 +47,6 @@ public class Ticket {
         this.booking = booking;
         this.subject = subject;
         this.category = category;
-        this.contents = new ArrayList<>();
         this.status = "Open"; // Default status
         this.lastUpdatedAt = LocalDateTime.now();
 
@@ -58,7 +56,9 @@ public class Ticket {
     }
 
     public void addNewContent(Content content) {
+        System.out.println("DEBUG - Ticket: Adding new content to ticket ID: " + this.ticketID); //DEBUGGING OUTPUT
         contents.add(content);
+        System.out.println("DEBUG - Ticket: Content added. Total contents in ticket: " + contents.size()); //DEBUGGING OUTPUT
         lastUpdatedAt = content.getDateTime();
     }
 

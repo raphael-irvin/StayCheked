@@ -14,13 +14,12 @@
             <font>
                <Font name="System Bold Italic" size="17.0" />
             </font></Label>
-            <TableView fx:id="activeTicketTable" prefHeight="400.0" prefWidth="600.0">
+            <TableView fx:id="activeTicketTable" prefHeight="400.0" prefWidth="536.0">
                 <columns>
                     <TableColumn fx:id="idColumn" prefWidth="100" text="Ticket ID" />
                     <TableColumn fx:id="subjectColumn" prefWidth="200" text="Subject" />
-                    <TableColumn fx:id="statusColumn" prefWidth="100" text="Status" />
-                    <TableColumn fx:id="dateColumn" prefWidth="150" text="Date Submitted" />
-                    <TableColumn fx:id="actionColumn" prefWidth="50" text="Action" />
+                    <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
+                    <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Date Submitted" />
                 </columns>
             </TableView>
         </VBox>

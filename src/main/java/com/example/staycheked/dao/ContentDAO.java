@@ -2,6 +2,7 @@ package com.example.staycheked.dao;
 
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Content;
+import com.example.staycheked.model.object.Ticket;
 import com.example.staycheked.model.user.User;
 import com.example.staycheked.service.UtilService;
 
@@ -31,7 +32,11 @@ public class ContentDAO {
 
             for (String ticketID : contents.keySet()) {
                 for (Content content : contents.get(ticketID)) {
-                    line = String.join(",",content.getTicketID(), content.getSender().getEmailAddress(), content.getDateTime().format(UtilService.dateTimeFormatter), content.getMessage());
+                    String rawContentMessage = content.getMessage();
+                    // Escape commas in the message to avoid CSV format issues
+                    String escapedMessage = rawContentMessage.replace(",", "$");
+
+                    line = String.join(",",content.getTicketID(), content.getSender().getEmailAddress(), content.getDateTime().format(UtilService.dateTimeFormatter), escapedMessage);
                     System.out.println("Saving content: " + line); // Debugging output
                     writer.write(line);
                     writer.newLine();
@@ -46,7 +51,14 @@ public class ContentDAO {
     }
 
     public static boolean retrieveAllContents() {
- HashMap<String, ArrayList<Content>> contents = new HashMap<>();
+
+    //Refresh Ticket's Content Property to Avoid Duplicate Content
+    for (Ticket ticket : DataStore.tickets.values()) {
+        System.out.println("DEBUG - ContentDAO: Clearing existing contents for ticket ID: " + ticket.getTicketID()); // Debugging output
+        ticket.getContents().clear(); // Clear existing contents
+    }
+
+    HashMap<String, ArrayList<Content>> contents = new HashMap<>();
 
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))
@@ -60,7 +72,10 @@ public class ContentDAO {
                     String ticketID = parts[0];
                     String userEmail = parts[1];
                     String lastUpdatedAtString = parts[2];
-                    String message = parts[3];
+
+                    // Handle escaped commas in the message
+                    String rawMessage = parts[3];
+                    String message = rawMessage.replace("$", ","); // Replace escaped commas back to normal
 
                     User sender = DataStore.findUserByEmailAddress(userEmail);
                     LocalDateTime lastUpdatedAt = LocalDateTime.parse(lastUpdatedAtString, UtilService.dateTimeFormatter);
@@ -86,6 +101,7 @@ public class ContentDAO {
         } catch (IOException e) {
             System.out.println("Content Data Retrieval Failed");
         }
+
         DataStore.contents = contents;
         System.out.println("SAVED IN CONTENT DATASTORE: " + DataStore.contents); // Debugging output to check if contents are loaded correctly
         return true;

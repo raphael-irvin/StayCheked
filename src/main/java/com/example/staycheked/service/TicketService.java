@@ -1,5 +1,6 @@
 package com.example.staycheked.service;
 
+import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Booking;
 import com.example.staycheked.model.object.Content;
@@ -25,8 +26,7 @@ public class TicketService {
     }
 
     public boolean replyTicket(Ticket ticket, String reply) {
-        Content content = new Content(ticket.getTicketID(), ticket.getSubmittedBy(), reply);
-        ticket.getContents().add(content);
+        Content content = new Content(ticket.getTicketID(), Session.getCurrentUser(), reply);
         ticket.setLastUpdatedAt(content.getDateTime());
         return true;
     }

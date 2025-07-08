@@ -5,6 +5,7 @@ import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.user.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Content {
 
@@ -21,8 +22,10 @@ public class Content {
         this.dateTime = dateTime;
         this.message = message;
 
+        System.out.println("DEBUG - Content: Creating new content for ticket ID: " + ticketID); //DEBUGGING OUTPUT
+        System.out.println("DEBUG - Content: Does Ticket Exist in DataStore: " + DataStore.tickets.get(ticketID)); //DEBUGGING OUTPUT
         DataStore.tickets.get(ticketID).addNewContent(this);
-        System.out.println("Content added to ticket: " + ticketID); //DEBUGGING OUTPUT
+        System.out.println("DEBUG - Content: Sucessfully Inserted to Ticket Object, Contents in Ticket now: " + DataStore.tickets.get(ticketID).getContents().size()); //DEBUGGING OUTPUT
     }
 
     // Constructor for creating new Content with minimal properties (RUNTIME)
@@ -31,6 +34,7 @@ public class Content {
         this.sender = sender;
         this.message = message;
         this.dateTime = LocalDateTime.now();
+        DataStore.contents.computeIfAbsent(ticketID, _ -> new ArrayList<>()).add(this); // Add content to the DataStore
         ContentDAO.saveAllContents(); // Save the new content to the database
         ContentDAO.retrieveAllContents(); // Refresh the contents from the database
     }

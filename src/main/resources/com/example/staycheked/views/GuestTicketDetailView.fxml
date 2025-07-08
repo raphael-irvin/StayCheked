@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <VBox alignment="CENTER" fillWidth="false">
+         <Label fx:id="ticketIdLabel" alignment="TOP_CENTER" styleClass="header-label" text="(Ticket ID)">
+            <font>
+               <Font name="System Italic" size="12.0" />
+            </font>
+         </Label>
+            <Label fx:id="subjectLabel" alignment="TOP_CENTER" styleClass="header-label" text="[Ticket Title]">
+            <font>
+               <Font name="System Bold Italic" size="17.0" />
+            </font></Label>
+         <Label fx:id="lastUpdatedLabel" alignment="TOP_CENTER" styleClass="header-label" text="Last updated at [DateTime]">
+            <font>
+               <Font name="System Italic" size="12.0" />
+            </font>
+         </Label>
+         <ListView fx:id="contentListView" prefHeight="200.0" prefWidth="337.0">
+            <VBox.margin>
+               <Insets left="10.0" right="10.0" top="10.0" />
+            </VBox.margin>
+         </ListView>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+        </VBox>
+    </center>
+   <bottom>
+      <VBox spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="responseField" promptText="Please input your queries/response" />
+            <Button fx:id="sendResponseButton" mnemonicParsing="false" text="Send" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </bottom>
+</BorderPane>
