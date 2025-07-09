@@ -45,9 +45,9 @@ public class TicketDetailController {
 
         //Set up conditional button visibility based conditions
         if (ticket.getStatus().equals("Closed")) {
-            sendResponseButton.setVisible(false);
-            responseField.setVisible(false);
-            closeTicketButton.setVisible(false);
+            sendResponseButton.setDisable(true);
+            responseField.setDisable(true);
+            closeTicketButton.setDisable(true);
             lastUpdatedLabel.setText("Ticket is closed at " + ticket.getLastUpdatedAt().toString() + ". No further replies can be sent.");
         } else {
             sendResponseButton.setDisable(false);
@@ -110,12 +110,27 @@ public class TicketDetailController {
 
     public void refreshView() {
         // Populate the UI with ticket details
-        ticketIdLabel.setText(ticket.getTicketID());
+        ticketIdLabel.setText("Ticket ID: " + ticket.getTicketID());
         subjectLabel.setText(ticket.getSubject());
         lastUpdatedLabel.setText("Requested by " + ticket.getSubmittedBy().getUsername() + " - Last Updated at "+ ticket.getLastUpdatedAt().toString());
 
         messageContainer.getChildren().clear(); // Clear previous messages
         for (Content content : ticket.getContents()) {
+
+            VBox bubbleContainer = new VBox();
+            bubbleContainer.setSpacing(5);
+
+            Label senderLabel = new Label(content.getSender().getUsername() + ": ");
+            senderLabel.getStyleClass().add("message-info");
+            senderLabel.getStyleClass().add("message-info-sender");
+            Label timeStampLabel = new Label(content.getDateTime().toString() + " - ");
+            timeStampLabel.getStyleClass().add("message-info");
+            timeStampLabel.getStyleClass().add("message-info-timestamp");
+
+            VBox messageInfoContainer = new VBox();
+            messageInfoContainer.getChildren().addAll(timeStampLabel, senderLabel);
+            bubbleContainer.getChildren().add(messageInfoContainer);
+
             Label messageLabel = new Label(content.getMessage());
             messageLabel.setPrefWidth(Control.USE_COMPUTED_SIZE);
             messageLabel.getStyleClass().add("message-bubble");
@@ -125,7 +140,9 @@ public class TicketDetailController {
             } else {
                 messageLabel.getStyleClass().add("message-bubble-received");
             }
-            messageContainer.getChildren().add(messageLabel);
+
+            bubbleContainer.getChildren().add(messageLabel);
+            messageContainer.getChildren().add(bubbleContainer);
         }
     }
 }

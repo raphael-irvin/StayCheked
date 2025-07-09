@@ -42,15 +42,37 @@
     -fx-text-fill: black;
 }
 
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    background: transparent;
+    background-color: transparent;
+}
+
 .ContentBackground {
     -fx-background-color: rgb(255, 255, 255);
     background-color: rgb(255, 255, 255);
 }
 
+.message-info-sender {
+    -fx-text-fill: rgb(0, 0, 0);
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-font-size: 12px;
+    font-size: 12px;
+}
+
+.message-info-timestamp {
+    -fx-text-fill: rgb(105, 105, 105);
+    -fx-font-style: italic;
+    font-style: italic;
+    -fx-font-size: 10px;
+    font-size: 10px;
+}
+
 .message-bubble {
     -fx-padding: 8 16 8 16;
     padding: 8 16 8 16;
-    -fx-background-insets: 0;
     -fx-background-radius: 16;
     -fx-font-size: 14px;
     font-size: 14px;
