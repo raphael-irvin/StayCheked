@@ -91,27 +91,43 @@ public class UserAuthController {
 
     public void onRegisterButtonClick(ActionEvent event) {
         Main.debug("UserAuthController", "Register button clicked. Starting registration process...");
+
+        //FAIL CONDITION 1: Missing required fields
         if (usernameField.getText().isEmpty() || emailField.getText().isEmpty() ||
             contactNoField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             showErrorAlert("Please fill in all required fields.");
             Main.debug("UserAuthController", "User registration failed. Missing required fields.");
             return;
         }
-        
+
+        //FAIL Condition 2: Email Format Unmet
+        //[PUT CODE HERE TO CHECK EMAIL FORMAT AND SHOW ERROR DIALOG IF NOT MET]
+
+        //FAIL Condition 3: Password Requirement Unmet
+        /* PASSWORD FORMAT
+         * - Minimum 8 characters
+         * - At least one uppercase letter
+         * - At least one lowercase letter
+         * - At least one digit
+         * - At least one special character
+         */
+        //[PUT CODE HERE TO CHECK PASSWORD FORMAT AND SHOW ERROR DIALOG IF NOT MET]
 
         Main.debug("UserAuthController", "Accommodation Toggle Status: " + toggleAccommodationRegistration.isSelected());
 
-        //Accommodation registration
+        //CASE: Accommodation registration
         if (toggleAccommodationRegistration.isSelected()) {
+
             if (accommodationNameField.getText().isEmpty() || accommodationAddressField.getText().isEmpty()) {
                 showErrorAlert("Please fill in all required fields for accommodation registration.");
                 Main.debug("UserAuthController", "User registration failed. Missing required fields for accommodation registration.");
                 return;
             }
+
             onRegisterAccommodationButtonClick(event);
         }
 
-        //Guest registration
+        //CASE: Guest registration
         if (!toggleAccommodationRegistration.isSelected()) {
             if (fullNameField.getText().isEmpty()) {
                 showErrorAlert("Please fill in all required fields for guest registration.");
