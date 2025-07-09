@@ -30,14 +30,29 @@ public class TicketDetailController {
     TextField responseField;
     @FXML
     Button sendResponseButton;
+    @FXML
+    Button closeTicketButton;
 
     //Initialization
     public void initialize() {
-        // Set up the UI components and event handlers
-        sendResponseButton.setOnAction(_ -> onPostNewReplyButtonClick());
-
         //All Initialization is done through refreshView() for future proofing
         refreshView();
+
+        // Set up the UI components and event handlers
+        sendResponseButton.setOnAction(_ -> onPostNewReplyButtonClick());
+        closeTicketButton.setOnAction(_ -> onCloseTicketButtonClick());
+
+        //Set up conditional button visibility based conditions
+        if (ticket.getStatus().equals("Closed")) {
+            sendResponseButton.setVisible(false);
+            responseField.setVisible(false);
+            closeTicketButton.setVisible(false);
+            lastUpdatedLabel.setText("Ticket is closed at " + ticket.getLastUpdatedAt().toString() + ". No further replies can be sent.");
+        } else {
+            sendResponseButton.setDisable(false);
+            responseField.setDisable(false);
+        }
+
     }
 
     public TicketDetailController(TicketService ticketService, Ticket ticket) {
@@ -65,6 +80,31 @@ public class TicketDetailController {
 
         // Refresh the content list view to show the new reply
         refreshView();
+    }
+
+    public void onCloseTicketButtonClick() {
+        //Confirm with the user before closing the ticket
+        Dialog<ButtonType> confirmationDialog = new Dialog<>();
+        confirmationDialog.setTitle("Close Ticket Confirmation");
+        confirmationDialog.setContentText("Are you sure you want to close this ticket? Closed tickets cannot be reopened.");
+        confirmationDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+        ButtonType result = confirmationDialog.showAndWait().orElse(ButtonType.NO);
+
+        if (result != ButtonType.YES) {
+            // User chose not to close the ticket
+            return;
+        }
+
+        // Close the ticket
+        ticketService.closeTicket(ticket);
+
+        // Refresh the view to reflect the closed status
+        refreshView();
+
+        // Disable the response field and button since the ticket is closed
+        responseField.setDisable(true);
+        sendResponseButton.setDisable(true);
+        closeTicketButton.setDisable(true);
     }
 
     public void refreshView() {

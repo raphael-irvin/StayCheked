@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -39,7 +40,12 @@
          <VBox alignment="CENTER" prefHeight="60.0" prefWidth="340.0" spacing="10.0">
             <children>
                <TextField fx:id="responseField" prefHeight="25.0" prefWidth="233.0" promptText="Please input your queries/response" />
-               <Button fx:id="sendResponseButton" mnemonicParsing="false" text="Send" />
+               <HBox alignment="CENTER_LEFT" spacing="10.0">
+                  <children>
+                     <Button fx:id="sendResponseButton" alignment="CENTER" mnemonicParsing="false" text="Send" />
+                     <Button fx:id="closeTicketButton" alignment="CENTER" layoutX="159.0" layoutY="10.0" mnemonicParsing="false" text="Close Ticket" />
+                  </children>
+               </HBox>
             </children>
          </VBox>
          <BorderPane.margin>

@@ -17,7 +17,7 @@ public class Main extends Application {
         //Data Initialization
         DataStore.dataInitialization();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/AuthenticationViews/LoginView.fxml"));
         UserAuthController userAuthController = new UserAuthController(new UserAuthService());
         fxmlLoader.setController(userAuthController);
         Parent root = fxmlLoader.load();

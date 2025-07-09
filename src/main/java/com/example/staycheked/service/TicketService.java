@@ -1,6 +1,8 @@
 package com.example.staycheked.service;
 
 import com.example.staycheked.Session;
+import com.example.staycheked.dao.ContentDAO;
+import com.example.staycheked.dao.TicketDAO;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Booking;
 import com.example.staycheked.model.object.Content;
@@ -34,6 +36,12 @@ public class TicketService {
     public void closeTicket(Ticket ticket) {
         ticket.setStatus("Closed");
         ticket.setLastUpdatedAt(LocalDateTime.now());
+
+        //Content needs to be saved because it is dependent with the ticket Object
+        ContentDAO.saveAllContents();
+        TicketDAO.saveAllTickets();
+        TicketDAO.retrieveAllTickets();
+        ContentDAO.retrieveAllContents();
     }
 
     public void cancelTicket(Ticket ticket) {

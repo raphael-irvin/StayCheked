@@ -87,7 +87,7 @@ public class MainController {
         Main.debug("MainController", "Sign out clicked");
         // Redirect to login view or perform other actions
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AuthenticationViews/LoginView.fxml"));
         fxmlLoader.setController(new UserAuthController(new UserAuthService()));
         try {
             Parent root = fxmlLoader.load();
@@ -102,7 +102,7 @@ public class MainController {
     public void onAccommodationTicketButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/TicketView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/ListViews/TicketView.fxml"));
             fxmlLoader.setController(new TicketListController(new TicketService()));
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
@@ -115,7 +115,7 @@ public class MainController {
     public void onBookingButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AccommodationBookingView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/ListViews/AccommodationBookingView.fxml"));
             fxmlLoader.setController(new BookingListController());
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(null);
@@ -129,7 +129,7 @@ public class MainController {
     public void onGuestButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/ListViews/GuestView.fxml"));
             fxmlLoader.setController(new GuestListController());
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
@@ -143,7 +143,7 @@ public class MainController {
     public void onGuestTicketButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/TicketView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/ListViews/TicketView.fxml"));
             fxmlLoader.setController(new TicketListController(new TicketService()));
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
@@ -156,7 +156,7 @@ public class MainController {
     public void onGuestBookingButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestBookingView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/ListViews/GuestBookingView.fxml"));
             fxmlLoader.setController(new BookingListController());
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(null);
@@ -170,7 +170,7 @@ public class MainController {
     public void onAccommodationButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AccommodationView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/ListViews/AccommodationView.fxml"));
             fxmlLoader.setController(new AccommodationListController());
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);

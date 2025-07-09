@@ -64,14 +64,14 @@ public class UserAuthController {
             // Guest user
             if (user instanceof Guest) {
                 Main.debug("UserAuthController", "Logged in as Guest: " + user.getUsername());
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainGuestView.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainGuestView.fxml"));
             fxmlLoader.setController(new MainController());
             } 
 
             // Accommodation user
             else if (user instanceof Accommodation) { 
                 Main.debug("UserAuthController", "Logged in as Accommodation: " + user.getUsername());
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainAccommodationView.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainAccommodationView.fxml"));
             }
             fxmlLoader.setController(new MainController());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -151,7 +151,7 @@ public class UserAuthController {
         if (guest != null) {
             Main.debug("UserAuthController", "Guest registration successful!");
             Session.setCurrentUser(guest);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainGuestView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainGuestView.fxml"));
             fxmlLoader.setController(new MainController());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             try {
@@ -183,7 +183,7 @@ public class UserAuthController {
         if (accommodation != null) {
             Main.debug("UserAuthController", "Accommodation registration successful!");
             Session.setCurrentUser(accommodation);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainAccommodationView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainAccommodationView.fxml"));
             fxmlLoader.setController(new MainController());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             try {
@@ -203,7 +203,7 @@ public class UserAuthController {
 
     public void switchToRegisterGuestView(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/RegisterGuestView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AuthenticationViews/RegisterGuestView.fxml"));
         fxmlLoader.setController(this);
         try {
             Parent root = fxmlLoader.load();
@@ -217,7 +217,7 @@ public class UserAuthController {
 
     public void switchToRegisterAccommodationView(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/RegisterAccommodationView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AuthenticationViews/RegisterAccommodationView.fxml"));
         fxmlLoader.setController(this);
         try {
             Parent root = fxmlLoader.load();
@@ -232,7 +232,7 @@ public class UserAuthController {
 
     public void backToLoginButtonClick(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/AuthenticationViews/LoginView.fxml"));
         fxmlLoader.setController(this);
         try {
             Parent root = fxmlLoader.load();

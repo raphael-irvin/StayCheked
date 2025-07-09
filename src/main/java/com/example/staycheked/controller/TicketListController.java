@@ -80,7 +80,7 @@ public class TicketListController {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     Ticket selectedTicket = row.getItem();
                     try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/GuestTicketDetailView.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/DetailViews/GuestTicketDetailView.fxml"));
                         fxmlLoader.setController(new TicketDetailController(new TicketService(), selectedTicket));
                         Parent root = fxmlLoader.load();
 
