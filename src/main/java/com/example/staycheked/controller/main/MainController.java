@@ -193,9 +193,19 @@ public class MainController {
 
         for (Button button : navButtons) {
             if (button.equals(clickedButton)) {
-                button.getStyleClass().remove("DashboardButton");
+                if (button.getStyleClass().contains("DashboardButton")) {
+                    button.getStyleClass().remove("DashboardButton");
+                } 
+                
+                if (button.getStyleClass().contains("DashboardButton-Active")) {
+                    return; // Already active, no need to change
+                }
+                
                 button.getStyleClass().add("DashboardButton-Active");
-            } else {
+
+            } 
+            
+            else {
                 if (button.getStyleClass().contains("DashboardButton-Active")) {
                     button.getStyleClass().remove("DashboardButton-Active");
                 }
