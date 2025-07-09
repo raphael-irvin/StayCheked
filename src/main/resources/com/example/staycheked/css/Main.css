@@ -41,3 +41,30 @@
     background-color: transparent;
     -fx-text-fill: black;
 }
+
+.ContentBackground {
+    -fx-background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+}
+
+.message-bubble {
+    -fx-padding: 8 16 8 16;
+    padding: 8 16 8 16;
+    -fx-background-insets: 0;
+    -fx-background-radius: 16;
+    -fx-font-size: 14px;
+    font-size: 14px;
+    -fx-wrap-text: true;
+}
+
+.message-bubble-sent {
+    -fx-background-color: rgb(31, 132, 255);
+    background-color: rgb(31, 132, 255);
+    -fx-text-fill: white;
+}
+
+.message-bubble-received {
+    -fx-background-color: rgb(136, 31, 255);
+    background-color: rgb(136, 31, 255);
+    -fx-text-fill: rgb(255, 255, 255);
+}

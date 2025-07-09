@@ -1,6 +1,6 @@
 package com.example.staycheked.controller;
 
-import com.example.staycheked.Main;
+import com.example.staycheked.Session;
 import com.example.staycheked.model.object.Content;
 import com.example.staycheked.model.object.Ticket;
 import com.example.staycheked.service.TicketService;
@@ -8,10 +8,11 @@ import com.example.staycheked.service.TicketService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Control;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 public class TicketDetailController {
 
@@ -25,7 +26,7 @@ public class TicketDetailController {
     @FXML
     Label lastUpdatedLabel;
     @FXML
-    ListView<String> contentListView;
+    VBox messageContainer; // Changed from ListView to VBox for better layout control
     @FXML
     TextField responseField;
     @FXML
@@ -113,15 +114,18 @@ public class TicketDetailController {
         subjectLabel.setText(ticket.getSubject());
         lastUpdatedLabel.setText("Requested by " + ticket.getSubmittedBy().getUsername() + " - Last Updated at "+ ticket.getLastUpdatedAt().toString());
 
-        contentListView.getItems().clear();
-        Main.debug("TicketDetailController", "Populating content list view for ticket ID: " + ticket.getTicketID());
-        Main.debug("TicketDetailController", "Content count: " + ticket.getContents().size());
+        messageContainer.getChildren().clear(); // Clear previous messages
         for (Content content : ticket.getContents()) {
-            Main.debug("TicketDetailController", "Adding content to list view: " + content.getMessage());
-            contentListView.getItems().add(
-                content.getDateTime() + " | " + content.getSender().getUsername() + ": " + content.getMessage()
-            );
+            Label messageLabel = new Label(content.getMessage());
+            messageLabel.setPrefWidth(Control.USE_COMPUTED_SIZE);
+            messageLabel.getStyleClass().add("message-bubble");
+
+            if (content.getSender() == Session.getCurrentUser()) {
+                messageLabel.getStyleClass().add("message-bubble-sent");
+            } else {
+                messageLabel.getStyleClass().add("message-bubble-received");
+            }
+            messageContainer.getChildren().add(messageLabel);
         }
     }
-
 }

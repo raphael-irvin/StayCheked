@@ -9,10 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+
+import java.util.ArrayList;
 import java.util.Optional;
 
 import com.example.staycheked.Session;
 import com.example.staycheked.model.DataStore;
+import com.example.staycheked.model.object.Booking;
 import com.example.staycheked.service.BookingAuthService;
 import com.example.staycheked.service.TicketService;
 import com.example.staycheked.Main;
@@ -114,8 +117,23 @@ public class GuestActionBarController {
         // Booking selection ComboBox
         javafx.scene.control.ComboBox<String> bookingComboBox = new javafx.scene.control.ComboBox<>();
         bookingComboBox.setPromptText("Select Booking");
+
+        //Get verified Bookings based on logged user
+        ArrayList<Booking> verifiedBookings = BookingAuthService.getVerifiedBookingsBasedOnLoggedUser(Session.getCurrentUser());
+        ArrayList<Booking> openBookings = new ArrayList<>();
+
+        for (Booking booking : verifiedBookings) {
+            Main.debug("GuestActionBarController", "Matching booking: " + booking.getBookingID() + " - " + booking.getAccommodation().getAccommodationName());
+            Main.debug("GuestActionBarController", "Booking status: " + booking.getStatus());
+            if (booking.getStatus().equalsIgnoreCase("Verified")) {
+                Main.debug("GuestActionBarController", "Open Booking Detected: " + booking.getBookingID() + " - " + booking.getAccommodation().getAccommodationName());
+                // Remove booking if not verified
+                openBookings.add(booking);
+            }
+        }
+
         bookingComboBox.getItems().addAll(
-            BookingAuthService.getVerifiedBookingsBasedOnLoggedUser(Session.getCurrentUser()).stream()
+            openBookings.stream()
                 .map(booking -> booking.getBookingID() + " - " + booking.getAccommodation().getAccommodationName())
                 .toList()
         );
