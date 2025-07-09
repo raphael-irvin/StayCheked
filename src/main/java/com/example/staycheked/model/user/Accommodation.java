@@ -52,6 +52,7 @@ public class Accommodation extends User{
 
     public void setStatus(Boolean status) {
         this.status = status;
+        DataStore.refreshData();
     }
 
     public String getLocation() {

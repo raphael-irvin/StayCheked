@@ -40,7 +40,9 @@ public class DataStore {
         if (user != null) return user;
 
         user = findAdminByEmailAddress(emailAddress);
-        return user; // Returns null if no user found
+        if (user != null) return user;
+
+        return null; // Returns null if no user found
     }
 
     public static Guest findGuestByEmailAddress(String emailAddress) {
@@ -101,6 +103,21 @@ public class DataStore {
         BookingDAO.saveAllBookings();
         TicketDAO.saveAllTickets();
         ContentDAO.saveAllContents();
+    }
+
+    public static void refreshData() {
+        Main.debug("DataStore", "Refreshing DataStore.");
+        saveAllData();
+        // Reinitialize the data store to reload all data
+        bookings.clear();
+        tickets.clear();
+        contents.clear();
+        guests.clear();
+        accommodations.clear();
+        admins.clear();
+        faqs.clear();
+        Main.debug("DataStore", "DataStore cleared, reinitializing data.");
+        dataInitialization();
     }
 
 }

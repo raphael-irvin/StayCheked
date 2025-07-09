@@ -5,6 +5,7 @@ import com.example.staycheked.Session;
 import com.example.staycheked.controller.actionBars.GuestActionBarController;
 import com.example.staycheked.controller.lists.*;
 import com.example.staycheked.model.user.Accommodation;
+import com.example.staycheked.model.user.Admin;
 import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.service.BookingAuthService;
 import com.example.staycheked.service.TicketService;
@@ -62,7 +63,13 @@ public class MainController {
                 navButtons[0] = guestTicketButton;
                 navButtons[1] = guestBookingButton;
                 navButtons[2] = accommodationButton;
-            } else {
+            } else if (Session.getCurrentUser() instanceof Admin) {
+                navButtons = new Button[1];
+                navButtons[0] = accommodationButton;
+                Main.debug("MainController", "Admin user logged in, no specific dashboard buttons.");
+            }
+            
+            else {
                 Main.debug("MainController", "Unknown user type.");
             }
         } else {
@@ -170,6 +177,7 @@ public class MainController {
 
     public void onAccommodationButtonClick(ActionEvent event) {
         onNavbarButtonClick(event);
+        
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/ListViews/AccommodationView.fxml"));
             fxmlLoader.setController(new AccommodationListController());

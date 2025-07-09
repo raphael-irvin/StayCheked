@@ -55,17 +55,17 @@ public class UserAuthController {
     public void onLoginButtonClick(ActionEvent event) {
         User user = userAuthService.login(emailField.getText(), passwordField.getText());
 
+        FXMLLoader fxmlLoader;
+
         if (user != null) {
             Main.debug("UserAuthController", "Login successful!");
             Session.setCurrentUser(user);
-            FXMLLoader fxmlLoader = null;
 
             // Redirect to the main application view
             // Guest user
             if (user instanceof Guest) {
                 Main.debug("UserAuthController", "Logged in as Guest: " + user.getUsername());
                 fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainGuestView.fxml"));
-            fxmlLoader.setController(new MainController());
             } 
 
             // Accommodation user
@@ -73,9 +73,18 @@ public class UserAuthController {
                 Main.debug("UserAuthController", "Logged in as Accommodation: " + user.getUsername());
                 fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainAccommodationView.fxml"));
             }
-            fxmlLoader.setController(new MainController());
+
+            // Admin user
+            else {
+                Main.debug("UserAuthController", "Logged in as Admin: " + user.getUsername());
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainAdminView.fxml"));
+            }
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            //Load the main view and set the controller
             try {
+                fxmlLoader.setController(new MainController());
                 Parent root = fxmlLoader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -83,7 +92,10 @@ public class UserAuthController {
             } catch (IOException e) {
                 Main.debug("UserAuthController", "Error loading main view: " + e.getMessage());
             }
-        } else {
+        } 
+        
+        //CASE: Login failed
+        else {
             Main.debug("UserAuthController", "Login failed. Please check your credentials.");
             // Show error message in the UI
         }
