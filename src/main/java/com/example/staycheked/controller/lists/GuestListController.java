@@ -1,4 +1,4 @@
-package com.example.staycheked.controller;
+package com.example.staycheked.controller.lists;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;

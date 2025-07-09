@@ -1,6 +1,6 @@
 package com.example.staycheked;
 
-import com.example.staycheked.controller.UserAuthController;
+import com.example.staycheked.controller.main.UserAuthController;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.service.UserAuthService;
 import javafx.application.Application;

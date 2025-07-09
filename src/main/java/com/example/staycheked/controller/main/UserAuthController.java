@@ -1,4 +1,4 @@
-package com.example.staycheked.controller;
+package com.example.staycheked.controller.main;
 
 import com.example.staycheked.Main;
 import com.example.staycheked.Session;

@@ -1,10 +1,11 @@
-package com.example.staycheked.controller;
+package com.example.staycheked.controller.lists;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 import com.example.staycheked.Main;
 import com.example.staycheked.Session;
+import com.example.staycheked.controller.TicketDetailController;
 import com.example.staycheked.model.DataStore;
 import com.example.staycheked.model.object.Ticket;
 import com.example.staycheked.model.user.Accommodation;

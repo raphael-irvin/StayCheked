@@ -1,4 +1,4 @@
-package com.example.staycheked.controller.ActionBars;
+package com.example.staycheked.controller.actionBars;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

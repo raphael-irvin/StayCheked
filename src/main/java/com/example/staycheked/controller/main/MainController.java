@@ -1,8 +1,9 @@
-package com.example.staycheked.controller;
+package com.example.staycheked.controller.main;
 
 import com.example.staycheked.Main;
 import com.example.staycheked.Session;
-import com.example.staycheked.controller.ActionBars.GuestActionBarController;
+import com.example.staycheked.controller.actionBars.GuestActionBarController;
+import com.example.staycheked.controller.lists.*;
 import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.service.BookingAuthService;
