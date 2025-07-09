@@ -21,6 +21,7 @@ public class GuestDAO {
 
     public static boolean saveAllGuests() {
         HashMap<String, Guest> guests = DataStore.guests;
+        Main.debug("GuestDAO", "ACCESSING DATASTORE: " + DataStore.guests); // Debugging output to check if guests are loaded correctly
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_SOURCE))
                 ) {
@@ -45,6 +46,7 @@ public class GuestDAO {
 
     public static boolean retrieveAllGuests() {
         HashMap<String, Guest> guests = new HashMap<>();
+        Main.debug("GuestDAO", "Guest Initialization Start Point"); // Debugging output
 
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))
@@ -64,13 +66,12 @@ public class GuestDAO {
                     guests.put(emailAddress, guest);
 
                     // For debugging purposes, print the guest details
-                    Main.debug("GuestDAO", emailAddress);
-                    Main.debug("GuestDAO", guest.getUserID());
-                    Main.debug("GuestDAO", guest.getUsername());
-                    Main.debug("GuestDAO", guest.getEmailAddress());
-                    Main.debug("GuestDAO", guest.getContactNo());
-                    Main.debug("GuestDAO", guest.getPassword());
-                    Main.debug("GuestDAO", guest.getFullName());
+                    Main.debug("GuestDAO", "Retrieved guest: " + guest.getUsername() + ", Email: " + guest.getEmailAddress());
+                    if (userID != null && contactNo != null && password != null && fullName != null) {
+                        Main.debug("GuestDAO", "Guest ID: " + userID + ", Contact No: " + contactNo + ", Full Name: " + fullName);
+                    } else {
+                        Main.debug("GuestDAO", "Incomplete guest data for email: " + emailAddress);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -78,6 +79,15 @@ public class GuestDAO {
             ;
         }
         DataStore.guests = guests;
+        // For debugging purposes, print the size of the guests HashMap
+        for (Guest guest : DataStore.guests.values()) {
+            Main.debug("GuestDAO", "REGISTERED GUEST: " + guest.getUserID());
+            Main.debug("GuestDAO", "Guest Email: " + guest.getEmailAddress());
+            Main.debug("GuestDAO", "User ID: " + guest.getUserID());
+            Main.debug("GuestDAO", "Username: " + guest.getUsername());
+            Main.debug("GuestDAO", "Contact No: " + guest.getContactNo());
+        }   
+        Main.debug("GuestDAO", "Guest Keys: " + DataStore.guests.keySet());
         return true;
     }
 

@@ -25,6 +25,7 @@ public class Guest extends User {
     public Guest(String username, String emailAddress, String contactNo, String password, String fullName) {
         super(username, emailAddress, contactNo, password, "Guest");
         this.fullName = fullName;
+        this.setUserID(User.generateUserID("Guest")); // Generate a new userID for the Guest
 
         DataStore.guests.put(this.getEmailAddress(), this);
     }

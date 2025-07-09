@@ -1,5 +1,7 @@
 package com.example.staycheked.model.user;
 
+import com.example.staycheked.model.DataStore;
+
 public class User {
 
     //Properties
@@ -24,10 +26,23 @@ public class User {
 
     public static String generateUserID(String type) {
         return switch (type) {
-            case "Accommodation" -> "a-" + (++accommodationIDTracker);
-            case "Guest" -> "g-" + (++guestIDTracker);
-            case "Admin" -> "op-" + (++adminIDTracker);
-            default -> throw new IllegalArgumentException("Invalid user type: " + type);
+            case "Accommodation":
+                DataStore.accommodations.values().stream()
+                .mapToInt(accommodation -> Integer.parseInt(accommodation.getUserID().split("-")[1])).max()
+                .ifPresentOrElse(max -> accommodationIDTracker = max, () -> accommodationIDTracker = 0);
+                yield "a-" + (++accommodationIDTracker);
+            case "Guest":
+                DataStore.guests.values().stream()
+                .mapToInt(guest -> Integer.parseInt(guest.getUserID().split("-")[1])).max()
+                .ifPresentOrElse(max -> guestIDTracker = max, () -> guestIDTracker = 0);
+                yield "g-" + (++guestIDTracker);
+            case "Admin":
+                DataStore.admins.values().stream()
+                .mapToInt(admin -> Integer.parseInt(admin.getUserID().split("-")[1])).max()
+                .ifPresentOrElse(max -> adminIDTracker = max, () -> adminIDTracker = 0);
+                yield "ad-" + (++adminIDTracker);
+            default:
+                throw new IllegalArgumentException("Invalid user type: " + type);
         };
     }
 

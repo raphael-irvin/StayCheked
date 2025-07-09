@@ -65,17 +65,6 @@ HashMap<String, Accommodation> accommodations = new HashMap<>();
                     String status = parts[7];
                     Accommodation accommodation = new Accommodation(userID, username, emailAddress, contactNo, password, accommodationName, address, status);
                     accommodations.put(emailAddress, accommodation);
-
-                    // For debugging purposes, print the guest details
-                    Main.debug("AccommodationDAO", emailAddress);
-                    Main.debug("AccommodationDAO", accommodation.getUserID());
-                    Main.debug("AccommodationDAO", accommodation.getUsername());
-                    Main.debug("AccommodationDAO", accommodation.getEmailAddress());
-                    Main.debug("AccommodationDAO", accommodation.getContactNo());
-                    Main.debug("AccommodationDAO", accommodation.getPassword());
-                    Main.debug("AccommodationDAO", accommodation.getAccommodationName());
-                    Main.debug("AccommodationDAO", accommodation.getLocation());
-                    Main.debug("AccommodationDAO", String.valueOf(accommodation.getStatus()));
                 }
             }
         } catch (IOException e) {
@@ -83,7 +72,16 @@ HashMap<String, Accommodation> accommodations = new HashMap<>();
             return false;
         }
         DataStore.accommodations = accommodations;
-        Main.debug("AccommodationDAO", "SAVED IN DATASTORE: " + DataStore.accommodations); // Debugging output to check if accommodations are loaded correctly
+        for (Accommodation accommodation : accommodations.values()) {
+            Main.debug("AccommodationDAO", "REGISTERED ACCOMMODATION: " + accommodation.getUserID());
+            Main.debug("AccommodationDAO", "Accommodation Email: " + accommodation.getEmailAddress());
+            Main.debug("AccommodationDAO", "User ID: " + accommodation.getUserID());
+            Main.debug("AccommodationDAO", "Username: " + accommodation.getUsername());
+            Main.debug("AccommodationDAO", "Contact No: " + accommodation.getContactNo());
+            Main.debug("AccommodationDAO", "Accommodation Name: " + accommodation.getAccommodationName());
+            Main.debug("AccommodationDAO", "Address: " + accommodation.getLocation());
+            Main.debug("AccommodationDAO", "Status: " + (accommodation.getStatus() ? "verified" : "unverified"));
+        }
         return true;
     }
 

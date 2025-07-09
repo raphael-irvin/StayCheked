@@ -89,13 +89,17 @@ public class UserAuthController {
         }
     }
 
-    public void onRegisterButtonClick() {
+    public void onRegisterButtonClick(ActionEvent event) {
+        Main.debug("UserAuthController", "Register button clicked. Starting registration process...");
         if (usernameField.getText().isEmpty() || emailField.getText().isEmpty() ||
             contactNoField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             showErrorAlert("Please fill in all required fields.");
             Main.debug("UserAuthController", "User registration failed. Missing required fields.");
             return;
         }
+        
+
+        Main.debug("UserAuthController", "Accommodation Toggle Status: " + toggleAccommodationRegistration.isSelected());
 
         //Accommodation registration
         if (toggleAccommodationRegistration.isSelected()) {
@@ -104,7 +108,7 @@ public class UserAuthController {
                 Main.debug("UserAuthController", "User registration failed. Missing required fields for accommodation registration.");
                 return;
             }
-            onRegisterAccommodationButtonClick();
+            onRegisterAccommodationButtonClick(event);
         }
 
         //Guest registration
@@ -114,11 +118,11 @@ public class UserAuthController {
                 Main.debug("UserAuthController", "User registration failed. Missing required fields for guest registration.");
                 return;
             }
-            onRegisterGuestButtonClick();
+            onRegisterGuestButtonClick(event);
         }
     }
 
-    public void onRegisterGuestButtonClick() {
+    public void onRegisterGuestButtonClick(ActionEvent event) {
 
         Guest guest = userAuthService.registerGuest(
                 usernameField.getText(),
@@ -131,14 +135,25 @@ public class UserAuthController {
         if (guest != null) {
             Main.debug("UserAuthController", "Guest registration successful!");
             Session.setCurrentUser(guest);
-            // Redirect to the main application view
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainGuestView.fxml"));
+            fxmlLoader.setController(new MainController());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            try {
+                Parent root = fxmlLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                Main.debug("UserAuthController", "Redirected to main application view after guest registration.");
+            } catch (IOException e) {
+                Main.debug("UserAuthController", "Error loading main view: " + e.getMessage());
+            }
         } else {
             Main.debug("UserAuthController", "Guest registration failed. Please check your details.");
             // Show error message in the UI
+            showErrorAlert("Guest registration failed. Please check your details.");
         }
     }
 
-    public void onRegisterAccommodationButtonClick() {
+    public void onRegisterAccommodationButtonClick(ActionEvent event) {
 
         Accommodation accommodation = userAuthService.registerAccommodation(
                 usernameField.getText(),
@@ -152,10 +167,21 @@ public class UserAuthController {
         if (accommodation != null) {
             Main.debug("UserAuthController", "Accommodation registration successful!");
             Session.setCurrentUser(accommodation);
-            // Redirect to the main application view
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainAccommodationView.fxml"));
+            fxmlLoader.setController(new MainController());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            try {
+                Parent root = fxmlLoader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                Main.debug("UserAuthController", "Redirected to main application view after accommodation registration.");
+            } catch (IOException e) {
+                Main.debug("UserAuthController", "Error loading main view: " + e.getMessage());
+            }
         } else {
             Main.debug("UserAuthController", "Accommodation registration failed. Please check your details.");
             // Show error message in the UI
+            showErrorAlert("Accommodation registration failed. Please check your details.");
         }
     }
 

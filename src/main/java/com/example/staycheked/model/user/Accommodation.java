@@ -39,6 +39,7 @@ public class Accommodation extends User{
     public Accommodation(String username, String emailAddress, String contactNo, String password, String accommodationName, String location) {
         super(username, emailAddress, contactNo, password, "Accommodation");
         this.accommodationName = accommodationName;
+        this.setUserID(User.generateUserID("Accommodation")); // Generate a new userID for the Accommodation
         this.location = location;
         this.status = false;
 

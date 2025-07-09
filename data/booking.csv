@@ -1,5 +1,3 @@
 bookingID,accommodationEmailAddress,guestIdentificationLastName,room,status,guestEmailAddress
-21430490,accoma@gmail.com,booking2ln,a12,Unverified,null
 23059312,accoma@gmail.com,booking1ln,a11,Verified,usera@gmail.com
-13579135,accoma@gmail.com,testlastname,a3,Verified,g
 48929122,accomb@gmail.com,booking3ln,a2,Closed,usera@gmail.com
