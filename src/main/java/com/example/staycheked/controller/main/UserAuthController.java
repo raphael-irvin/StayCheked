@@ -5,6 +5,8 @@ import com.example.staycheked.Session;
 import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.model.user.User;
+import com.example.staycheked.service.BookingAuthService;
+import com.example.staycheked.service.TicketService;
 import com.example.staycheked.service.UserAuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,49 +51,15 @@ public class UserAuthController {
 
     public UserAuthController(UserAuthService userAuthService) {
         this.userAuthService = userAuthService;
-        
     }
 
     public void onLoginButtonClick(ActionEvent event) {
         User user = userAuthService.login(emailField.getText(), passwordField.getText());
 
-        FXMLLoader fxmlLoader;
-
         if (user != null) {
             Main.debug("UserAuthController", "Login successful!");
             Session.setCurrentUser(user);
-
-            // Redirect to the main application view
-            // Guest user
-            if (user instanceof Guest) {
-                Main.debug("UserAuthController", "Logged in as Guest: " + user.getUsername());
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainGuestView.fxml"));
-            } 
-
-            // Accommodation user
-            else if (user instanceof Accommodation) { 
-                Main.debug("UserAuthController", "Logged in as Accommodation: " + user.getUsername());
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainAccommodationView.fxml"));
-            }
-
-            // Admin user
-            else {
-                Main.debug("UserAuthController", "Logged in as Admin: " + user.getUsername());
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainAdminView.fxml"));
-            }
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            //Load the main view and set the controller
-            try {
-                fxmlLoader.setController(new MainController());
-                Parent root = fxmlLoader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                Main.debug("UserAuthController", "Redirected to main application view after login.");
-            } catch (IOException e) {
-                Main.debug("UserAuthController", "Error loading main view: " + e.getMessage());
-            }
+            redirectToMainView(event);
         } 
         
         //CASE: Login failed
@@ -163,17 +131,7 @@ public class UserAuthController {
         if (guest != null) {
             Main.debug("UserAuthController", "Guest registration successful!");
             Session.setCurrentUser(guest);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainGuestView.fxml"));
-            fxmlLoader.setController(new MainController());
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            try {
-                Parent root = fxmlLoader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                Main.debug("UserAuthController", "Redirected to main application view after guest registration.");
-            } catch (IOException e) {
-                Main.debug("UserAuthController", "Error loading main view: " + e.getMessage());
-            }
+            redirectToMainView(event);
         } else {
             Main.debug("UserAuthController", "Guest registration failed. Please check your details.");
             // Show error message in the UI
@@ -195,17 +153,7 @@ public class UserAuthController {
         if (accommodation != null) {
             Main.debug("UserAuthController", "Accommodation registration successful!");
             Session.setCurrentUser(accommodation);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainAccommodationView.fxml"));
-            fxmlLoader.setController(new MainController());
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            try {
-                Parent root = fxmlLoader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                Main.debug("UserAuthController", "Redirected to main application view after accommodation registration.");
-            } catch (IOException e) {
-                Main.debug("UserAuthController", "Error loading main view: " + e.getMessage());
-            }
+            redirectToMainView(event);
         } else {
             Main.debug("UserAuthController", "Accommodation registration failed. Please check your details.");
             // Show error message in the UI
@@ -271,5 +219,19 @@ public class UserAuthController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void redirectToMainView(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainView.fxml"));
+        fxmlLoader.setController(new MainController(new BookingAuthService(), new TicketService()));
+        try {
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            Main.debug("UserAuthController", "Redirected to main application view.");
+        } catch (IOException e) {
+            Main.debug("UserAuthController", "Error loading main view: " + e.getMessage());
+        }
     }
 }

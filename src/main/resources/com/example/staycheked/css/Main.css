@@ -3,6 +3,14 @@
     background-color: rgb(221, 221, 221);
 }
 
+/*NAVBAR*/
+.navbar {
+    -fx-background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(221, 221, 221);
+    border-color: rgb(221, 221, 221);
+}
+
 .navbarActive {
     -fx-background-color: rgb(31, 132, 255);
     background-color: rgb(31, 132, 255);
@@ -10,11 +18,18 @@
 }
 
 .navbarInactive {
-    -fx-background-color: transparent;
-    background-color: transparent;
+    -fx-background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
     -fx-text-fill: black;
 }
 
+.navbarInactive:hover {
+    -fx-background-color: rgb(28, 121, 197);
+    background-color: rgb(28, 121, 197);
+    -fx-text-fill: white;
+}
+
+/*DASHBOARD*/
 .DashboardNavbar {
     -fx-background-color: rgb(255, 255, 255);
     background-color: rgb(255, 255, 255);
@@ -30,18 +45,39 @@
     -fx-text-alignment: left;
 }
 
+.DashboardButton:hover {
+    -fx-background-color: rgb(28, 121, 197);
+    background-color: rgb(28, 121, 197);
+    -fx-text-fill: white;
+}
+
 .DashboardButton-Active {
     -fx-background-color: rgb(31, 132, 255);
     background-color: rgb(31, 132, 255);
     -fx-text-fill: white;
 }
 
+/*ACTION BAR*/
 .ActionBar {
-    -fx-background-color: transparent;
-    background-color: transparent;
-    -fx-text-fill: black;
+    -fx-background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(221, 221, 221);
+    border-color: rgb(221, 221, 221);
 }
 
+.ActionBarButton {
+    -fx-background-color: lightgray;
+    background-color: lightgray;
+    -fx-text-fill: rgb(0, 0, 0);
+}
+
+.ActionBarButton:hover {
+    -fx-background-color: rgb(28, 121, 197);
+    background-color: rgb(28, 121, 197);
+    -fx-text-fill: white;
+}
+
+/*UTILITIES*/
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-background: transparent;
@@ -54,6 +90,7 @@
     background-color: rgb(255, 255, 255);
 }
 
+/*MESSAGES*/
 .message-info-sender {
     -fx-text-fill: rgb(0, 0, 0);
     -fx-font-weight: bold;
