@@ -66,6 +66,11 @@ public class UserAuthController {
         else {
             Main.debug("UserAuthController", "Login failed. Please check your credentials.");
             // Show error message in the UI
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Login Failed");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Login failed. Please check your email and password.");
+            errorAlert.showAndWait();
         }
     }
 
@@ -79,19 +84,68 @@ public class UserAuthController {
             Main.debug("UserAuthController", "User registration failed. Missing required fields.");
             return;
         }
+        
+        //FAIL CONDITION 2: Format Errors
 
-        //FAIL Condition 2: Email Format Unmet
-        //[PUT CODE HERE TO CHECK EMAIL FORMAT AND SHOW ERROR DIALOG IF NOT MET]
+        //Validate Username Format
+        String username = usernameField.getText();
+        if (username.length() < 5 || username.length() > 20 ||
+            !username.matches("^[a-zA-Z][a-zA-Z0-9._]*$") ||
+            username.contains("..") || username.contains("__") ||
+            username.contains(" ")) {
+            showErrorAlert("Invalid username. It must be:\n" +
+                "* 5-20 characters long\n" +
+                "* Start with a letter\n" +
+                "* Can only include letters, numbers, underscores, or dots\n" +
+                "* Cannot contain consecutive special characters like '__' or '..'\n" +
+                "* Cannot contain spaces");
+            Main.debug("UserAuthController", "User registration failed due to invalid username format.");
+            return;
+        }
 
-        //FAIL Condition 3: Password Requirement Unmet
-        /* PASSWORD FORMAT
-         * - Minimum 8 characters
-         * - At least one uppercase letter
-         * - At least one lowercase letter
-         * - At least one digit
-         * - At least one special character
-         */
-        //[PUT CODE HERE TO CHECK PASSWORD FORMAT AND SHOW ERROR DIALOG IF NOT MET]
+        //Validate Email Format
+        String email = emailField.getText();
+        if (!email.matches("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$")) {
+            showErrorAlert("Invalid email address. It must be:\n" +
+                "* A valid email format (e.g., user@example.com)\n" +
+                "* Contain a domain name and a top-level domain (e.g., .com, .org)");
+            Main.debug("UserAuthController", "User registration failed due to invalid email format.");
+            return;
+        }
+
+        //Password Validation
+        String password = passwordField.getText();
+        if (password.length() < 8 ||
+            !password.matches(".*[A-Z].*") ||
+            !password.matches(".*[a-z].*") ||
+            !password.matches(".*\\d.*") ||
+            !password.matches(".*[!@#$%^&*].*") ||
+            password.contains(" ") ||
+            password.toLowerCase().contains(username.toLowerCase()) ||
+            password.matches(".*(password|123456|qwerty|letmein|welcome).*")) {
+            showErrorAlert("Invalid password. It must be:\n" +
+                "* At least 8 characters long (12 recommended)\n" +
+                "* Include an uppercase letter\n" +
+                "* Include a lowercase letter\n" +
+                "* Include a number\n" +
+                "* Include a special character (!@#$%^&*)\n" +
+                "* Not contain spaces\n" +
+                "* Not be similar to the username or common passwords");
+            Main.debug("UserAuthController", "User registration failed due to invalid password format.");
+            return;
+        }
+
+        //Contact Number Validation
+        String contactNo = contactNoField.getText().replaceAll("[\\s()-]", ""); // Remove spaces, dashes, and parentheses
+        if (!contactNo.matches("^\\+?\\d{10,15}$")) {
+            showErrorAlert("Invalid contact number. It must be:\n" +
+                "* A valid international phone number format (e.g., +60123456789)\n" +
+                "* Contain only digits after the '+' (if present)\n" +
+                "* Be between 10 to 15 digits (excluding the '+' sign)");
+            Main.debug("UserAuthController", "User registration failed due to invalid contact number format.");
+            return;
+        }
+
 
         Main.debug("UserAuthController", "Accommodation Toggle Status: " + toggleAccommodationRegistration.isSelected());
 
