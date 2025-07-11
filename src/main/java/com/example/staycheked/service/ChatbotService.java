@@ -36,12 +36,13 @@ public class ChatbotService {
                     .build();
                 if (testChatBot()) {
                     workingChatModelFound = true;
-                    System.out.println("Chat model initialized successfully with key: " + apiKeys.indexOf(key));
+                    Main.debug("ChatbotService", "Chat model initialized successfully with key: " + apiKeys.indexOf(key));
                     break; // Exit loop if a working key is found
                 }
             }
             catch (Exception e) {
-                System.out.println("Failed to initialize chat model with key: " + apiKeys.indexOf(key));
+                Main.debug("ChatbotService", "Failed to initialize chat model with key: " + apiKeys.indexOf(key));
+                Main.debug("ChatbotService", e.getMessage()); // Log the exception message
                 continue; // Try the next key
             }
         }

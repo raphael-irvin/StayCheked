@@ -26,7 +26,6 @@
     -fx-background-color: rgb(31, 132, 255);
     background-color: rgb(31, 132, 255);
     -fx-text-fill: white;
-    -fx-alignment: right;
 }
 
 .message-bubble-received {
