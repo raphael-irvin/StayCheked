@@ -9,14 +9,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../../css/Main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="navbar" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="navbar" stylesheets="@../../css/Main.css" BorderPane.alignment="CENTER_LEFT">
          <children>
             <Button fx:id="dashboardNavbar" mnemonicParsing="false" prefHeight="35.0" styleClass="navbarActive" text="Dashboard" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets left="20.0" right="20.0" />
                </padding></Button>
+            <Button fx:id="helpNavbar" layoutX="21.0" layoutY="21.0" mnemonicParsing="false" prefHeight="35.0" styleClass="navbarInactive" text="Help">
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </Button>
             <Pane HBox.hgrow="ALWAYS" />
             <Button fx:id="signOutNavbar" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onNavbarSignOutClick" prefHeight="35.0" styleClass="navbarInactive" stylesheets="@../../css/Main.css" text="Sign Out" HBox.hgrow="ALWAYS">
                <padding>
@@ -32,7 +37,7 @@
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="484.0" prefWidth="135.0" spacing="20.0" styleClass="DashboardNavbar" BorderPane.alignment="TOP_LEFT">
+      <VBox prefHeight="484.0" prefWidth="135.0" spacing="20.0" styleClass="DashboardNavbar" stylesheets="@../../css/Main.css" BorderPane.alignment="TOP_LEFT">
          <children>
             <Button fx:id="ticketButton" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTicketButtonClick" styleClass="DashboardButton" text="Tickets">
                <VBox.margin>
@@ -56,7 +61,7 @@
       </VBox>
    </left>
    <center>
-      <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="5.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" fillWidth="false" BorderPane.alignment="CENTER">
          <children>
             <Label text="StayChecked">
                <font>
@@ -70,12 +75,12 @@
             </Label>
          </children>
          <BorderPane.margin>
-            <Insets bottom="17.5" left="90.0" right="90.0" top="17.5" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="ActionBar" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="ActionBar" stylesheets="@../../css/Main.css" BorderPane.alignment="CENTER_LEFT">
          <children>
             <Button fx:id="verifyBookingButton" mnemonicParsing="false" styleClass="ActionBarButton" text="Verify Booking">
                <padding>

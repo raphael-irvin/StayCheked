@@ -5,6 +5,10 @@ module com.example.staycheked {
     requires jdk.jshell;
     requires java.desktop;
     requires javafx.base;
+    requires langchain4j;
+    requires langchain4j.core;
+    requires langchain4j.open.ai;
+    requires java.net.http;
 
     exports com.example.staycheked.service;
 

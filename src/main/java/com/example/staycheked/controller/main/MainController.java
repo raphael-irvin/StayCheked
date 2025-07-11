@@ -12,6 +12,7 @@ import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Admin;
 import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.service.BookingAuthService;
+import com.example.staycheked.service.ChatbotService;
 import com.example.staycheked.service.TicketService;
 import com.example.staycheked.service.UserAuthService;
 
@@ -41,6 +42,8 @@ public class MainController {
     Button signOutNavbar;
     @FXML
     Button dashboardNavbar;
+    @FXML
+    Button helpNavbar;
 
     //Dashboard Buttons
     @FXML
@@ -62,10 +65,19 @@ public class MainController {
     BookingAuthService bookingAuthService;
     TicketService ticketService;
 
-    Button[] navButtons;
+    Button[] navbarButtons;
+    Button[] dashboardButtons;
 
     public void initialize() {
+        dashboardNavbar.setOnAction(this::onNavbarDashboardClick);
         signOutNavbar.setOnAction(this::onNavbarSignOutClick);
+        helpNavbar.setOnAction(this::onNavbarHelpClick);
+
+        //NAVBAR SETUP
+        navbarButtons = new Button[3];
+        navbarButtons[0] = signOutNavbar;
+        navbarButtons[1] = dashboardNavbar;
+        navbarButtons[2] = helpNavbar;
 
         //ACTION BAR SETUP
         verifyBookingButton.setOnAction(e -> showVerifyBookingDialog(e));
@@ -81,20 +93,20 @@ public class MainController {
         //DASHBOARD SETUP
         //USER TYPE: Accommodation
         if (Session.getCurrentUser() instanceof Accommodation) {
-            navButtons = new Button[3];
-            navButtons[0] = ticketButton;
-            navButtons[1] = bookingButton;
-            navButtons[2] = userListButton;
+            dashboardButtons  = new Button[3];
+            dashboardButtons [0] = ticketButton;
+            dashboardButtons [1] = bookingButton;
+            dashboardButtons [2] = userListButton;
         } 
             
         //USER TYPE: Guest
         else if (Session.getCurrentUser() instanceof Guest) {
             userListButton.setText("Accommodations");
 
-            navButtons = new Button[3];
-            navButtons[0] = ticketButton;
-            navButtons[1] = bookingButton;
-            navButtons[2] = userListButton;
+            dashboardButtons  = new Button[3];
+            dashboardButtons [0] = ticketButton;
+            dashboardButtons [1] = bookingButton;
+            dashboardButtons [2] = userListButton;
         } 
             
         //USER TYPE: Admin
@@ -106,8 +118,8 @@ public class MainController {
             if (bookingButton.getParent() != null) {
                 ((javafx.scene.layout.Pane) bookingButton.getParent()).getChildren().remove(bookingButton);
             }
-            navButtons = new Button[1];
-            navButtons[0] = userListButton;
+            dashboardButtons  = new Button[1];
+            dashboardButtons [0] = userListButton;
         } 
         
         else {
@@ -122,6 +134,23 @@ public class MainController {
     }
     
     //NAVBAR FUNCTIONS
+    public void onNavbarDashboardClick(ActionEvent event) {
+        Main.debug("MainController", "Dashboard clicked");
+        onNavbarButtonClick(event);
+        // Load the dashboard view
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/MainView.fxml"));
+            fxmlLoader.setController(new MainController(bookingAuthService, ticketService));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+        } catch (Exception e) {
+            Main.debug("MainController", "Error loading Dashboard View: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
     public void onNavbarSignOutClick(ActionEvent event) {
         Session.clear();
         Main.debug("MainController", "Sign out clicked");
@@ -138,9 +167,44 @@ public class MainController {
         }
     }
 
+    public void onNavbarHelpClick(ActionEvent event) {
+        Main.debug("MainController", "Help clicked");
+        onNavbarButtonClick(event);
+        // Load the help view with error handling for ChatbotService
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/MainViews/HelpPageView.fxml"));
+            
+            //Show Loading Dialog until ChatbotService is initialized
+            Dialog<String> loadingDialog = new Dialog<>();
+            loadingDialog.setTitle("Loading Chatbot Service");
+            loadingDialog.setHeaderText("The Chabot Service has been initialized. Please wait while the help page loads.");
+            loadingDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            loadingDialog.show();
+
+            // Try to create ChatbotService, fall back to null if it fails
+            ChatbotService chatbotService = null;
+            try {
+                chatbotService = new ChatbotService();
+                Main.debug("MainController", "ChatbotService initialized successfully");
+            } catch (Exception chatbotError) {
+                Main.debug("MainController", "ChatbotService initialization failed: " + chatbotError.getMessage());
+                Main.debug("MainController", "Help page will load without chatbot functionality");
+            }
+            
+            fxmlLoader.setController(new HelpPageController(chatbotService));
+            Parent root = fxmlLoader.load();
+            mainBorderPane.setLeft(null);
+            mainBorderPane.setCenter(null);
+            mainBorderPane.setCenter(root);
+        } catch (Exception e) {
+            Main.debug("MainController", "Error loading Help View: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     //DASHBOARD FUNCTIONS
     public void onTicketButtonClick(ActionEvent event) {
-        onNavbarButtonClick(event);
+        onDashboardButtonClick(event);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staycheked/views/ContentViews/ListViews/TicketView.fxml"));
             fxmlLoader.setController(new TicketListController(new TicketService()));
@@ -153,7 +217,7 @@ public class MainController {
     }
 
     public void onBookingButtonClick(ActionEvent event) {
-        onNavbarButtonClick(event);
+        onDashboardButtonClick(event);
         try {
             FXMLLoader fxmlLoader = null;
             if (Session.getCurrentUser() instanceof Guest) {
@@ -175,7 +239,7 @@ public class MainController {
     }
 
     public void onUserListButtonClick(ActionEvent event) {
-        onNavbarButtonClick(event);
+        onDashboardButtonClick(event);
         try {
             FXMLLoader fxmlLoader = null;
             if (Session.getCurrentUser() instanceof Guest || Session.getCurrentUser() instanceof Admin) {
@@ -366,10 +430,10 @@ public class MainController {
     }
 
     //UTILITY / TRANSITION FUNCTIONS
-    private void onNavbarButtonClick(ActionEvent event) {
+    private void onDashboardButtonClick(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
 
-        for (Button button : navButtons) {
+        for (Button button : dashboardButtons) {
             if (button.equals(clickedButton)) {
                 if (button.getStyleClass().contains("DashboardButton")) {
                     button.getStyleClass().remove("DashboardButton");
@@ -391,4 +455,21 @@ public class MainController {
             }
         }
     }
+
+    public void onNavbarButtonClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        for (Button button : navbarButtons) {
+            if (button.equals(clickedButton)) {
+                if (button.getStyleClass().contains("navbarActive")) {
+                    return; // Already active, no need to change
+                }
+                button.getStyleClass().remove("navbarInactive");
+                button.getStyleClass().add("navbarActive");
+            } else {
+                button.getStyleClass().remove("navbarActive");
+                button.getStyleClass().add("navbarInactive");
+            }
+        }
+    }
+
 }

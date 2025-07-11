@@ -14,6 +14,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        debug("Main", "Current Java Version: " + System.getProperty("java.version"));
         //Data Initialization
         DataStore.dataInitialization();
 

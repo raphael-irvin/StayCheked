@@ -20,12 +20,20 @@
 .navbarInactive {
     -fx-background-color: rgb(255, 255, 255);
     background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(221, 221, 221);    
+    border-color: rgb(221, 221, 221);
+    -fx-border-radius: 4px;
+    border-radius: 4px;
     -fx-text-fill: black;
 }
 
 .navbarInactive:hover {
     -fx-background-color: rgb(28, 121, 197);
     background-color: rgb(28, 121, 197);
+    -fx-border-color: rgb(28, 121, 197);
+    border-color: rgb(28, 121, 197);
+    -fx-border-radius: 4px;
+    border-radius: 4px;
     -fx-text-fill: white;
 }
 
