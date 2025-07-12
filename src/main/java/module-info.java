@@ -8,7 +8,11 @@ module com.example.staycheked {
     requires langchain4j;
     requires langchain4j.core;
     requires langchain4j.open.ai;
+    requires langchain4j.easy.rag;
+    requires java.sql;
     requires java.net.http;
+    requires org.apache.logging.log4j;
+    requires org.slf4j;
 
     exports com.example.staycheked.service;
 

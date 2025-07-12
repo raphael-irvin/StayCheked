@@ -53,13 +53,13 @@ public class ContentDAO {
 
     public static boolean retrieveAllContents() {
 
-    //Refresh Ticket's Content Property to Avoid Duplicate Content
-    for (Ticket ticket : DataStore.tickets.values()) {
-        Main.debug("ContentDAO", "Clearing existing contents for ticket ID: " + ticket.getTicketID()); // Debugging output
-        ticket.getContents().clear(); // Clear existing contents
-    }
+        //Refresh Ticket's Content Property to Avoid Duplicate Content
+        for (Ticket ticket : DataStore.tickets.values()) {
+            Main.debug("ContentDAO", "Clearing existing contents for ticket ID: " + ticket.getTicketID()); // Debugging output
+            ticket.getContents().clear(); // Clear existing contents
+        }
 
-    HashMap<String, ArrayList<Content>> contents = new HashMap<>();
+        HashMap<String, ArrayList<Content>> contents = new HashMap<>();
 
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(DATA_SOURCE))

@@ -10,7 +10,13 @@ import com.example.staycheked.model.user.Accommodation;
 import com.example.staycheked.model.user.Admin;
 import com.example.staycheked.model.user.Guest;
 import com.example.staycheked.model.user.User;
+import com.example.staycheked.service.UtilService;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -94,6 +100,7 @@ public class DataStore {
         Main.debug("DataStore", "TicketDAO initialized.");
         ContentDAO.initialize();
         Main.debug("DataStore", "ContentDAO initialized.");
+        refreshRAGDocument();
     }
 
     public static void saveAllData() {
@@ -118,6 +125,44 @@ public class DataStore {
         faqs.clear();
         Main.debug("DataStore", "DataStore cleared, reinitializing data.");
         dataInitialization();
+        refreshRAGDocument();
+    }
+
+    public static void refreshRAGDocument() {
+        Main.debug("DataStore", "Refreshing RAG Document.");
+        // Logic to refresh the RAG Document
+        try (
+            BufferedWriter writer = new BufferedWriter(new FileWriter("data/RAGDocument/main.txt"));
+        ) {
+            writer.write("RAG Document refreshed at: " + LocalDateTime.now().format(UtilService.dateTimeFormatter));
+            writer.newLine();
+            writer.write("This document contains the latest information from the StayCheked system.");
+            writer.newLine();
+            writer.write("The current total number of bookings registered in the system: " + bookings.size());
+            writer.newLine();
+            writer.write("The current total number of tickets registered in the system: " + tickets.size());
+            writer.newLine();
+            writer.write("The current total number of guests registered in the system: " + guests.size());
+            writer.newLine();
+            writer.write("The current total number of accommodations registered in the system: " + accommodations.size());
+
+            try (
+                BufferedReader reader = new BufferedReader(new FileReader("data/RAGDocument/appDesc.txt"))
+            ) {
+                Main.debug("DataStore", "Reading application description from appDesc.txt");
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    writer.write(line);
+                    writer.newLine();
+                }
+            }
+
+        } catch (Exception e) {
+            Main.debug("DataStore", "Error refreshing RAG Document: " + e.getMessage());
+            return;
+        }
+
+        Main.debug("DataStore", "RAG Document refreshed successfully.");
     }
 
 }

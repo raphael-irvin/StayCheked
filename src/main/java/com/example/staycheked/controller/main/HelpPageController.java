@@ -74,7 +74,7 @@ public class HelpPageController {
 
         //Process the user message
         // Get the bot response from the chatbot service
-        String botResponse = chatbotService.getRawResponse(userMessage);
+        String botResponse = chatbotService.getResponse(userMessage);
 
         //Show the bot response in the chat bot message container
         Label receivedMessage = new Label(botResponse);

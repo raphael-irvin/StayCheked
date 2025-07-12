@@ -1,0 +1,62 @@
+RAG Document refreshed at: 12/07/2025 12:04
+This document contains the latest information from the StayCheked system.
+The current total number of bookings registered in the system: 2
+The current total number of tickets registered in the system: 3
+The current total number of guests registered in the system: 3
+The current total number of accommodations registered in the system: 3StayChecked is a comprehensive JavaFX-based accommodation booking and support management system designed to facilitate interactions between three key user types: Guests, Accommodations, and Admins. The application provides a centralized platform for booking verification, support ticket management, and accommodation oversight with an integrated AI-powered help system.
+
+Core Features
+1. User Management System
+Three User Types: Guest, Accommodation Provider, Admin
+Role-Based Authentication: Secure login with email/password
+User Registration: Separate registration flows for Guests and Accommodations
+Session Management: Persistent user sessions throughout application lifecycle
+
+2. Booking Management
+Booking Verification: Guests can verify bookings using Booking ID and last name
+Multi-User Views:
+Guests see their verified bookings
+Accommodations see bookings for their properties
+Status Tracking: Real-time booking status updates
+Guest Association: Links verified bookings to user accounts
+
+3. Support Ticket System
+Ticket Creation: Users can create support tickets directly from the interface
+Real-time Chat: Interactive support ticket interface
+User-Specific Tickets: Guests submit tickets, Accommodations receive them
+Status Management: Track ticket resolution progress
+
+4. AI-Powered Help System
+Intelligent Chatbot: OpenAI GPT-4 Mini integration for user assistance
+Multiple API Key Support: Redundant API keys for high availability
+RAG Implementation: Basic Retrieval-Augmented Generation for contextual responses
+Graceful Fallbacks: Alternative models when primary service unavailable
+Context-Aware Responses: Maintains conversation history for better assistance
+
+5. Admin Dashboard
+Accommodation Verification: Admins can verify/unverify accommodation providers
+System Oversight: Complete view of all accommodations and their status
+User Management: Monitor and manage user accounts
+Data Integrity: Ensure platform quality through verification processes
+
+User Roles & Permissions
+Guest Users
+Registration: Self-register with personal details
+Booking Verification: Verify existing bookings using ID and last name
+Support Tickets: Create and track support requests
+Accommodation Browsing: View verified accommodation providers only
+AI Assistance: Access to chatbot for help and guidance
+
+Accommodation Providers
+Registration: Register accommodation business with verification pending
+Booking Management: View and manage bookings for their properties
+Guest Communication: Receive and respond to support tickets
+Profile Management: Update accommodation details and status
+Guest List Access: View guests who have verified bookings
+
+Admin Users
+System Administration: Full access to all system features
+Accommodation Verification: Approve/reject accommodation registrations
+User Oversight: Monitor all user types and their activities
+Data Management: Access to complete system data and analytics
+Platform Integrity: Maintain quality and security standards

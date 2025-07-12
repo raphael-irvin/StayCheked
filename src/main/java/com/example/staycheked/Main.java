@@ -2,6 +2,7 @@ package com.example.staycheked;
 
 import com.example.staycheked.controller.main.UserAuthController;
 import com.example.staycheked.model.DataStore;
+import com.example.staycheked.service.ChatbotService;
 import com.example.staycheked.service.UserAuthService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,8 @@ public class Main extends Application {
         debug("Main", "Current Java Version: " + System.getProperty("java.version"));
         //Data Initialization
         DataStore.dataInitialization();
+        //Chatbot Service Initialization
+        ChatbotService.initializeChatbotService();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/AuthenticationViews/LoginView.fxml"));
         UserAuthController userAuthController = new UserAuthController(new UserAuthService());
