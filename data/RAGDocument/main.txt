@@ -1,4 +1,4 @@
-RAG Document refreshed at: 12/07/2025 12:18
+RAG Document refreshed at: 12/07/2025 13:33
 This document contains the latest information from the StayCheked system.
 The current total number of bookings registered in the system: 2
 The current total number of tickets registered in the system: 3
