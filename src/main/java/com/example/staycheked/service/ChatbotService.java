@@ -38,7 +38,16 @@ public class ChatbotService {
     };
 
     private static OpenAiChatModel chatModel;
-    private static Assistant assistant;
+    private static Assistant assistant = null;
+
+    public ChatbotService() {
+        Main.debug("ChatbotService", "Initializing ChatbotService...");
+        if (assistant != null) {
+            Main.debug("ChatbotService", "ChatbotService already initialized.");
+            return; // Already initialized
+        }
+        initializeChatbotService();
+    }
 
     public static void initializeChatbotService() {
 
