@@ -24,7 +24,7 @@ public class Main extends Application {
         fxmlLoader.setController(userAuthController);
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        stage.setTitle("staychecked");
+        stage.setTitle("StayChecked");
         stage.setScene(scene);
         stage.show();
     }
