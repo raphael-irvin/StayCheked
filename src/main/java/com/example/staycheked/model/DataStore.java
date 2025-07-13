@@ -100,6 +100,8 @@ public class DataStore {
         Main.debug("DataStore", "TicketDAO initialized.");
         ContentDAO.initialize();
         Main.debug("DataStore", "ContentDAO initialized.");
+        FAQDAO.initialize();
+        Main.debug("DataStore", "FAQDAO initialized.");
         refreshRAGDocument();
     }
 
@@ -110,6 +112,7 @@ public class DataStore {
         BookingDAO.saveAllBookings();
         TicketDAO.saveAllTickets();
         ContentDAO.saveAllContents();
+        FAQDAO.saveAllFAQs();
     }
 
     public static void refreshData() {

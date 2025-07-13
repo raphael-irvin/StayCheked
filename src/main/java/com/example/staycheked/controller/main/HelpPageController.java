@@ -1,5 +1,7 @@
 package com.example.staycheked.controller.main;
 
+import com.example.staycheked.model.DataStore;
+import com.example.staycheked.model.object.FAQ;
 import com.example.staycheked.service.ChatbotService;
 
 import javafx.event.ActionEvent;
@@ -14,6 +16,7 @@ import javafx.scene.layout.VBox;
 
 public class HelpPageController {
 
+    //ChatBot UI Components
     @FXML
     VBox chatBotMessageContainer;
     @FXML
@@ -22,6 +25,10 @@ public class HelpPageController {
     Button chatBotSendButton;
     @FXML
     Label chatBotWelcomeMessage;
+
+    //About UI Components
+    @FXML
+    VBox FAQContainer;
 
     private ChatbotService chatbotService;
 
@@ -34,6 +41,27 @@ public class HelpPageController {
             chatBotField.setDisable(true);
             chatBotSendButton.setDisable(true);
             chatBotWelcomeMessage.setText("I'm sorry, but the chatbot service is currently unavailable. Please check your API keys or internet connection.");
+        }
+
+        //Set up FAQs
+        FAQContainer.getChildren().clear(); // Clear any existing FAQs
+        for (FAQ faq : DataStore.faqs) {
+            // Set Up Container for each FAQ
+            VBox faqBox = new VBox();
+            faqBox.getStyleClass().add("FAQContainer");
+            
+            //Get FAQ Question and Answer
+            Label faqQuestion = new Label(faq.getQuestion());
+            faqQuestion.getStyleClass().add("FAQQuestion");
+            Label faqAnswer = new Label(faq.getAnswer());
+            faqAnswer.getStyleClass().add("FAQAnswer");
+
+            //Add Question and Answer to the FAQ Box
+            faqBox.getChildren().add(faqQuestion);
+            faqBox.getChildren().add(faqAnswer);
+
+            // Add the FAQ box to the FAQ container
+            FAQContainer.getChildren().add(faqBox);
         }
     }
 

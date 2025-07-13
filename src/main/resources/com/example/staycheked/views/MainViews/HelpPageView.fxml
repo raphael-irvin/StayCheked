@@ -14,13 +14,36 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" stylesheets="@../../css/HelpPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <VBox BorderPane.alignment="TOP_LEFT">
+      <VBox spacing="15.0" BorderPane.alignment="TOP_LEFT">
          <children>
-            <Label text="About StayChecked">
-               <font>
-                  <Font name="Quicksand Medium" size="26.0" />
-               </font>
-            </Label>
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="About StayChecked">
+                     <font>
+                        <Font name="Quicksand Medium" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="StayChecked is a comprehensive accommodation booking and support management system designed to facilitate interactions between Guests and Accommodations." wrapText="true" />
+               </children>
+            </VBox>
+            <VBox VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Frequently Asked Questions">
+                     <font>
+                        <Font name="Quicksand Medium" size="18.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="aboutSection" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="FAQContainer" spacing="15.0">
+                           <padding>
+                              <Insets bottom="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
