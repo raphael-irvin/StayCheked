@@ -57,3 +57,19 @@
 
     -fx-text-fill: white;
 }
+
+.scrollpane {
+    -fx-background-color: transparent;
+    background-color: transparent;
+
+    -fx-padding: 10 20 10 0px;
+    padding: 10 20 10 0px;
+
+    -fx-border-color: transparent;
+    border-color: transparent;
+
+    -fx-border-radius: 5px;
+    border-radius: 5px;
+
+    -fx-background-radius: 5px;
+}
