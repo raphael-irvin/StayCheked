@@ -11,6 +11,7 @@ import java.io.IOException;
 import com.example.staychecked.controller.main.UserAuthController;
 import com.example.staychecked.model.DataStore;
 import com.example.staychecked.service.UserAuthService;
+import com.example.staychecked.service.UtilService;
 
 public class Main extends Application {
     @Override
@@ -31,7 +32,9 @@ public class Main extends Application {
 
     // Centralized debug output method
     public static void debug(String className, String message) {
-        System.out.println("DEBUG - " + className + ": " + message);
+        String debugLine = "DEBUG - " + className + ": " + message;
+        System.out.println(debugLine);
+        UtilService.writeDebugLogToFile(debugLine); // Write to debug log file
     }
 
     public static void main(String[] args) {
