@@ -1,4 +1,4 @@
-module com.example.StayChecked {
+module com.example.staychecked {
     requires javafx.controls;
     requires javafx.fxml;
     requires transitive javafx.graphics;

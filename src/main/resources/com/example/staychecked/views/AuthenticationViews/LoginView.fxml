@@ -24,7 +24,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField" prefHeight="40.0" prefWidth="399.0" promptText="youremailaddress@gmail.com" styleClass="authTextField" stylesheets="/com/example/StayChecked/css/Main.css">
+            <TextField fx:id="emailField" prefHeight="40.0" prefWidth="399.0" promptText="youremailaddress@gmail.com" styleClass="authTextField" stylesheets="/com/example/staychecked/css/Main.css">
                <padding>
                   <Insets left="15.0" />
                </padding>
@@ -39,19 +39,19 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <PasswordField fx:id="passwordField" prefHeight="40.0" prefWidth="399.0" promptText="*******" styleClass="authTextField" stylesheets="/com/example/StayChecked/css/Main.css">
+            <PasswordField fx:id="passwordField" prefHeight="40.0" prefWidth="399.0" promptText="*******" styleClass="authTextField" stylesheets="/com/example/staychecked/css/Main.css">
                <padding>
                   <Insets left="15.0" />
                </padding></PasswordField>
          </children>
       </VBox>
       <Pane prefHeight="33.0" prefWidth="400.0" />
-      <Button mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="36.0" prefWidth="398.0" styleClass="authButton" stylesheets="/com/example/StayChecked/css/Main.css" text="Login">
+      <Button mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="36.0" prefWidth="398.0" styleClass="authButton" stylesheets="/com/example/staychecked/css/Main.css" text="Login">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
       <Pane prefHeight="25.0" prefWidth="400.0" />
-      <Button id="register" mnemonicParsing="false" onAction="#switchToRegisterGuestView" prefHeight="36.0" styleClass="authButton" stylesheets="/com/example/StayChecked/css/Main.css" text="Or Register">
+      <Button id="register" mnemonicParsing="false" onAction="#switchToRegisterGuestView" prefHeight="36.0" styleClass="authButton" stylesheets="/com/example/staychecked/css/Main.css" text="Or Register">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

@@ -140,7 +140,7 @@ public class MainController {
         // Load the dashboard view
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/MainViews/MainView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/MainViews/MainView.fxml"));
             fxmlLoader.setController(new MainController(bookingAuthService, ticketService));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -156,7 +156,7 @@ public class MainController {
         Main.debug("MainController", "Sign out clicked");
         // Redirect to login view or perform other actions
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/AuthenticationViews/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/AuthenticationViews/LoginView.fxml"));
         fxmlLoader.setController(new UserAuthController(new UserAuthService()));
         try {
             Parent root = fxmlLoader.load();
@@ -172,7 +172,7 @@ public class MainController {
         onNavbarButtonClick(event);
         // Load the help view with error handling for ChatbotService
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/MainViews/HelpPageView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/MainViews/HelpPageView.fxml"));
             
             //Show Loading Dialog until ChatbotService is initialized
             Dialog<String> loadingDialog = new Dialog<>();
@@ -206,7 +206,7 @@ public class MainController {
     public void onTicketButtonClick(ActionEvent event) {
         onDashboardButtonClick(event);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/ContentViews/ListViews/TicketView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/ContentViews/ListViews/TicketView.fxml"));
             fxmlLoader.setController(new TicketListController(new TicketService()));
             Parent root = fxmlLoader.load();
             mainBorderPane.setCenter(root);
@@ -221,9 +221,9 @@ public class MainController {
         try {
             FXMLLoader fxmlLoader = null;
             if (Session.getCurrentUser() instanceof Guest) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/ContentViews/ListViews/GuestBookingView.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/ContentViews/ListViews/GuestBookingView.fxml"));
             } else if (Session.getCurrentUser() instanceof Accommodation) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/ContentViews/ListViews/AccommodationBookingView.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/ContentViews/ListViews/AccommodationBookingView.fxml"));
             } else {
                 Main.debug("MainController", "Unknown user type for booking view.");
                 return;
@@ -243,10 +243,10 @@ public class MainController {
         try {
             FXMLLoader fxmlLoader = null;
             if (Session.getCurrentUser() instanceof Guest || Session.getCurrentUser() instanceof Admin) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/ContentViews/ListViews/AccommodationView.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/ContentViews/ListViews/AccommodationView.fxml"));
                 fxmlLoader.setController(new AccommodationListController());
             } else if (Session.getCurrentUser() instanceof Accommodation) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/ContentViews/ListViews/GuestView.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/ContentViews/ListViews/GuestView.fxml"));
                 fxmlLoader.setController(new GuestListController());
             } else {
                 Main.debug("MainController", "Unknown user type for user list view.");

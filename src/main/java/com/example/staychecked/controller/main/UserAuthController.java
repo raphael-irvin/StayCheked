@@ -218,7 +218,7 @@ public class UserAuthController {
 
     public void switchToRegisterGuestView(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/AuthenticationViews/RegisterGuestView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/AuthenticationViews/RegisterGuestView.fxml"));
         fxmlLoader.setController(this);
         try {
             Parent root = fxmlLoader.load();
@@ -232,7 +232,7 @@ public class UserAuthController {
 
     public void switchToRegisterAccommodationView(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/AuthenticationViews/RegisterAccommodationView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/AuthenticationViews/RegisterAccommodationView.fxml"));
         fxmlLoader.setController(this);
         try {
             Parent root = fxmlLoader.load();
@@ -247,7 +247,7 @@ public class UserAuthController {
 
     public void backToLoginButtonClick(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/AuthenticationViews/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/AuthenticationViews/LoginView.fxml"));
         fxmlLoader.setController(this);
         try {
             Parent root = fxmlLoader.load();
@@ -278,7 +278,7 @@ public class UserAuthController {
 
     public void redirectToMainView(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/StayChecked/views/MainViews/MainView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/staychecked/views/MainViews/MainView.fxml"));
         fxmlLoader.setController(new MainController(new BookingAuthService(), new TicketService()));
         try {
             Parent root = fxmlLoader.load();

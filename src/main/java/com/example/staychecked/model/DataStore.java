@@ -139,7 +139,7 @@ public class DataStore {
         ) {
             writer.write("RAG Document refreshed at: " + LocalDateTime.now().format(UtilService.dateTimeFormatter));
             writer.newLine();
-            writer.write("This document contains the latest information from the StayChecked system.");
+            writer.write("This document contains the latest information from the staychecked system.");
             writer.newLine();
             writer.write("The current total number of bookings registered in the system: " + bookings.size());
             writer.newLine();

@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>StayChecked</artifactId>
+  <artifactId>staychecked</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>StayChecked</name>
+  <name>staychecked</name>
   <packaging>jar</packaging>
 
   <properties>
