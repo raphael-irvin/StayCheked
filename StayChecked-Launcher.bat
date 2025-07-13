@@ -1,1 +1,1 @@
-Java -jar StayCheked-1.0-SNAPSHOT.jar
+Java -jar StayChecked-1.0-SNAPSHOT.jar

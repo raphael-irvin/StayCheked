@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>StayCheked</artifactId>
+  <artifactId>StayChecked</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>StayCheked</name>
+  <name>StayChecked</name>
   <packaging>jar</packaging>
 
   <properties>
@@ -103,7 +103,7 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.example.staycheked/com.example.staycheked.Main</mainClass>
+              <mainClass>com.example.staychecked/com.example.staychecked.Main</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
@@ -143,7 +143,7 @@
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>libs/</classpathPrefix>
                 <mainClass>
-                    com.example.staycheked.App
+                    com.example.staychecked.App
                 </mainClass>
             </manifest>
         </archive>

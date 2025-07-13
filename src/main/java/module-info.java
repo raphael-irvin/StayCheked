@@ -1,4 +1,4 @@
-module com.example.staycheked {
+module com.example.StayChecked {
     requires javafx.controls;
     requires javafx.fxml;
     requires transitive javafx.graphics;
@@ -14,20 +14,20 @@ module com.example.staycheked {
     requires org.apache.logging.log4j;
     requires org.slf4j;
 
-    exports com.example.staycheked.service;
+    exports com.example.staychecked.service;
 
-    opens com.example.staycheked to javafx.fxml;
-    exports com.example.staycheked;
-    exports com.example.staycheked.model.user;
-    opens com.example.staycheked.model.user to javafx.fxml;
-    exports com.example.staycheked.model.object;
-    opens com.example.staycheked.model.object to javafx.fxml;
-    exports com.example.staycheked.model;
-    opens com.example.staycheked.model to javafx.fxml;
-    exports com.example.staycheked.controller;
-    opens com.example.staycheked.controller to javafx.fxml;
-    exports com.example.staycheked.controller.lists;
-    opens com.example.staycheked.controller.lists to javafx.fxml;
-    exports com.example.staycheked.controller.main;
-    opens com.example.staycheked.controller.main to javafx.fxml;
+    opens com.example.staychecked to javafx.fxml;
+    exports com.example.staychecked;
+    exports com.example.staychecked.model.user;
+    opens com.example.staychecked.model.user to javafx.fxml;
+    exports com.example.staychecked.model.object;
+    opens com.example.staychecked.model.object to javafx.fxml;
+    exports com.example.staychecked.model;
+    opens com.example.staychecked.model to javafx.fxml;
+    exports com.example.staychecked.controller;
+    opens com.example.staychecked.controller to javafx.fxml;
+    exports com.example.staychecked.controller.lists;
+    opens com.example.staychecked.controller.lists to javafx.fxml;
+    exports com.example.staychecked.controller.main;
+    opens com.example.staychecked.controller.main to javafx.fxml;
 }
