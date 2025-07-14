@@ -27,4 +27,4 @@ The Application will come with pre-installed datasets which can be found in the 
 ***It is NOT recommended to Partially remove data as it will interfere with the Java Object Parsing Process which is highly dependent on the structure and consistency of data.***
 
 ## User Guide & Documentation
-The full User Guide & Documentation document can be found [here](https://docs.google.com/document/d/1TH5AWnXFvq2EM3ex2VvbyGq2hrokKWYeTiQCViml0o4/edit?usp=sharing)
+The full User Guide & Documentation document can be found within the `StayCheckedPrototype_Document` file or can be found [here](https://docs.google.com/document/d/1TH5AWnXFvq2EM3ex2VvbyGq2hrokKWYeTiQCViml0o4/edit?usp=sharing)
