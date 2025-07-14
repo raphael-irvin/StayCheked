@@ -55,3 +55,172 @@ Accommodation Verification: Approve/reject accommodation registrations
 User Oversight: Monitor all user types and their activities
 Data Management: Access to complete system data and analytics
 Platform Integrity: Maintain quality and security standards
+
+Guest User – Step-by-Step Feature Flow
+
+Login / Registration
+A new user can register as a Guest by filling in personal information.
+After registering, they can log in using their email and password.
+
+Access Guest Dashboard
+Upon login, the user is redirected to the Main Landing Page with access to guest-specific features.
+
+Booking Verification
+The user can verify a booking by entering the Booking ID and their last name.
+If the details are correct, the system confirms the booking and displays it in the booking list.
+Users can view the status of each booking (verified, closed).
+
+Submit Support Tickets
+Guests can create new support tickets linked to a booking. To do so, they must:
+Select the relevant booking
+Choose a support category
+Write the subject and inquiry description
+
+The system validates the form before submission.
+
+Manage Existing Tickets
+Guests can view open and closed tickets.
+For open tickets, they can send follow-up messages or close the ticket once resolved.
+Closed tickets remain viewable but are no longer editable.
+
+Browse Accommodations (View Only)
+Guests can access a list of all approved accommodations, including details like:
+Accomodation Name
+Email, Phone Number
+Address
+
+Use AI-Powered Help System & FAQs
+The guest can go to the Help Page to:
+View FAQs
+Interact with the AI Chatbot, which provides contextual responses using RAG (Retrieval-Augmented Generation) technology.
+
+
+Accommodation User – Step-by-Step Feature Flow
+
+Login / Registration
+A user can register as an Accommodation, entering extra verification details.
+Their account is pending verification by a System Admin.
+Once approved, they can log in to access their dashboard.
+
+Access Accommodation Dashboard
+After login, the accommodation user is taken to the Main Landing Page, where they can access provider-specific features.
+
+View Accommodation Information
+Users can view their own accommodation data, such as:
+Booking ID & Room number
+Guest last name
+Approval Status
+
+View Guest List
+Accommodation users can view a list of guests who booked their property, including:
+Guest ID & Name
+Email and Phone Number
+This helps with communication and guest management.
+
+Manage Support Tickets
+Accommodations can view and respond to support tickets submitted by guests.
+For each ticket, they can:
+Read and reply to messages
+View status (Open/Closed)
+Track conversation history
+
+Use AI-Powered Help System
+The Help Page includes an AI Chatbot for asking questions and retrieving system help.
+FAQs are also available for quick reference.
+
+
+System Admin User – Step-by-Step Feature Flow
+
+Login
+Admins do not register through the interface. They use predefined credentials to log in.
+
+Access Admin Dashboard
+After logging in, the Admin is taken to the Main Admin Panel, which provides access to admin-level controls.
+
+Verify Accommodations
+Admins can view newly registered accommodations and:
+Review their registration details
+Approve or reject the application
+Only approved accommodations become visible to guests.
+
+
+System Overview and Architecture
+The StayChecked backend is built on a multi-layered architecture using Java. It is designed to be a self-contained system that manages all data, business logic, and user interactions for a hotel booking and support platform. The architecture follows a pattern similar to Model-View-Controller (MVC), with clear separation of concerns into:
+
+Data Access Layer (DAO): Handles data persistence and retrieval from CSV files.
+Model Layer: Defines the core data structures (e.g., User, Booking, Ticket).
+Service Layer: Contains the business logic for all major functionalities.
+Controller Layer (JavaFX): Connects the backend services to the user interface.
+View Layer (JavaFX): Stores all pre-defined static .fxml files.
+
+The system operates on an in-memory data model, loading all necessary data from CSV files into a central DataStore upon application startup. All modifications during a session are performed on these in-memory objects, which are then persisted back to the CSV files.
+
+
+Core Components
+Data Management (DataStore & DAOs)
+DataStore (DataStore.java): This static class acts as a centralized, in-memory database for the application. It holds ArrayLists for all major data models, including Users (Guests, Accommodations, Admins), bookings, and support tickets. It provides static methods to access, find, and manage this data globally, ensuring a single source of truth during runtime.
+
+Data Access Objects (DAOs): Located in the dao package, each DAO is responsible for the persistence of a specific data model.
+
+The functionality is that they handle the reading of data from corresponding CSV files (data/*.csv) into the DataStore on startup (initialize() method) and saving the in-memory data back to the files (saveAll...() methods). 
+Examples: GuestDAO, AccommodationDAO, BookingDAO, TicketDAO, ContentDAO.
+
+Main Data Flow Processes
+Startup: 
+Main -> DataStore.dataInitialization() -> All DAO.initialize() methods are called.
+Data Loading: 
+Each DAO reads its respective .csv file, creates objects, and populates lists in DataStore.
+User Action (e.g., Login): 
+UI Controller (UserAuthController) -> UserAuthService.loginUser() -> DataStore (for data retrieval).
+Data Modification (e.g., New Booking): 
+UI Controller -> Service Layer -> DataStore (to update in-memory list) -> DAO saveAll...() method (to persist changes to CSV).
+
+
+Application Entry Point
+Main (Main.java): This is the entry point for the JavaFX application. Its primary responsibilities in the start() method are:
+Initialization: It triggers the entire data loading process by calling DataStore.dataInitialization(), which then calls the initialize() method of every DAO.
+UI Loading: It loads the initial LoginView.fxml and injects its controller (UserAuthController), effectively starting the user-facing application.
+Centralized Logging: It provides a static debug() method used throughout the application to print debug messages to the console and write them to a log file via UtilService.
+
+
+
+User Authentication
+Purpose: Manages user login, registration, and session management.
+
+Function / Methods
+UserAuthService -> loginUser(email, password):
+Searches for the user by email across all user types (Guest, Accommodation, Admin) in the DataStore.
+If a user is found, it verifies the provided password against the stored (hashed) password.
+On success, it sets the authenticated user in the Session class for global access.
+
+UserAuthService -> registerUser(...): Creates new Guest or Accommodation objects, ensures email uniqueness, and saves the new user to the DataStore and persists it via the corresponding DAO.
+
+Booking Management
+Purpose: Handles all logic related to booking verification and management.
+
+Function / Methods
+BookingAuthService -> verifyBooking(bookingID, lastName):
+Finds a Booking in the DataStore using its ID.
+Validates that the provided last name matches the guest's last name on the booking record.
+If successful, it updates the booking status to "Verified" and associates the current session's guest with it.
+
+Ticket Support System
+Purpose: Manages the creation and lifecycle of support tickets.
+
+Function / Methods
+TicketService -> postNewTicket(...): Creates a new Ticket object, linking a Guest, an Accommodation, and an optional Booking. It also creates the initial Content (the first message) for the ticket.
+
+TicketService -> replyToTicket(...): Adds a new Content object to an existing ticket's message history.
+
+TicketService -> closeTicket(...): Set the corresponding Ticket status to “Closed”
+
+
+RAG AI-Powered Chatbot
+Purpose: Provides RAG AI-powered assistance to users.
+
+Technology: Integrates with an external AI provider (OpenAI) and uses a Retrieval-Augmented Generation (RAG) approach.
+
+Function / Methods
+DataStore -> refreshRAGDocument(): This method, called on startup and during any saving processes, aggregates data from the DataStore ArrayLists into a single document.
+
+ChatbotService -> getResponse(prompt): The RAG document is used as a knowledge base. The service sends the user's prompt and the knowledge base to the AI model to generate a contextually relevant answer.

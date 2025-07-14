@@ -29,6 +29,7 @@ public class ChatbotService {
             add("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");
             add("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");
             add("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");
+            add("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");
         }
     };
 

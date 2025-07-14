@@ -1,0 +1,275 @@
+DEBUG - Main: Current Java Version: 23
+DEBUG - DataStore: Initializitation of DataStore started.
+DEBUG - AccommodationDAO: REGISTERED ACCOMMODATION: a-1
+DEBUG - AccommodationDAO: Accommodation Email: accoma@gmail.com
+DEBUG - AccommodationDAO: User ID: a-1
+DEBUG - AccommodationDAO: Username: accoma
+DEBUG - AccommodationDAO: Contact No: 02489849932
+DEBUG - AccommodationDAO: Accommodation Name: AccommodationA
+DEBUG - AccommodationDAO: Address: AccommodationALoc
+DEBUG - AccommodationDAO: Status: verified
+DEBUG - AccommodationDAO: REGISTERED ACCOMMODATION: a-3
+DEBUG - AccommodationDAO: Accommodation Email: accomc@gmail.com
+DEBUG - AccommodationDAO: User ID: a-3
+DEBUG - AccommodationDAO: Username: accomc
+DEBUG - AccommodationDAO: Contact No: 03209575932
+DEBUG - AccommodationDAO: Accommodation Name: AccommodationC
+DEBUG - AccommodationDAO: Address: AccommodationCLoc
+DEBUG - AccommodationDAO: Status: verified
+DEBUG - AccommodationDAO: REGISTERED ACCOMMODATION: a-2
+DEBUG - AccommodationDAO: Accommodation Email: accomb@gmail.com
+DEBUG - AccommodationDAO: User ID: a-2
+DEBUG - AccommodationDAO: Username: accomb
+DEBUG - AccommodationDAO: Contact No: 08592389102
+DEBUG - AccommodationDAO: Accommodation Name: AccommodationB
+DEBUG - AccommodationDAO: Address: AccommodationBLoc
+DEBUG - AccommodationDAO: Status: verified
+DEBUG - DataStore: AccommodationDAO initialized.
+DEBUG - GuestDAO: Guest Initialization Start Point
+DEBUG - GuestDAO: Retrieved guest: userb, Email: userb@gmail.com
+DEBUG - GuestDAO: Guest ID: g-2, Contact No: 08592389102, Full Name: userBfn
+DEBUG - GuestDAO: Retrieved guest: usera, Email: usera@gmail.com
+DEBUG - GuestDAO: Guest ID: g-1, Contact No: 02489849932, Full Name: userAfn
+DEBUG - GuestDAO: Retrieved guest: userc, Email: userc@gmail.com
+DEBUG - GuestDAO: Guest ID: g-3, Contact No: 03209575932, Full Name: userCfn
+DEBUG - GuestDAO: REGISTERED GUEST: g-2
+DEBUG - GuestDAO: Guest Email: userb@gmail.com
+DEBUG - GuestDAO: User ID: g-2
+DEBUG - GuestDAO: Username: userb
+DEBUG - GuestDAO: Contact No: 08592389102
+DEBUG - GuestDAO: REGISTERED GUEST: g-1
+DEBUG - GuestDAO: Guest Email: usera@gmail.com
+DEBUG - GuestDAO: User ID: g-1
+DEBUG - GuestDAO: Username: usera
+DEBUG - GuestDAO: Contact No: 02489849932
+DEBUG - GuestDAO: REGISTERED GUEST: g-3
+DEBUG - GuestDAO: Guest Email: userc@gmail.com
+DEBUG - GuestDAO: User ID: g-3
+DEBUG - GuestDAO: Username: userc
+DEBUG - GuestDAO: Contact No: 03209575932
+DEBUG - GuestDAO: Guest Keys: [userb@gmail.com, usera@gmail.com, userc@gmail.com]
+DEBUG - DataStore: GuestDAO initialized.
+DEBUG - AdminDAO: Admin Email: adma@gmail.com
+DEBUG - AdminDAO: User ID: op-1
+DEBUG - AdminDAO: Username: admina
+DEBUG - AdminDAO: Contact No: 02489849932
+DEBUG - AdminDAO: Admin Email: admb@gmail.com
+DEBUG - AdminDAO: User ID: op-2
+DEBUG - AdminDAO: Username: adminb
+DEBUG - AdminDAO: Contact No: 08592389102
+DEBUG - AdminDAO: Admin Email: admc@gmail.com
+DEBUG - AdminDAO: User ID: op-3
+DEBUG - AdminDAO: Username: adminc
+DEBUG - AdminDAO: Contact No: 03209575932
+DEBUG - AdminDAO: SAVED IN DATASTORE: {adma@gmail.com=com.example.staychecked.model.user.Admin@23201859, admb@gmail.com=com.example.staychecked.model.user.Admin@182c256f, admc@gmail.com=com.example.staychecked.model.user.Admin@2d6a5513}
+DEBUG - DataStore: AdminDAO initialized.
+DEBUG - BookingDAO: Saved Booking with Booking ID: 23059312
+DEBUG - BookingDAO: Saved Booking with Booking ID: 48929122
+DEBUG - DataStore: BookingDAO initialized.
+DEBUG - TicketDAO: Ticket Initialization Start Point
+DEBUG - TicketDAO: 1
+DEBUG - TicketDAO: accomb@gmail.com
+DEBUG - TicketDAO: usera@gmail.com
+DEBUG - TicketDAO: 48929122
+DEBUG - TicketDAO: Broken TV
+DEBUG - TicketDAO: Broken Utilities (Maintenance)
+DEBUG - TicketDAO: Closed
+DEBUG - TicketDAO: 2
+DEBUG - TicketDAO: accoma@gmail.com
+DEBUG - TicketDAO: usera@gmail.com
+DEBUG - TicketDAO: 23059312
+DEBUG - TicketDAO: Wifi Not Available
+DEBUG - TicketDAO: Broken Utilities (Maintenance)
+DEBUG - TicketDAO: Closed
+DEBUG - TicketDAO: 3
+DEBUG - TicketDAO: accoma@gmail.com
+DEBUG - TicketDAO: usera@gmail.com
+DEBUG - TicketDAO: 23059312
+DEBUG - TicketDAO: Cleaning Request
+DEBUG - TicketDAO: Housekeeping
+DEBUG - TicketDAO: Closed
+DEBUG - DataStore: TicketDAO initialized.
+DEBUG - ContentDAO: Clearing existing contents for ticket ID: 1
+DEBUG - ContentDAO: Clearing existing contents for ticket ID: 2
+DEBUG - ContentDAO: Clearing existing contents for ticket ID: 3
+DEBUG - ContentDAO: Initializing Content Data...
+DEBUG - Content: Creating new content for ticket ID: 1
+DEBUG - Content: Does Ticket Exist in DataStore: com.example.staychecked.model.object.Ticket@78dc36c4
+DEBUG - Ticket: Adding new content to ticket ID: 1
+DEBUG - Ticket: Content added. Total contents in ticket: 1
+DEBUG - Content: Successfully Inserted to Ticket Object, Contents in Ticket now: 1
+DEBUG - ContentDAO: Creating new content list for ticketID: 1
+DEBUG - ContentDAO: Ticket ID: 1
+DEBUG - ContentDAO: Sender Email: usera@gmail.com
+DEBUG - ContentDAO: Last Updated At: 2025-05-31T14:45
+DEBUG - ContentDAO: Message: TV remote is not working. Tried the manual switch on the side and it works
+DEBUG - Content: Creating new content for ticket ID: 1
+DEBUG - Content: Does Ticket Exist in DataStore: com.example.staychecked.model.object.Ticket@78dc36c4
+DEBUG - Ticket: Adding new content to ticket ID: 1
+DEBUG - Ticket: Content added. Total contents in ticket: 2
+DEBUG - Content: Successfully Inserted to Ticket Object, Contents in Ticket now: 2
+DEBUG - ContentDAO: Adding content to existing ticketID: 1
+DEBUG - ContentDAO: Ticket ID: 1
+DEBUG - ContentDAO: Sender Email: accoma@gmail.com
+DEBUG - ContentDAO: Last Updated At: 2025-05-31T17:20
+DEBUG - ContentDAO: Message: Our maintenance team will be on it very soon
+DEBUG - Content: Creating new content for ticket ID: 2
+DEBUG - Content: Does Ticket Exist in DataStore: com.example.staychecked.model.object.Ticket@2e57338d
+DEBUG - Ticket: Adding new content to ticket ID: 2
+DEBUG - Ticket: Content added. Total contents in ticket: 1
+DEBUG - Content: Successfully Inserted to Ticket Object, Contents in Ticket now: 1
+DEBUG - ContentDAO: Creating new content list for ticketID: 2
+DEBUG - ContentDAO: Ticket ID: 2
+DEBUG - ContentDAO: Sender Email: usera@gmail.com
+DEBUG - ContentDAO: Last Updated At: 2025-06-06T11:40
+DEBUG - ContentDAO: Message: I've been trying to connect to the wifi but it keeps saying restricted internet access
+DEBUG - Content: Creating new content for ticket ID: 2
+DEBUG - Content: Does Ticket Exist in DataStore: com.example.staychecked.model.object.Ticket@2e57338d
+DEBUG - Ticket: Adding new content to ticket ID: 2
+DEBUG - Ticket: Content added. Total contents in ticket: 2
+DEBUG - Content: Successfully Inserted to Ticket Object, Contents in Ticket now: 2
+DEBUG - ContentDAO: Adding content to existing ticketID: 2
+DEBUG - ContentDAO: Ticket ID: 2
+DEBUG - ContentDAO: Sender Email: accoma@gmail.com
+DEBUG - ContentDAO: Last Updated At: 2025-07-08T22:31
+DEBUG - ContentDAO: Message: We will get into it immediately
+DEBUG - Content: Creating new content for ticket ID: 2
+DEBUG - Content: Does Ticket Exist in DataStore: com.example.staychecked.model.object.Ticket@2e57338d
+DEBUG - Ticket: Adding new content to ticket ID: 2
+DEBUG - Ticket: Content added. Total contents in ticket: 3
+DEBUG - Content: Successfully Inserted to Ticket Object, Contents in Ticket now: 3
+DEBUG - ContentDAO: Adding content to existing ticketID: 2
+DEBUG - ContentDAO: Ticket ID: 2
+DEBUG - ContentDAO: Sender Email: accoma@gmail.com
+DEBUG - ContentDAO: Last Updated At: 2025-07-08T22:39
+DEBUG - ContentDAO: Message: Should be good to go now!
+DEBUG - Content: Creating new content for ticket ID: 2
+DEBUG - Content: Does Ticket Exist in DataStore: com.example.staychecked.model.object.Ticket@2e57338d
+DEBUG - Ticket: Adding new content to ticket ID: 2
+DEBUG - Ticket: Content added. Total contents in ticket: 4
+DEBUG - Content: Successfully Inserted to Ticket Object, Contents in Ticket now: 4
+DEBUG - ContentDAO: Adding content to existing ticketID: 2
+DEBUG - ContentDAO: Ticket ID: 2
+DEBUG - ContentDAO: Sender Email: accoma@gmail.com
+DEBUG - ContentDAO: Last Updated At: 2025-07-08T22:43
+DEBUG - ContentDAO: Message: We will close the ticket now!
+DEBUG - Content: Creating new content for ticket ID: 2
+DEBUG - Content: Does Ticket Exist in DataStore: com.example.staychecked.model.object.Ticket@2e57338d
+DEBUG - Ticket: Adding new content to ticket ID: 2
+DEBUG - Ticket: Content added. Total contents in ticket: 5
+DEBUG - Content: Successfully Inserted to Ticket Object, Contents in Ticket now: 5
+DEBUG - ContentDAO: Adding content to existing ticketID: 2
+DEBUG - ContentDAO: Ticket ID: 2
+DEBUG - ContentDAO: Sender Email: usera@gmail.com
+DEBUG - ContentDAO: Last Updated At: 2025-07-08T22:48
+DEBUG - ContentDAO: Message: problem solved. thanks!
+DEBUG - Content: Creating new content for ticket ID: 3
+DEBUG - Content: Does Ticket Exist in DataStore: com.example.staychecked.model.object.Ticket@354052b9
+DEBUG - Ticket: Adding new content to ticket ID: 3
+DEBUG - Ticket: Content added. Total contents in ticket: 1
+DEBUG - Content: Successfully Inserted to Ticket Object, Contents in Ticket now: 1
+DEBUG - ContentDAO: Creating new content list for ticketID: 3
+DEBUG - ContentDAO: Ticket ID: 3
+DEBUG - ContentDAO: Sender Email: usera@gmail.com
+DEBUG - ContentDAO: Last Updated At: 2025-07-09T22:27
+DEBUG - ContentDAO: Message: Can I get an additional urgent cleaning tonight? I got some water spillage
+DEBUG - ContentDAO: SAVED IN CONTENT DATASTORE: {1=[com.example.staychecked.model.object.Content@26ce2e00, com.example.staychecked.model.object.Content@3fbd460b], 2=[com.example.staychecked.model.object.Content@2861c12a, com.example.staychecked.model.object.Content@1f839b05, com.example.staychecked.model.object.Content@48ea18db, com.example.staychecked.model.object.Content@1d3282d3, com.example.staychecked.model.object.Content@3bfc78ce], 3=[com.example.staychecked.model.object.Content@38248707]}
+DEBUG - DataStore: ContentDAO initialized.
+DEBUG - FAQDAO: Retrieving FAQs from: data/faq.csv
+DEBUG - FAQDAO: Retrieved FAQ: com.example.staychecked.model.object.FAQ@71df7122
+DEBUG - FAQDAO: FAQ Question: How do I request a new support ticket?
+DEBUG - FAQDAO: FAQ Answer: You may request a new support ticket after verifying your ongoing booking with a verified accommodation
+DEBUG - FAQDAO: FAQ Category: General
+DEBUG - FAQDAO: Retrieved FAQ: com.example.staychecked.model.object.FAQ@6ddfcca1
+DEBUG - FAQDAO: FAQ Question: How do I verify your my booking?
+DEBUG - FAQDAO: FAQ Answer: "For validation and security purposes, you will require a unique Booking ID which is shown on your booking details, as well as the last name of the person who had booked for it"
+DEBUG - FAQDAO: FAQ Category: General
+DEBUG - FAQDAO: Retrieved FAQ: com.example.staychecked.model.object.FAQ@4e0c0dae
+DEBUG - FAQDAO: FAQ Question: Why can't I verify my booking?
+DEBUG - FAQDAO: FAQ Answer: "If you can't verify your booking, the accommodation which provides your stay may not be registered on our platform or it may not be verified yet. Contact your accommodation to ask for more clarification."
+DEBUG - FAQDAO: FAQ Category: General
+DEBUG - FAQDAO: Total FAQs retrieved: 3
+DEBUG - DataStore: FAQDAO initialized.
+DEBUG - DataStore: Refreshing RAG Document.
+DEBUG - DataStore: Reading application description from appDesc.txt
+DEBUG - DataStore: RAG Document refreshed successfully.
+DEBUG - UserAuthController: Login successful!
+DEBUG - UserAuthController: Redirected to main application view.
+DEBUG - MainController: Help clicked
+DEBUG - ChatbotService: Initializing ChatbotService...
+DEBUG - ChatbotService: Getting RAG Document
+DEBUG - ChatbotService: Failed to initialize chat model with key: 0
+DEBUG - ChatbotService: {
+    "error": {
+        "message": "Incorrect API key provided: sk-proj-********************************************************************************************************************************************************0IwA. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+DEBUG - ChatbotService: Failed to initialize chat model with key: 1
+DEBUG - ChatbotService: {
+    "error": {
+        "message": "Incorrect API key provided: sk-proj-********************************************************************************************************************************************************3fYA. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+DEBUG - ChatbotService: Failed to initialize chat model with key: 2
+DEBUG - ChatbotService: {
+    "error": {
+        "message": "Incorrect API key provided: sk-proj-********************************************************************************************************************************************************oE0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+DEBUG - ChatbotService: Failed to initialize chat model with key: 3
+DEBUG - ChatbotService: {
+    "error": {
+        "message": "Incorrect API key provided: sk-proj-********************************************************************************************************************************************************3ZIA. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+DEBUG - ChatbotService: Failed to initialize chat model with key: 4
+DEBUG - ChatbotService: {
+    "error": {
+        "message": "Incorrect API key provided: sk-proj-********************************************************************************************************************************************************KoMA. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+DEBUG - ChatbotService: Failed to initialize chat model with key: 5
+DEBUG - ChatbotService: {
+    "error": {
+        "message": "Incorrect API key provided: sk-proj-********************************************************************************************************************************************************exQA. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+DEBUG - ChatbotService: Failed to initialize chat model with key: 6
+DEBUG - ChatbotService: {
+    "error": {
+        "message": "Incorrect API key provided: sk-proj-********************************************************************************************************************************************************uy0A. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+DEBUG - ChatbotService: Test response: The chatbot is working! How can I assist you today?
+DEBUG - ChatbotService: Chat model initialized successfully with key: 7
+DEBUG - ChatbotService: ChatbotService initialized successfully with a working chat model.
+DEBUG - ChatbotService: Creating assistant with chat model and embedding store.
+DEBUG - MainController: ChatbotService initialized successfully
